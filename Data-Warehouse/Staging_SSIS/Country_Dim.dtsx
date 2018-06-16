@@ -1,0 +1,2970 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/20/2013 1:53:01 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="JWOLFITZ-IT"
+  DTS:CreatorName="DUNE\jwolfisz"
+  DTS:DTSID="{55403453-3A91-4594-9D72-18C327ACED71}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Country_Dim"
+  DTS:PackageType="5"
+  DTS:VersionBuild="143"
+  DTS:VersionGUID="{619EBCCB-0E56-4329-AC40-69EBA06FED2A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A61115A3-D2E2-4A81-83B9-16EA1EDC0EE5}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::InitialMasterDataRAWFolder] + @[User::IP_Table_Name] +  @[$Project::Cache_File_Extension]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Cache_FQN">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Bisdw-cl01\FTP\DataWarehouse\Cache\InitialMasterData\RAW\IPCNTRY.RAW</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E0FA2F2E-EA19-4B8C-A4F1-8A32A49D74CD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="IP_Table_Name">
+      <DTS:VariableValue
+        DTS:DataType="8">IPCNTRY</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ACCF28FD-8965-4795-8D3C-001FF691D5BC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Last_Id">
+      <DTS:VariableValue
+        DTS:DataType="17">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8313A7C2-A838-4684-9E15-01E68C7B1765}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Load_Id">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5689BA73-1293-44D6-9E76-D33EC985CD58}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Load_Log_Id">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{313917AC-D9B1-4DA7-B0C4-F075CBF4CAC7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Row_Count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BF01CE20-B304-45D6-9D22-FBC183C5FDB2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Source">
+      <DTS:VariableValue
+        DTS:DataType="8">Initial Master Data</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9960CFCA-4E57-4594-98C8-DBDA8A39F567}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;TRUNCATE TABLE dbo.&quot; + @[User::Table_Name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_Truncate_Staging_Table">
+      <DTS:VariableValue
+        DTS:DataType="8">TRUNCATE TABLE dbo.Country_Dim</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{52523F41-E219-4D14-912F-57B6F07B0C1B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Success">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{745EBAA7-99E6-4DE9-8EC2-36436D7613C8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Table_Name">
+      <DTS:VariableValue
+        DTS:DataType="8">Country_Dim</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ETL"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{DE0F81E8-FBF5-449D-9824-57D0B9AEBB79}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Cache IP Files"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{AA3A420E-5B09-4C91-A880-F7002963CD15}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Cache IP Files"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\ETL\Cache IP Files\IPCNTRY"
+                  componentClassID="{A77F5655-A006-443A-9B7E-90B6BD55CB84}"
+                  contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;1"
+                  description="ODBC Source"
+                  name="IPCNTRY"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT
+	IPCNTRY.CCID,
+                IPCNTRY.CCNT
+FROM IPTSFIL.IPCNTRY IPCNTRY</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                      expressionType="Notify"
+                      name="ExposeCharColumnsAsUnicode">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                      expressionType="Notify"
+                      name="StatementTimeout">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The method used for fetching data."
+                      expressionType="Notify"
+                      name="FetchMethod"
+                      typeConverter="FetchMethod">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The ODBC C data type for binding numeric data."
+                      expressionType="Notify"
+                      name="BindNumericAs"
+                      typeConverter="BindNumericAs">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                      expressionType="Notify"
+                      name="BindCharColumnsAs"
+                      typeConverter="BindCharColumnsAs">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ETL\Cache IP Files\IPCNTRY.Connections[ODBCConnection]"
+                      connectionManagerID="{F411DC6E-6012-43DF-A4BD-6422597D46CE}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CSOIP02_ODBC]"
+                      description="The ODBC runtime connection"
+                      name="ODBCConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="ODBC Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCID]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCID]"
+                          length="3"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCID]"
+                          name="CCID" />
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCNT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCNT]"
+                          length="20"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCNT]"
+                          name="CCNT" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="CCID" />
+                        <externalMetadataColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCNT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="CCNT" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output]"
+                      isErrorOut="true"
+                      name="ODBC Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[CCID]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCID]"
+                          length="3"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[CCID]"
+                          name="CCID" />
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[CCNT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].ExternalColumns[CCNT]"
+                          length="20"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[CCNT]"
+                          name="CCNT" />
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Cache IP Files\IPCNTRY RAW"
+                  componentClassID="{04762BB6-892F-4EE6-AD46-9CEB0A7EC7A2}"
+                  contactInfo="Writes raw data that will not require parsing or translation. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers.;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Writes raw data that will not require parsing or translation. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers."
+                  name="IPCNTRY RAW"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the file."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                    <property
+                      dataType="System.Null"
+                      description="Output file name"
+                      name="FileName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.NonValidatingFileNameEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+                    <property
+                      dataType="System.String"
+                      description="Name of the variable that contains the file name"
+                      name="FileNameVariable">User::Cache_FQN</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates what option is used to write to the file."
+                      name="WriteOption"
+                      typeConverter="WriteOption">0</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Cache IP Files\IPCNTRY RAW.Inputs[Raw File Destination Input]"
+                      hasSideEffects="true"
+                      name="Raw File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY RAW.Inputs[Raw File Destination Input].Columns[CCID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="CCID"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCID]" />
+                        <inputColumn
+                          refId="Package\ETL\Cache IP Files\IPCNTRY RAW.Inputs[Raw File Destination Input].Columns[CCNT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="CCNT"
+                          lineageId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output].Columns[CCNT]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\ETL\Cache IP Files.Paths[ODBC Source Output]"
+                  endId="Package\ETL\Cache IP Files\IPCNTRY RAW.Inputs[Raw File Destination Input]"
+                  name="ODBC Source Output"
+                  startId="Package\ETL\Cache IP Files\IPCNTRY.Outputs[ODBC Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Get Last Id"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1CFB7985-8EEC-4F87-A05F-3451B20AE096}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Last Id"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="EXEC dbo.Get_Last_Reference_No ?;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Last_Id" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Table_Name"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Load Table Staging"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{A4BD328B-3911-4D3A-9033-3D47CEA68B24}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Table Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\ETL\Load Table Staging\Add Ids"
+                  componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+                  contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+                  description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                  name="Add Ids"
+                  version="8">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Stores the source code of the component"
+                      isArray="true"
+                      name="SourceCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="30">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    Byte Last_Id;
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+
+        IDTSVariables100 vars = null;
+        this.VariableDispenser.LockOneForRead("User::Last_Id", ref vars);
+        Last_Id = Byte.Parse(vars["User::Last_Id"].Value.ToString());
+        vars.Unlock();
+
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+
+        IDTSVariables100 vars = null;
+        this.VariableDispenser.LockOneForWrite("User::Last_Id", ref vars);
+        vars["User::Last_Id"].Value = Last_Id;
+        vars.Unlock();
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+            Last_Id++;
+            Row.CountryDimID = Last_Id;    
+        
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public Byte CountryDimID
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool CountryDimID_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_40248c2a6cdc4de985d456df8b15f550.Properties.Settings.get_Default():SC_40248c2a6cdc4de985d456df8b15f550.Properties.Sett" +
+    "ings")]
+
+namespace SC_40248c2a6cdc4de985d456df8b15f550.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_40248c2a6cdc4de985d456df8b15f550.csproj]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7261ec22-acce-4616-a72f-d0c0249087f7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_40248c2a6cdc4de985d456df8b15f550</RootNamespace>
+    <AssemblyName>SC_40248c2a6cdc4de985d456df8b15f550</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptComponent" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptComponent" GeneratedNamespace="SC_40248c2a6cdc4de985d456df8b15f550" IconIndex="0"></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Project]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_40248c2a6cdc4de985d456df8b15f550</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>SC_40248c2a6cdc4de985d456df8b15f550</msb:DisplayName>
+		<msb:ProjectId>{5996943C-E4F7-442A-8654-C336B270FF2A}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_40248c2a6cdc4de985d456df8b15f550.csproj"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_40248c2a6cdc4de985d456df8b15f550")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyProduct("SC_40248c2a6cdc4de985d456df8b15f550")]
+[assembly: AssemblyCopyright("Copyright @ Hewlett-Packard Company 2013")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_40248c2a6cdc4de985d456df8b15f550.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_40248c2a6cdc4de985d456df8b15f550.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_40248c2a6cdc4de985d456df8b15f550.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_40248c2a6cdc4de985d456df8b15f550.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_40248c2a6cdc4de985d456df8b15f550.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Stores the binary representation of the component"
+                      isArray="true"
+                      name="BinaryCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="2">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_40248c2a6cdc4de985d456df8b15f550.dll]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDABck4FEAAAAAAAAAAOAAAiELAQsAABYAAAAIAAAAAAAADjQA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAALwzAABPAAAAAEAAAIgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAFBQAAAAgAAAAFgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAIgEAAAAQAAAAAYAAAAYAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAHgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADw
+MwAAAAAAAEgAAAACAAUA8CIAAMwQAAABAAAAAAAAADgiAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4CKA0AAAoCAnMOAAAGfQEAAAQCAnMPAAAGfQIAAAQqkgRy
+AQAAcBpvDgAACiwVAgUCAygPAAAKDgRzCQAABm8DAAAGKkorBwIDbwQAAAYDbwwAAAYt8SoGKgAA
+EzADAEEAAAABAAARAigRAAAKFAoCKBIAAApyEQAAcBIAbxMAAAoCBnIRAABwbxQAAApvFQAACm8W
+AAAKKBcAAAp9AwAABAZvGAAACioAAAATMAMAPAAAAAEAABECKBkAAAoUCgIoEgAACnIRAABwEgBv
+GgAACgZyEQAAcG8UAAAKAnsDAAAEjBsAAAFvGwAACgZvGAAACipyAiV7AwAABBdY0n0DAAAEAwJ7
+AwAABG8KAAAGKh4CKAEAAAYqKgIDBAUoHAAACio6AhYDjBsAAAEoHQAACipaAywIAhYoHgAACipy
+LQAAcHMfAAAKeh4CKCAAAAoqHgIoIQAACio6AigiAAAKAgN9BAAABCo6AigiAAAKAgN9BQAABCoe
+AigiAAAKKhMwAgAtAAAAAgAAEX4GAAAELSByygAAcNAHAAACKCQAAApvJQAACnMmAAAKCgaABgAA
+BH4GAAAEKhp+BwAABCoeAoAHAAAEKhp+CAAABCoucxUAAAaACAAABCoeAigpAAAKKgAAAAAAtAAA
+AM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwg
+VmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2
+MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQ
+QURQQURQtAAAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAIgFAAAjfgAA9AUA
+AJwHAAAjU3RyaW5ncwAAAACQDQAAPAEAACNVUwDMDgAAEAAAACNHVUlEAAAA3A4AAPABAAAjQmxv
+YgAAAAAAAAACAAABVxWiAQkBAAAA+iUzABYAAAEAAAAjAAAACAAAAAgAAAAWAAAADwAAACkAAAAP
+AAAAAgAAAAMAAAAFAAAABgAAAAEAAAAFAAAAAQAAAAAACgABAAAAAAAGAO4AzQAGAP4AzQAKABsB
+FAEOADcBIgESAHYBzQAGAIUBzQAKAGkCWAIKAJoChQIKAHMDWQMKAJ4DjAMKALUDjAMKANIDjAMK
+APEDjAMKAAoEjAMKACMEjAMKAD4EjAMKAFkEjAMKAHIEjAMKAKsEiwQKAMsEiwQKAA0FFAEKABQF
+FAEGAD0FzQAWAK8FhwUWAN4FhwUWAP4FhwUKACoGFAEKAGcGFAEKAJQGgQYKALEGFAEKALYGFAEK
+ANoGjAMOAAYH8AYOAB8H8AYKADQHiwQAAAAAAQAAAAAAAQABAAEAEAAyAAAABQABAAEAAQAQAEAA
+AAAIAAMABQABABAASwAAAAkABAAJAAEAEABYAAAADQAEAA4AAQAQAGQAAAANAAUADwAAABAAbgB4
+AA0ABgAQAAABEACnAHgAEQAIABQABgBYABMABgBkABcAAQDLAS8AAQBIAlIAAQBIAlIAEQB5AlwA
+EQCmAmAAEQDqAn4AUCAAAAAAhhhPARsAAQBwIAAAAADGAJMBHwABAJUgAAAAAMYBoAEpAAUAqCAA
+AAAAxgG0ASkABgCsIAAAAADGANMBGwAHAPwgAAAAAMYA3gEbAAcARCEAAAAAxgC0ASkABwBhIQAA
+AACGGE8BGwAIAGkhAAAAAIYYTwEyAAgAdCEAAAAAhgjqATwACwCDIQAAAACGCPsBQQAMAJohAAAA
+AIYAEwJGAA0AoiEAAAAAhgAbAkYADQCqIQAAAACGGE8BVgANALkhAAAAAIYYTwFWAA4AyCEAAAAA
+gxhPARsADwDQIQAAAACTCLYCZAAPAAkiAAAAAJMIygJpAA8AECIAAAAAkwjWAm4ADwAYIgAAAACW
+CPoCggAQACsiAAAAAIYYTwEbABAAHyIAAAAAkRhPBwIBEAAAAAEADgMAAAIAFgMAAAMAIAMAAAQA
+JwMAAAEAIAMAAAEAMQMAAAEAMQMAAAEAIAMAAAIANQMAAAMAJwMAAAEASQMAAAEASQMAAAEATwMA
+AAEATwMAAAEASQNJAE8BjABRAE8BjABZAE8BjABhAE8BjABpAE8BjABxAE8BjAB5AE8BjACBAE8B
+jACJAE8BjACRAE8BjACZAE8BkQChAE8BGwAJAE8BGwCpACUFlgAJACwFnQC5AE8BGwAJANMBGwAJ
+AMgFqADBAO8FrQDJAA4GtQDRABcGuwAZACEGvwDZAC8GwwDJADUGGwAJAN4BGwDBADwGrQDRAEwG
+zQARAE8BMgARAFYG0gARAF8GkQDhAE8BjAARABMCRgARABsCRgAZAE8BGwDpAE8BGwDxAMgG2ADx
+AOMG3wA5AE8B5QAJAU8B8gAZAU8BGwAhAE8BGwAuABsAdwEuAGMA0QEuAAsABgEuABMATgEuACMA
+dwEuACsAfQEuADMATgEuADsAmgEuAEMAdwEuAFsAyAFjAIMAowBpADsB+QCJADsB+QDjABsBowAB
+AUMBowDIAO0ABAABAAcAAwAIAAUAAAAnAkoAAAA0Ak4AAABpAnQAAADiAnkAAAAGA4cAAQAKAAMA
+AQALAAUAAgARAAcAAgASAAkAAQATAAkAAgAUAAsABIAAAAEAAABNE4tuAAAAAAAA6QQAAAsAAAAA
+AAAAAAAAAAEAsAAAAAAABAAAAAAAAAAAAAAACgALAQAAAAAEAAAAAAAAAAAAAAAKABQBAAAAAAsA
+AAAAAAAAAAAAAAEAVQEAAAAACwAAAAAAAAAAAAAAAQBkBQAAAAAAAAAAAQAAAFYHAAAAAAA8TW9k
+dWxlPgBTQ180MDI0OGMyYTZjZGM0ZGU5ODVkNDU2ZGY4YjE1ZjU1MC5kbGwAVXNlckNvbXBvbmVu
+dABTY3JpcHRNYWluAElucHV0MEJ1ZmZlcgBDb25uZWN0aW9ucwBWYXJpYWJsZXMAUmVzb3VyY2Vz
+AFNDXzQwMjQ4YzJhNmNkYzRkZTk4NWQ0NTZkZjhiMTVmNTUwLlByb3BlcnRpZXMAU2V0dGluZ3MA
+TWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBl
+bGluZQBTY3JpcHRDb21wb25lbnQAU2NyaXB0QnVmZmVyAG1zY29ybGliAFN5c3RlbQBPYmplY3QA
+U3lzdGVtLkNvbmZpZ3VyYXRpb24AQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UALmN0b3IATWljcm9z
+b2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUGlwZWxpbmVCdWZmZXIAT3V0cHV0TmFtZU1hcABQ
+cm9jZXNzSW5wdXQASW5wdXQwX1Byb2Nlc3NJbnB1dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93AExh
+c3RfSWQAUHJlRXhlY3V0ZQBQb3N0RXhlY3V0ZQBzZXRfQ291bnRyeURpbUlEAHNldF9Db3VudHJ5
+RGltSURfSXNOdWxsAE5leHRSb3cARW5kT2ZSb3dzZXQAQ291bnRyeURpbUlEAENvdW50cnlEaW1J
+RF9Jc051bGwAUGFyZW50Q29tcG9uZW50AFN5c3RlbS5SZXNvdXJjZXMAUmVzb3VyY2VNYW5hZ2Vy
+AHJlc291cmNlTWFuAFN5c3RlbS5HbG9iYWxpemF0aW9uAEN1bHR1cmVJbmZvAHJlc291cmNlQ3Vs
+dHVyZQBnZXRfUmVzb3VyY2VNYW5hZ2VyAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAEN1bHR1cmUA
+ZGVmYXVsdEluc3RhbmNlAGdldF9EZWZhdWx0AERlZmF1bHQASW5wdXRJRABJbnB1dE5hbWUAQnVm
+ZmVyAE91dHB1dE1hcABSb3cAQnVmZmVyQ29sdW1uSW5kZXhlcwB2YWx1ZQBDb21wb25lbnQAU3lz
+dGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAU3lzdGVtLlJl
+ZmxlY3Rpb24AQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmli
+dXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1
+dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFz
+c2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q3VsdHVyZUF0dHJpYnV0ZQBBc3NlbWJs
+eVZlcnNpb25BdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBDb21waWxh
+dGlvblJlbGF4YXRpb25zQXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFND
+XzQwMjQ4YzJhNmNkYzRkZTk4NWQ0NTZkZjhiMTVmNTUwAFN0cmluZwBTdHJpbmdDb21wYXJpc29u
+AEVxdWFscwBHZXRDb2x1bW5JbmRleGVzAFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0
+cmlidXRlAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGltZVdyYXAATWljcm9zb2Z0LlNxbFNl
+cnZlci5EdHMuUnVudGltZS5XcmFwcGVyAElEVFNWYXJpYWJsZURpc3BlbnNlcjEwMABnZXRfVmFy
+aWFibGVEaXNwZW5zZXIASURUU1ZhcmlhYmxlczEwMABMb2NrT25lRm9yUmVhZABJRFRTVmFyaWFi
+bGUxMDAAZ2V0X0l0ZW0AZ2V0X1ZhbHVlAFRvU3RyaW5nAEJ5dGUAUGFyc2UAVW5sb2NrAExvY2tP
+bmVGb3JXcml0ZQBzZXRfVmFsdWUAc2V0X0l0ZW0AU2V0TnVsbABJbnZhbGlkT3BlcmF0aW9uRXhj
+ZXB0aW9uAFN5c3RlbS5EaWFnbm9zdGljcwBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAFR5
+cGUAUnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUAQXNzZW1ibHkAZ2V0X0Fzc2Vt
+Ymx5AFN5c3RlbS5Db21wb25lbnRNb2RlbABFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUARWRpdG9y
+QnJvd3NhYmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUALmNjdG9yAFNDXzQwMjQ4
+YzJhNmNkYzRkZTk4NWQ0NTZkZjhiMTVmNTUwLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNl
+cwAAAAAAD0kAbgBwAHUAdAAgADAAABtVAHMAZQByADoAOgBMAGEAcwB0AF8ASQBkAACAm0kAcwBO
+AHUAbABsACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAgAHQA
+bwAgAEYAYQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAAdABo
+AGUAIABjAG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAcVMAQwBfADQAMAAyADQAOABjADIA
+YQA2AGMAZABjADQAZABlADkAOAA1AGQANAA1ADYAZABmADgAYgAxADUAZgA1ADUAMAAuAFAAcgBv
+AHAAZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAA5pQwcGhCJkSFarP3ZH3z/wAIiYRd
+zYCAzJEIt3pcVhk04IkDBhIUAwYSGAMgAAEJIAQBCA4SFRIZBSABARIQAgYFCSADARIVHQgSGQQg
+AQEFBCABAQIDIAACAygABQMoAAIDBhIFBSABARIFAwYSHQMGEiEEAAASHQQAABIhBQABARIhBAgA
+Eh0ECAASIQMGEiAEAAASIAQIABIgBCABAQ4EIAEBCAYgAgIOEVkFIAEdCAgEAQAAAAQgABJhByAC
+AQ4QEmUFIAESaRwDIAAcAyAADgQAAQUOBAcBEmUEIAEBHAUgAgEIHAYAARJ5EX0FIAASgIEHIAIB
+DhKAgQQHARIdBiABARGAiQgBAAIAAAAAAAMAAAFHAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0
+LjABAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEC5ORVQgRnJhbWV3b3JrIDQoAQAjU0NfNDAyNDhj
+MmE2Y2RjNGRlOTg1ZDQ1NmRmOGIxNWY1NTAAAAUBAAAAABwBABdIZXdsZXR0LVBhY2thcmQgQ29t
+cGFueQAALQEAKENvcHlyaWdodCBAIEhld2xldHQtUGFja2FyZCBDb21wYW55IDIwMTMAAAgBAAgA
+AAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwHkMwAAAAAAAAAAAAD+MwAAACAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA8DMAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAA
+AAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABI
+AAAAWEAAADAEAAAAAAAAAAAAADAENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAA
+AAC9BO/+AAABAAAAAQCLbk0TAAABAItuTRM/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAA
+AAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4A
+AAAAAAAAsASQAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABsAwAAAQAwADAAMAAw
+ADAANABiADAAAABQABgAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAEgAZQB3AGwAZQB0AHQA
+LQBQAGEAYwBrAGEAcgBkACAAQwBvAG0AcABhAG4AeQAAAHAAJAABAEYAaQBsAGUARABlAHMAYwBy
+AGkAcAB0AGkAbwBuAAAAAABTAEMAXwA0ADAAMgA0ADgAYwAyAGEANgBjAGQAYwA0AGQAZQA5ADgA
+NQBkADQANQA2AGQAZgA4AGIAMQA1AGYANQA1ADAAAABAAA8AAQBGAGkAbABlAFYAZQByAHMAaQBv
+AG4AAAAAADEALgAwAC4ANAA5ADQAMQAuADIAOAAyADkAOQAAAAAAcAAoAAEASQBuAHQAZQByAG4A
+YQBsAE4AYQBtAGUAAABTAEMAXwA0ADAAMgA0ADgAYwAyAGEANgBjAGQAYwA0AGQAZQA5ADgANQBk
+ADQANQA2AGQAZgA4AGIAMQA1AGYANQA1ADAALgBkAGwAbAAAAHgAKQABAEwAZQBnAGEAbABDAG8A
+cAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgAEgAZQB3AGwAZQB0AHQALQBQ
+AGEAYwBrAGEAcgBkACAAQwBvAG0AcABhAG4AeQAgADIAMAAxADMAAAAAAHgAKAABAE8AcgBpAGcA
+aQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAEMAXwA0ADAAMgA0ADgAYwAyAGEANgBjAGQAYwA0
+AGQAZQA5ADgANQBkADQANQA2AGQAZgA4AGIAMQA1AGYANQA1ADAALgBkAGwAbAAAAGgAJAABAFAA
+cgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBDAF8ANAAwADIANAA4AGMAMgBhADYAYwBkAGMANABk
+AGUAOQA4ADUAZAA0ADUANgBkAGYAOABiADEANQBmADUANQAwAAAARAAPAAEAUAByAG8AZAB1AGMA
+dABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA0ADkANAAxAC4AMgA4ADIAOQA5AAAAAABIAA8AAQBB
+AHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA0ADkANAAxAC4AMgA4ADIA
+OQA5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAwAAAAQNAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                      name="VSTAProjectName"
+                      typeConverter="NOTBROWSABLE">SC_40248c2a6cdc4de985d456df8b15f550</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the programming language used by the script."
+                      name="ScriptLanguage"
+                      typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages, Microsoft.SqlServer.VSTAScriptingLib, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">CSharp</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read-only variables."
+                      name="ReadOnlyVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read/write variables."
+                      name="ReadWriteVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="List of breakpoints present on the script."
+                      isArray="true"
+                      name="BreakpointCollection"
+                      typeConverter="NOTBROWSABLE">
+                      <arrayElements
+                        arrayElementCount="0" />
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Checksum to match component metedata against compiled codes."
+                      name="MetadataChecksum"
+                      typeConverter="NOTBROWSABLE">942e12f06b84c1adaccb2f4a09971d00</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.ScriptComponentHost, Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Add Ids.Inputs[Input 0]"
+                      hasSideEffects="true"
+                      name="Input 0">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Add Ids.Outputs[Output 0]"
+                      name="Output 0"
+                      synchronousInputId="Package\ETL\Load Table Staging\Add Ids.Inputs[Input 0]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Add Ids.Outputs[Output 0].Columns[Country_Dim_ID]"
+                          dataType="ui1"
+                          lineageId="Package\ETL\Load Table Staging\Add Ids.Outputs[Output 0].Columns[Country_Dim_ID]"
+                          name="Country_Dim_ID" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\Country_Dim Staging"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Country_Dim Staging"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Country_Dim]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">ROWS_PER_BATCH = 100000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ETL\Load Table Staging\Country_Dim Staging.Connections[OleDbConnection]"
+                      connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].Columns[Country_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Country_Dim_ID"
+                          externalMetadataColumnId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Dim_ID]"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].Columns[Country_Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="Country_Code"
+                          externalMetadataColumnId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Code]"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Code]" />
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].Columns[Country_Name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="Country_Name"
+                          externalMetadataColumnId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Name]"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Name]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Dim_ID]"
+                          dataType="ui1"
+                          name="Country_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="Country_Code" />
+                        <externalMetadataColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input].ExternalColumns[Country_Name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="Country_Name" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Country_Dim Staging.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Country_Dim Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Country_Dim Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Country_Dim Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\Format IPCNTRY"
+                  componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Format IPCNTRY"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input].Columns[CCID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="CCID"
+                          lineageId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCID]" />
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input].Columns[CCNT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="CCNT"
+                          lineageId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCNT]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]"
+                          name="Country_Code"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,3,1252)[TRIM](#{Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCID]})</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,3,1252)TRIM(CCID)</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Name]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="20"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Name]"
+                          name="Country_Name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_STR,20,1252)[TRIM]([REPLACENULL](#{Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCNT]},""))</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_STR,20,1252)TRIM(REPLACENULL(CCNT,""))</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\IPCNTRY"
+                  componentClassID="{480C7D5A-CE63-405C-B338-3C7F26560EE3}"
+                  contactInfo="Reads raw data from a flat file that was previously written by the Raw File destination. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers.;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Reads raw data from a flat file that was previously written by the Raw File destination. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers."
+                  name="IPCNTRY"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the file."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                    <property
+                      dataType="System.Null"
+                      description="Output file name"
+                      name="FileName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.NonValidatingFileNameEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+                    <property
+                      dataType="System.String"
+                      description="Name of the variable that contains the file name"
+                      name="FileNameVariable">User::Cache_FQN</property>
+                  </properties>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output]"
+                      name="Raw File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCID]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].ExternalColumns[CCID]"
+                          length="3"
+                          lineageId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCID]"
+                          name="CCID" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCNT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].ExternalColumns[CCNT]"
+                          length="20"
+                          lineageId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].Columns[CCNT]"
+                          name="CCNT" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].ExternalColumns[CCID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="CCID" />
+                        <externalMetadataColumn
+                          refId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output].ExternalColumns[CCNT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="CCNT" />
+                      </externalMetadataColumns>
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW"
+                  componentClassID="{671046B0-AA63-4C9F-90E4-C06E0B710CE3}"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup Country_Dim DW"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+  Country_Dim_ID,
+ LTRIM(RTRIM(Country_Code))  AS Country_Code
+FROM Country_Dim</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+  Country_Dim_ID,
+ LTRIM(RTRIM(Country_Code))  AS Country_Code
+FROM Country_Dim) [refTable]
+where [refTable].[Country_Code] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Country_Dim_ID" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country_Code" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input].Columns[Country_Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="Country_Code"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Country_Code</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Match Output].Columns[Country_Dim_ID]"
+                          dataType="ui1"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Match Output].Columns[Country_Dim_ID]"
+                          name="Country_Dim_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Country_Dim_ID</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::Row_Count</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\ETL\Load Table Staging\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ETL\Load Table Staging\Union All"
+                  componentClassID="{B594E9A8-4351-4939-891C-CFE1AB93E925}"
+                  contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+                  name="Union All"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 1]"
+                      name="Union All Input 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 1].Columns[Country_Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="Country_Code"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Code]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 1].Columns[Country_Name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="Country_Name"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Name]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Name]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 1].Columns[Country_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Country_Dim_ID"
+                          lineageId="Package\ETL\Load Table Staging\Add Ids.Outputs[Output 0].Columns[Country_Dim_ID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Dim_ID]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 2]"
+                      hasSideEffects="true"
+                      name="Union All Input 2">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 2].Columns[Country_Code]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="Country_Code"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Code]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Code]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 2].Columns[Country_Name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="Country_Name"
+                          lineageId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output].Columns[Country_Name]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Name]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 2].Columns[Country_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Country_Dim_ID"
+                          lineageId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Match Output].Columns[Country_Dim_ID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Dim_ID]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 3]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Union All Input 3">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1]"
+                      name="Union All Output 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Code]"
+                          name="Country_Code" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Name]"
+                          name="Country_Name" />
+                        <outputColumn
+                          refId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Dim_ID]"
+                          dataType="ui1"
+                          lineageId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1].Columns[Country_Dim_ID]"
+                          name="Country_Dim_ID" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Derived Column Output]"
+                  endId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Inputs[Lookup Input]"
+                  name="Derived Column Output"
+                  startId="Package\ETL\Load Table Staging\Format IPCNTRY.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Lookup Match Output]"
+                  endId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 2]"
+                  name="Lookup Match Output"
+                  startId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Lookup No Match Output]"
+                  endId="Package\ETL\Load Table Staging\Add Ids.Inputs[Input 0]"
+                  name="Lookup No Match Output"
+                  startId="Package\ETL\Load Table Staging\Lookup Country_Dim DW.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Output 0]"
+                  endId="Package\ETL\Load Table Staging\Union All.Inputs[Union All Input 1]"
+                  name="Output 0"
+                  startId="Package\ETL\Load Table Staging\Add Ids.Outputs[Output 0]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Raw File Source Output]"
+                  endId="Package\ETL\Load Table Staging\Format IPCNTRY.Inputs[Derived Column Input]"
+                  name="Raw File Source Output"
+                  startId="Package\ETL\Load Table Staging\IPCNTRY.Outputs[Raw File Source Output]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Row Count Output 1]"
+                  endId="Package\ETL\Load Table Staging\Country_Dim Staging.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\ETL\Load Table Staging\Row Count.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\ETL\Load Table Staging.Paths[Union All Output 1]"
+                  endId="Package\ETL\Load Table Staging\Row Count.Inputs[Row Count Input 1]"
+                  name="Union All Output 1"
+                  startId="Package\ETL\Load Table Staging\Union All.Outputs[Union All Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Merge Into DW"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{38b901c7-d366-439f-8b7e-5b7a00e983b7}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge Into DW"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="EXEC dbo.Merge_Country_Dim ?,?,?,?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Source"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::Load_Id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Project::Cache_IP_Data"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="17"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="$Project::Process_Data"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="17"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Truncate Staging Table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{132CBFFA-A2C7-48EB-828A-28EC0E565007}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Staging Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::SQL_Truncate_Staging_Table" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ETL\Update Last Reference No"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{66cffc32-2e1a-469f-a53d-8525ab13b1d2}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Last Reference No"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="EXEC dbo.Update_Last_Reference_No ?, ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Table_Name"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::Last_Id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Cache]"
+          DTS:CreationName=""
+          DTS:DTSID="{34EA6F13-17C2-46F5-B158-A537CDA8AA1F}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[$Project::Cache_IP_Data] == TRUE"
+          DTS:From="Package\ETL\Get Last Id"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Cache"
+          DTS:To="Package\ETL\Cache IP Files" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{BC8D8276-8A40-4CF2-8678-27D2961072F1}"
+          DTS:From="Package\ETL\Load Table Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\ETL\Merge Into DW" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{E26D780B-94F3-4F10-82FD-000FD9FF4F71}"
+          DTS:From="Package\ETL\Truncate Staging Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\ETL\Get Last Id" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{D1C4E8B1-803D-45C7-A308-CC655DDD3CC3}"
+          DTS:From="Package\ETL\Merge Into DW"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\ETL\Update Last Reference No" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Dont Cache]"
+          DTS:CreationName=""
+          DTS:DTSID="{FBFD89B6-03F3-46BD-BC7E-1956A4F104EE}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[$Project::Cache_IP_Data] != TRUE"
+          DTS:From="Package\ETL\Get Last Id"
+          DTS:ObjectName="Dont Cache"
+          DTS:To="Package\ETL\Load Table Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ETL.PrecedenceConstraints[Process Data]"
+          DTS:CreationName=""
+          DTS:DTSID="{42751A83-1C0E-44C9-9E57-EF016B12ACB5}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[$Project::Process_Data] == TRUE"
+          DTS:From="Package\ETL\Cache IP Files"
+          DTS:ObjectName="Process Data"
+          DTS:To="Package\ETL\Load Table Staging" />
+      </DTS:PrecedenceConstraints>
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\ETL.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{BEEFECEB-420D-48D3-94BB-24BF043D2B7B}"
+          DTS:EventID="171977484"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{CA9750E3-1A1D-4A7D-85E4-3D4A4C4699FB}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\ETL.EventHandlers[OnError]\Success False"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{49321077-9920-4A28-A780-2510102D5A20}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExpressionTask.ExpressionTask, Microsoft.SqlServer.ExpressionTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Success False"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2012; � 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::Success]=false" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log End"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4E89B7E2-6FD1-4647-A7B2-195A91D15DEC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="EXEC dbo.Log_End ?, ?, ?,?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::Row_Count"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::Load_Id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::Load_Log_Id"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::Success"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="17"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Start"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D3EA4EB5-9A75-404F-B913-61F550421EF6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="EXEC dbo.Log_Start ?, ?,?,?;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::Load_Log_Id" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::Table_Name"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::Source"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="$Project::Cache_IP_Data"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="17"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="$Project::Process_Data"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="17"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Files To Archive"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2925cd1d-0f6f-41ec-b879-7ee3e08765f0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Files To Archive"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="INSERT INTO dbo.FilesToArchive VALUES ('IPCNTRY.RAW')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1301398F-EA1B-4649-932A-99C9DD7E120F}"
+      DTS:From="Package\ETL"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Log End"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DD9124F4-1889-47E7-AFCA-5CC4DF841CA5}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Project::Archive_Files] == TRUE"
+      DTS:From="Package\ETL"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Set Files To Archive"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{46A28D21-0880-447A-A3DF-5671C851AA61}"
+      DTS:From="Package\Log Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ETL" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\ETL\Cache IP Files"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\ETL\Get Last Id"
+          TopLeft="147.5,107.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL\Load Table Staging"
+          TopLeft="128.5,311.5" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\ETL\Merge Into DW"
+          TopLeft="137.5,413.5" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\ETL\Truncate Staging Table"
+          TopLeft="119,5.5" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\ETL\Update Last Reference No"
+          TopLeft="112,515.5" />
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Cache]"
+          TopLeft="193.166666666667,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-114.166666666667,60"
+              Start="0,0"
+              End="-114.166666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.4279346210995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.4279346210995"
+                    Point2="0,24.4279346210995"
+                    Point3="-4,24.4279346210995" />
+                  <mssgle:LineSegment
+                    End="-110.166666666667,24.4279346210995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-110.166666666667,24.4279346210995"
+                    Point2="-114.166666666667,24.4279346210995"
+                    Point3="-114.166666666667,28.4279346210995" />
+                  <mssgle:LineSegment
+                    End="-114.166666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-79.8083333333333,29.4279346210995,45.45,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Constraint]"
+          TopLeft="214,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Constraint 1]"
+          TopLeft="214,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Constraint 3]"
+          TopLeft="214,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Dont Cache]"
+          TopLeft="238,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,162"
+              Start="0,0"
+              End="0,154.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,154.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.855,69.25,69.71,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL.PrecedenceConstraints[Process Data]"
+          TopLeft="79,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107.833333333333,60"
+              Start="0,0"
+              End="107.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6662804171495" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.6662804171495"
+                    Point2="0,35.6662804171495"
+                    Point3="4,35.6662804171495" />
+                  <mssgle:LineSegment
+                    End="103.833333333333,35.6662804171495" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103.833333333333,35.6662804171495"
+                    Point2="107.833333333333,35.6662804171495"
+                    Point3="107.833333333333,39.6662804171495" />
+                  <mssgle:LineSegment
+                    End="107.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="16.1896549479167,40.6662804171495,75.4540234375,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="322,613"
+          Size="322,656"
+          Id="Package\ETL"
+          TopLeft="111,107.5" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Log End"
+          TopLeft="5.50000000000011,823.5" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Log Start"
+          TopLeft="210,5.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Set Files To Archive"
+          TopLeft="185.5,823.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="219.666666666667,763.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-154.666666666667,60"
+              Start="0,0"
+              End="-154.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1779975278121" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1779975278121"
+                    Point2="0,24.1779975278121"
+                    Point3="-4,24.1779975278121" />
+                  <mssgle:LineSegment
+                    End="-150.666666666667,24.1779975278121" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-150.666666666667,24.1779975278121"
+                    Point2="-154.666666666667,24.1779975278121"
+                    Point3="-154.666666666667,28.1779975278121" />
+                  <mssgle:LineSegment
+                    End="-154.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-102.637786458333,29.1779975278121,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="324.333333333333,763.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-52.3333333333333,60"
+              Start="0,0"
+              End="-52.3333333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1779975278121" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1779975278121"
+                    Point2="0,24.1779975278121"
+                    Point3="-4,24.1779975278121" />
+                  <mssgle:LineSegment
+                    End="-48.3333333333333,24.1779975278121" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-48.3333333333333,24.1779975278121"
+                    Point2="-52.3333333333333,24.1779975278121"
+                    Point3="-52.3333333333333,28.1779975278121" />
+                  <mssgle:LineSegment
+                    End="-52.3333333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-60.1322526041666,29.1779975278121,67.931171875,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="272,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package\ETL.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="145,42"
+          Id="Package\ETL.EventHandlers[OnError]\Success False"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\ETL\Cache IP Files">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\ETL\Cache IP Files\IPCNTRY RAW"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\ETL\Cache IP Files\IPCNTRY"
+          TopLeft="18.5,5.5" />
+        <EdgeLayout
+          Id="Package\ETL\Cache IP Files.Paths[ODBC Source Output]"
+          TopLeft="80,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\ETL\Load Table Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="132,42"
+          Id="Package\ETL\Load Table Staging\Row Count"
+          TopLeft="118,515.5" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\ETL\Load Table Staging\Country_Dim Staging"
+          TopLeft="93.5000000000001,617.5" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\ETL\Load Table Staging\Lookup Country_Dim DW"
+          TopLeft="84,209.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\ETL\Load Table Staging\Union All"
+          TopLeft="122.5,413.5" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\ETL\Load Table Staging\Format IPCNTRY"
+          TopLeft="104,107.5" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\ETL\Load Table Staging\Add Ids"
+          TopLeft="5.50000000000004,311.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\ETL\Load Table Staging\IPCNTRY"
+          TopLeft="123.5,34.8545454545455" />
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Union All Output 1]"
+          TopLeft="184,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Row Count Output 1]"
+          TopLeft="184,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Raw File Source Output]"
+          TopLeft="184.5,76.8545454545455">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.6454545454545"
+              Start="0,0"
+              End="0,23.1454545454545">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.1454545454545" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Output 0]"
+          TopLeft="64,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.833333333333,60"
+              Start="0,0"
+              End="100.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.53772070626"
+                    Point2="0,35.53772070626"
+                    Point3="4,35.53772070626" />
+                  <mssgle:LineSegment
+                    End="96.8333333333333,35.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.8333333333333,35.53772070626"
+                    Point2="100.833333333333,35.53772070626"
+                    Point3="100.833333333333,39.53772070626" />
+                  <mssgle:LineSegment
+                    End="100.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Lookup No Match Output]"
+          TopLeft="152,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-88,60"
+              Start="0,0"
+              End="-88,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2857142857143" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2857142857143"
+                    Point2="0,24.2857142857143"
+                    Point3="-4,24.2857142857143" />
+                  <mssgle:LineSegment
+                    End="-84,24.2857142857143" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-84,24.2857142857143"
+                    Point2="-88,24.2857142857143"
+                    Point3="-88,28.2857142857143" />
+                  <mssgle:LineSegment
+                    End="-88,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-99.80638671875,29.2857142857143,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Lookup Match Output]"
+          TopLeft="216,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.8333333333333,162"
+              Start="0,0"
+              End="-12.8333333333333,154.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76.5059019250574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,76.5059019250574"
+                    Point2="0,80.5059019250574"
+                    Point3="-4,80.5059019250574" />
+                  <mssgle:LineSegment
+                    End="-8.83333333333334,80.5059019250574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.83333333333334,80.5059019250574"
+                    Point2="-12.8333333333333,80.5059019250574"
+                    Point3="-12.8333333333333,84.5059019250574" />
+                  <mssgle:LineSegment
+                    End="-12.8333333333333,154.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-54.6080533854167,85.5059019250574,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL\Load Table Staging.Paths[Derived Column Output]"
+          TopLeft="184,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL\Load Table Staging\Country_Dim Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL\Load Table Staging\Lookup Country_Dim DW">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\ETL.PrecedenceConstraints[Cache]">
+    <ShowAnnotation>ConstraintName</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\ETL.PrecedenceConstraints[Dont Cache]">
+    <ShowAnnotation>ConstraintName</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\ETL.PrecedenceConstraints[Process Data]">
+    <ShowAnnotation>ConstraintName</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

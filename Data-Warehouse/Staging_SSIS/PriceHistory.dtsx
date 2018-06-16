@@ -1,0 +1,3218 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/2/2016 10:56:29 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0270"
+  DTS:CreatorName="DUNE\oturner"
+  DTS:DTSID="{97F75684-350C-43F5-BB71-A76FAFFD27BC}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="PriceHistory"
+  DTS:PackageType="5"
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{398AA7C4-FA01-4B23-B4B2-3B7783109383}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[IPITSTP_Store_Item_Price_Day_Fact.RAW]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{FBE69808-24DB-431E-9630-F37AE8DADC88}"
+      DTS:ObjectName="IPITSTP_Store_Item_Price_Day_Fact.RAW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\Bisdw-cl01\FTP\DataWarehouse\Cache\InitialFacts\RAW\IPITSTP_Store_Item_Price_Day_Fact.RAW" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2CB5ABB8-D123-4C96-ACD2-D96E2B4DCEE0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Calendar_Dim_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2849EE06-B57B-497D-8404-224BF533F5F1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67C34067-9ACA-482A-BA30-168AFE869B3B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{11A12A13-B1F6-47A6-8FDB-F9C1530DB08B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLResults">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A69FB958-84FD-4EF8-8FF6-74DF02E5D93C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Store_Dim_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete RAW File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Deletes Huge Raw file from  \\Bisdw-cl01\FTP\DataWarehouse\Cache\InitialFacts\RAW"
+      DTS:DTSID="{21275D50-F608-47B5-BE41-429AB0CA578F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete RAW File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteFile"
+          TaskSourcePath="{FBE69808-24DB-431E-9630-F37AE8DADC88}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{BB75E499-9BF7-4F3D-B788-A2C0EA562995}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.SqlServer.Dts.Runtime.Enumerators.ADO.ForEachADOEnumerator, Microsoft.SqlServer.ForEachADOEnumerator, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+        DTS:DTSID="{4C7F0067-DBBC-4C29-B41D-8D69A240AED9}"
+        DTS:ObjectName="{4C7F0067-DBBC-4C29-B41D-8D69A240AED9}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::SQLResults" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Load Data"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{E286CAB2-F8C0-40F6-91B9-93478C77D098}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\ActivePrices"
+                  componentClassID="DTSTransform.Lookup.3"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="ActivePrices"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC dbo.usp_Store_Item_Price_Day_FactStoreSelect</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (EXEC dbo.usp_Store_Item_Price_Day_FactStoreSelect) [refTable]
+where [refTable].[Item_Dim_ID] = ? and [refTable].[Store_Dim_ID] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="02ID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Item_Dim_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Store_Dim_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Calendar_Dim_ID" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Currency_Dim_ID" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FP_MD_Flag" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Retail_Price_Home" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Retail_Price_Curr" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Promotion_Flag" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Cost_Price_Home" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Cost_Price_Curr" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\ActivePrices.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input].Columns[Item_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Item_Dim_ID"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Item_Dim_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Store_Dim_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Match Output].Columns[02ID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Match Output].Columns[02ID]"
+                          name="02ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">02ID</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices"
+                  componentClassID="DTSTransform.Lookup.3"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="ActiveStorePrices"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC dbo.usp_Store_Item_Price_Day_FactStoreSelect</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (EXEC dbo.usp_Store_Item_Price_Day_FactStoreSelect) [refTable]
+where [refTable].[Item_Dim_ID] = ? and [refTable].[Store_Dim_ID] = ? and [refTable].[Currency_Dim_ID] = ? and [refTable].[FP_MD_Flag] = ? and [refTable].[Retail_Price_Home] = ? and [refTable].[Retail_Price_Curr] = ? and [refTable].[Promotion_Flag] = ? and [refTable].[Cost_Price_Home] = ? and [refTable].[Cost_Price_Curr] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="02ID" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Item_Dim_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Store_Dim_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Calendar_Dim_ID" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Currency_Dim_ID" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FP_MD_Flag" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Retail_Price_Home" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Retail_Price_Curr" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Promotion_Flag" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Cost_Price_Home" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Cost_Price_Curr" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]};#{Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Item_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Item_Dim_ID"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Item_Dim_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Store_Dim_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Currency_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Currency_Dim_ID"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Currency_Dim_ID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[FP_MD_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="FP_MD_Flag"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">FP_MD_Flag</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Retail_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Home"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Retail_Price_Home</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Retail_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Curr"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Retail_Price_Curr</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Promotion_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="Promotion_Flag"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Promotion_Flag</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Cost_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Home"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Cost_Price_Home</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input].Columns[Cost_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Curr"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Cost_Price_Curr</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Match Output].Columns[02ID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Match Output].Columns[02ID]"
+                          name="02ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">02ID</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\End"
+                  componentClassID="DTS.ManagedComponentWrapper.3"
+                  contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+                  description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                  name="End"
+                  version="8">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Stores the source code of the component"
+                      isArray="true"
+                      name="SourceCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="30">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_fdee9414086e45918149ad2b5bed6311")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_fdee9414086e45918149ad2b5bed6311")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        /*
+         * Add your code here
+         */
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_fdee9414086e45918149ad2b5bed6311.Properties.Settings.get_Default():SC_fdee9414086e45918149ad2b5bed6311.Properties.Sett" +
+    "ings")]
+
+namespace SC_fdee9414086e45918149ad2b5bed6311.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Project]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>SC_fdee9414086e45918149ad2b5bed6311</msb:CodeName>
+		<msb:DisplayName>SC_fdee9414086e45918149ad2b5bed6311</msb:DisplayName>
+		<msb:ProjectId>{454093C3-BB1C-4776-BB41-99FB382BF242}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_fdee9414086e45918149ad2b5bed6311.csproj"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_fdee9414086e45918149ad2b5bed6311.csproj]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3037f43f-9c32-4395-bd69-81045f0c7306}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_fdee9414086e45918149ad2b5bed6311</RootNamespace>
+    <AssemblyName>SC_fdee9414086e45918149ad2b5bed6311</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptComponent" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptComponent" GeneratedNamespace="SC_fdee9414086e45918149ad2b5bed6311" IconIndex="0"></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_fdee9414086e45918149ad2b5bed6311.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_fdee9414086e45918149ad2b5bed6311.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_fdee9414086e45918149ad2b5bed6311.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_fdee9414086e45918149ad2b5bed6311.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_fdee9414086e45918149ad2b5bed6311.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Stores the binary representation of the component"
+                      isArray="true"
+                      name="BinaryCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="2">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_fdee9414086e45918149ad2b5bed6311.dll]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAKR6XlcAAAAAAAAAAOAAAiELAQsAABAAAAAIAAAAAAAA3i8A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAIwvAABPAAAAAEAAAAgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAA5A8AAAAgAAAAEAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAAgEAAAAQAAAAAYAAAASAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADA
+LwAAAAAAAEgAAAACAAUAKCIAAGQNAAABAAAAAAAAAHAhAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4CKA0AAAoCAnMMAAAGfQEAAAQCAnMNAAAGfQIAAAQqkgRy
+AQAAcBpvDgAACiwVAgUCAygPAAAKDgRzCQAABm8DAAAGKkorBwIDbwQAAAYDbwoAAAYt8SoGKh4C
+KBEAAAoqHgIoEgAACioGKh4CKAEAAAYqKgIDBAUoEwAACioeAigUAAAKKh4CKBUAAAoqOgIoFgAA
+CgIDfQMAAAQqOgIoFgAACgIDfQQAAAQqHgIoFgAACioAAAATMAIALQAAAAEAABF+BQAABC0gchEA
+AHDQBwAAAigYAAAKbxkAAApzGgAACgoGgAUAAAR+BQAABCoafgYAAAQqHgKABgAABCoafgcAAAQq
+LnMTAAAGgAcAAAQqHgIoHQAACioAAAAAALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNl
+cy5SZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0
+cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVu
+dGltZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQAAABCU0pCAQABAAAAAAAMAAAAdjQu
+MC4zMDMxOQAAAAAFAGwAAADEBAAAI34AADAFAAAsBgAAI1N0cmluZ3MAAAAAXAsAAIQAAAAjVVMA
+4AsAABAAAAAjR1VJRAAAAPALAAB0AQAAI0Jsb2IAAAAAAAAAAgAAAVcVogEJAQAAAPolMwAWAAAB
+AAAAHgAAAAgAAAAHAAAAFAAAAA0AAAAdAAAADwAAAAEAAAACAAAAAwAAAAQAAAABAAAABAAAAAEA
+AAAAAAoAAQAAAAAABgDuAM0ABgD+AM0ACgAbARQBDgA3ASIBEgB2Ac0ABgCFAc0ACgAXAgYCCgBI
+AjMCCgAhAwcDCgBMAzoDCgBjAzoDCgCAAzoDCgCfAzoDCgC4AzoDCgDRAzoDCgDsAzoDCgAHBDoD
+CgAgBDoDCgBZBDkECgB5BDkECgC7BBQBCgDCBBQBBgDrBM0ACgAlBRIFCgBCBRQBCgBHBRQBCgBr
+BToDDgCXBYEFDgCwBYEFCgDFBTkEAAAAAAEAAAAAAAEAAQABABAAMgAAAAUAAQABAAEAEABAAAAA
+CAADAAUAAQAQAEsAAAAJAAMACQABABAAWAAAAA0AAwAMAAEAEABkAAAADQAEAA0AAAAQAG4AeAAN
+AAUADgAAARAApwB4ABEABwASAAYAWAATAAYAZAAXAAEA9gE9AAEA9gE9ABEAJwJHABEAVAJLABEA
+mAJpAFAgAAAAAIYYTwEbAAEAcCAAAAAAxgCTAR8AAQCVIAAAAADGAaABKQAFAKggAAAAAMYBtAEp
+AAYAqiAAAAAAxgDLARsABwCyIAAAAADGANYBGwAHALogAAAAAMYAtAEpAAcAvCAAAAAAhhhPARsA
+CADEIAAAAACGGE8BLwAIAM8gAAAAAIYA4gE5AAsA1yAAAAAAhgDqATkACwDfIAAAAACGGE8BQQAL
+AO4gAAAAAIYYTwFBAAwA/SAAAAAAgxhPARsADQAIIQAAAACTCGQCTwANAEEhAAAAAJMIeAJUAA0A
+SCEAAAAAkwiEAlkADQBQIQAAAACWCKgCbQAOAGMhAAAAAIYYTwEbAA4AVyEAAAAAkRjgBboADgAA
+AAEAvAIAAAIAxAIAAAMAzgIAAAQA1QIAAAEAzgIAAAEA3wIAAAEA3wIAAAEAzgIAAAIA4wIAAAMA
+1QIAAAEA9wIAAAEA9wIAAAEAAQNJAE8BdwBRAE8BdwBZAE8BdwBhAE8BdwBpAE8BdwBxAE8BdwB5
+AE8BdwCBAE8BdwCJAE8BdwCRAE8BdwCZAE8BfAChAE8BGwAJAE8BGwCpANMEgQAJANoEiAC5AE8B
+GwAJAMsBGwAJANYBGwARAE8BLwARAOIBOQARAOoBOQAZAE8BGwDBAE8BGwDJAFkFkwDJAHQFmgA5
+AE8BnwDhAE8BqwDxAE8BGwAhAE8BGwApANsAsQAuABsALwEuACMALwEuAFsATAEuAAsAvgAuABMA
+BgEuAGMAVQEuACsALwEuADMABgEuADsANQEuAEMALwFJANsAsQBjAIMAjgDhAOMAjgDjALsAjgCm
+AAcAAQAIAAMAAAAXAl8AAACQAmQAAAC0AnIAAgAPAAMAAgAQAAUAAQARAAUAAgASAAcABIAAAAEA
+AAB4F5JBAAAAAAAAlwQAAAsAAAAAAAAAAAAAAAEAsAAAAAAABAAAAAAAAAAAAAAACgALAQAAAAAE
+AAAAAAAAAAAAAAAKABQBAAAAAAsAAAAAAAAAAAAAAAEAVQEAAAAAAAAAAAEAAADnBQAAAAAAAAA8
+TW9kdWxlPgBTQ19mZGVlOTQxNDA4NmU0NTkxODE0OWFkMmI1YmVkNjMxMS5kbGwAVXNlckNvbXBv
+bmVudABTY3JpcHRNYWluAElucHV0MEJ1ZmZlcgBDb25uZWN0aW9ucwBWYXJpYWJsZXMAUmVzb3Vy
+Y2VzAFNDX2ZkZWU5NDE0MDg2ZTQ1OTE4MTQ5YWQyYjViZWQ2MzExLlByb3BlcnRpZXMAU2V0dGlu
+Z3MATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5Q
+aXBlbGluZQBTY3JpcHRDb21wb25lbnQAU2NyaXB0QnVmZmVyAG1zY29ybGliAFN5c3RlbQBPYmpl
+Y3QAU3lzdGVtLkNvbmZpZ3VyYXRpb24AQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UALmN0b3IATWlj
+cm9zb2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUGlwZWxpbmVCdWZmZXIAT3V0cHV0TmFtZU1h
+cABQcm9jZXNzSW5wdXQASW5wdXQwX1Byb2Nlc3NJbnB1dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93
+AFByZUV4ZWN1dGUAUG9zdEV4ZWN1dGUATmV4dFJvdwBFbmRPZlJvd3NldABQYXJlbnRDb21wb25l
+bnQAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFnZXIAcmVzb3VyY2VNYW4AU3lzdGVtLkds
+b2JhbGl6YXRpb24AQ3VsdHVyZUluZm8AcmVzb3VyY2VDdWx0dXJlAGdldF9SZXNvdXJjZU1hbmFn
+ZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAQ3VsdHVyZQBkZWZhdWx0SW5zdGFuY2UAZ2V0X0Rl
+ZmF1bHQARGVmYXVsdABJbnB1dElEAElucHV0TmFtZQBCdWZmZXIAT3V0cHV0TWFwAFJvdwBCdWZm
+ZXJDb2x1bW5JbmRleGVzAENvbXBvbmVudAB2YWx1ZQBTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5n
+AFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBTeXN0ZW0uUmVmbGVjdGlvbgBBc3NlbWJseVRpdGxl
+QXR0cmlidXRlAEFzc2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0
+aW9uQXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRy
+aWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1
+dGUAQXNzZW1ibHlDdWx0dXJlQXR0cmlidXRlAEFzc2VtYmx5VmVyc2lvbkF0dHJpYnV0ZQBTeXN0
+ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1
+dGUAUnVudGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAU0NfZmRlZTk0MTQwODZlNDU5MTgxNDlh
+ZDJiNWJlZDYzMTEAU3RyaW5nAFN0cmluZ0NvbXBhcmlzb24ARXF1YWxzAEdldENvbHVtbkluZGV4
+ZXMAU1NJU1NjcmlwdENvbXBvbmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAU3lzdGVtLkRpYWdub3N0
+aWNzAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRyaWJ1dGUAVHlwZQBSdW50aW1lVHlwZUhhbmRsZQBH
+ZXRUeXBlRnJvbUhhbmRsZQBBc3NlbWJseQBnZXRfQXNzZW1ibHkAU3lzdGVtLkNvbXBvbmVudE1v
+ZGVsAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxl
+ckdlbmVyYXRlZEF0dHJpYnV0ZQAuY2N0b3IAU0NfZmRlZTk0MTQwODZlNDU5MTgxNDlhZDJiNWJl
+ZDYzMTEuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAAAAAA9JAG4AcAB1AHQAIAAwAABx
+UwBDAF8AZgBkAGUAZQA5ADQAMQA0ADAAOAA2AGUANAA1ADkAMQA4ADEANAA5AGEAZAAyAGIANQBi
+AGUAZAA2ADMAMQAxAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAAAA
+grBjYUvK9Ei8ef6lxNUQ/wAIiYRdzYCAzJEIt3pcVhk04IkDBhIUAwYSGAMgAAEJIAQBCA4SFRIZ
+BSABARIQCSADARIVHQgSGQMgAAIDBhIFBSABARIFAwYSHQMGEiEEAAASHQQAABIhBQABARIhBAgA
+Eh0ECAASIQMGEiAEAAASIAQIABIgBCABAQ4EIAEBCAYgAgIOEVkFIAEdCAgEAQAAAAYAARJlEWkE
+IAASbQYgAgEOEm0EBwESHQUgAQERdQgBAAIAAAAAAAMAAAFHAQAaLk5FVEZyYW1ld29yayxWZXJz
+aW9uPXY0LjABAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEC5ORVQgRnJhbWV3b3JrIDQoAQAjU0Nf
+ZmRlZTk0MTQwODZlNDU5MTgxNDlhZDJiNWJlZDYzMTEAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAg
+MjAxNgAACAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAbQvAAAAAAAAAAAA
+AM4vAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAADALwAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1z
+Y29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
+AABIAAAAWEAAALADAAAAAAAAAAAAALADNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
+AAAAAAC9BO/+AAABAAAAAQCSQXgXAAABAJJBeBc/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
+AG4AAAAAAAAAsAQQAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAADsAgAAAQAwADAA
+MAAwADAANABiADAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBD
+AF8AZgBkAGUAZQA5ADQAMQA0ADAAOAA2AGUANAA1ADkAMQA4ADEANAA5AGEAZAAyAGIANQBiAGUA
+ZAA2ADMAMQAxAAAAQAAPAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADYAMAAw
+ADgALgAxADYANwA4ADYAAAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBDAF8A
+ZgBkAGUAZQA5ADQAMQA0ADAAOAA2AGUANAA1ADkAMQA4ADEANAA5AGEAZAAyAGIANQBiAGUAZAA2
+ADMAMQAxAC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8A
+cAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADYAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBp
+AGwAZQBuAGEAbQBlAAAAUwBDAF8AZgBkAGUAZQA5ADQAMQA0ADAAOAA2AGUANAA1ADkAMQA4ADEA
+NAA5AGEAZAAyAGIANQBiAGUAZAA2ADMAMQAxAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0
+AE4AYQBtAGUAAAAAAFMAQwBfAGYAZABlAGUAOQA0ADEANAAwADgANgBlADQANQA5ADEAOAAxADQA
+OQBhAGQAMgBiADUAYgBlAGQANgAzADEAMQAAAEQADwABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBp
+AG8AbgAAADEALgAwAC4ANgAwADAAOAAuADEANgA3ADgANgAAAAAASAAPAAEAQQBzAHMAZQBtAGIA
+bAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgAwADAAOAAuADEANgA3ADgANgAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADgPwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                      name="VSTAProjectName"
+                      typeConverter="NOTBROWSABLE">SC_fdee9414086e45918149ad2b5bed6311</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the programming language used by the script."
+                      name="ScriptLanguage"
+                      typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages, Microsoft.SqlServer.VSTAScriptingLib, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">CSharp</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read-only variables."
+                      name="ReadOnlyVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read/write variables."
+                      name="ReadWriteVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="List of breakpoints present on the script."
+                      isArray="true"
+                      name="BreakpointCollection"
+                      typeConverter="NOTBROWSABLE">
+                      <arrayElements
+                        arrayElementCount="0" />
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Checksum to match component metedata against compiled codes."
+                      name="MetadataChecksum"
+                      typeConverter="NOTBROWSABLE">5b93d44bd88ef5c5e6214bcd6db4e103</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.ScriptComponentHost, Microsoft.SqlServer.TxScript, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\End.Inputs[Input 0]"
+                      hasSideEffects="true"
+                      name="Input 0">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\End.Outputs[Output 0]"
+                      name="Output 0"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\End.Inputs[Input 0]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\Enter Changed Price"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Enter Changed Price"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Store_Item_Price_Day_Fact_02]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">100000</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Item_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Item_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Item_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Calendar_Dim_ID]"
+                          cachedDataType="i2"
+                          cachedName="Calendar_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Currency_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Currency_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Currency_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[FP_MD_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="FP_MD_Flag"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD_Flag]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Retail_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Home"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Retail_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Curr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Promotion_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="Promotion_Flag"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Promotion_Flag]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Cost_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Home"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Cost_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Curr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].Columns[Calendar_Date]"
+                          cachedDataType="dbDate"
+                          cachedName="Calendar_Date"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Date]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Item_Dim_ID]"
+                          dataType="i4"
+                          name="Item_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_ID]"
+                          dataType="i4"
+                          name="Store_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Dim_ID]"
+                          dataType="i2"
+                          name="Calendar_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Currency_Dim_ID]"
+                          dataType="ui1"
+                          name="Currency_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="FP_MD_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Home]"
+                          dataType="cy"
+                          name="Retail_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Curr]"
+                          dataType="cy"
+                          name="Retail_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Promotion_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="Promotion_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Home]"
+                          dataType="cy"
+                          name="Cost_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Curr]"
+                          dataType="cy"
+                          name="Cost_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                          dataType="dbDate"
+                          name="StartDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                          dataType="dbDate"
+                          name="EndDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input].ExternalColumns[02ID]"
+                          dataType="i8"
+                          name="02ID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\Enter New Price"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Enter New Price"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Store_Item_Price_Day_Fact_02]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">100000</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\Enter New Price.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Item_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Item_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Item_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Calendar_Dim_ID]"
+                          cachedDataType="i2"
+                          cachedName="Calendar_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Currency_Dim_ID]"
+                          cachedDataType="ui1"
+                          cachedName="Currency_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Currency_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[FP_MD_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="FP_MD_Flag"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD_Flag]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Retail_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Home"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Retail_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Retail_Price_Curr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Promotion_Flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="Promotion_Flag"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Promotion_Flag]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Cost_Price_Home]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Home"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Cost_Price_Curr]"
+                          cachedDataType="cy"
+                          cachedName="Cost_Price_Curr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].Columns[Calendar_Date]"
+                          cachedDataType="dbDate"
+                          cachedName="Calendar_Date"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Date]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Item_Dim_ID]"
+                          dataType="i4"
+                          name="Item_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_ID]"
+                          dataType="i4"
+                          name="Store_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Dim_ID]"
+                          dataType="i2"
+                          name="Calendar_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Currency_Dim_ID]"
+                          dataType="ui1"
+                          name="Currency_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="FP_MD_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Home]"
+                          dataType="cy"
+                          name="Retail_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Retail_Price_Curr]"
+                          dataType="cy"
+                          name="Retail_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Promotion_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="Promotion_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Home]"
+                          dataType="cy"
+                          name="Cost_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[Cost_Price_Curr]"
+                          dataType="cy"
+                          name="Cost_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[StartDate]"
+                          dataType="dbDate"
+                          name="StartDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[EndDate]"
+                          dataType="dbDate"
+                          name="EndDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input].ExternalColumns[02ID]"
+                          dataType="i8"
+                          name="02ID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Enter New Price.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Enter New Price.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Enter New Price.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Enter New Price.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\Expire Old Price"
+                  componentClassID="DTSTransform.OLEDBCommand.3"
+                  contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+                  name="Expire Old Price"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">usp_Store_Item_Price_Day_Fact_03Insert ?,?,?,?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Connections[OleDbConnection]"
+                      connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input]"
+                      errorOrTruncationOperation="Command Execution"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Command Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].Columns[Item_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Item_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@Item_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@Store_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].Columns[02ID]"
+                          cachedDataType="i8"
+                          cachedName="02ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@02ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Match Output].Columns[02ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].Columns[Calendar_Date]"
+                          cachedDataType="dbDate"
+                          cachedName="Calendar_Date"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@EndDate]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Date]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@02ID]"
+                          dataType="i8"
+                          name="@02ID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@Item_Dim_ID]"
+                          dataType="i4"
+                          name="@Item_Dim_ID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@Store_Dim_ID]"
+                          dataType="i4"
+                          name="@Store_Dim_ID">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">81</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input].ExternalColumns[@EndDate]"
+                          dataType="dbDate"
+                          name="@EndDate">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Output]"
+                      exclusionGroup="1"
+                      name="OLE DB Command Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Command Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\Row Count"
+                  componentClassID="DTSTransform.RowCount.3"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load Data\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Foreach Loop Container\Load Data\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01"
+                  componentClassID="DTSAdapter.OLEDBSource.3"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Store_Item_Price_Day_Fact_01"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Store_Item_Price_Day_Fact_01]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC dbo.usp_Store_Item_Price_Day_Fact_01Select</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Connections[OleDbConnection]"
+                      connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Item_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Item_Dim_ID]"
+                          name="Item_Dim_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Store_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Store_Dim_ID]"
+                          name="Store_Dim_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Dim_ID]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Calendar_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Dim_ID]"
+                          name="Calendar_Dim_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Date]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Calendar_Date]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Calendar_Date]"
+                          name="Calendar_Date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]"
+                          dataType="ui1"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Currency_Dim_ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Currency_Dim_ID]"
+                          name="Currency_Dim_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[FP_MD_Flag]"
+                          length="1"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[FP_MD_Flag]"
+                          name="FP_MD_Flag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Retail_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Home]"
+                          name="Retail_Price_Home"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Retail_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Retail_Price_Curr]"
+                          name="Retail_Price_Curr"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Promotion_Flag]"
+                          length="1"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Promotion_Flag]"
+                          name="Promotion_Flag"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Cost_Price_Home]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Home]"
+                          name="Cost_Price_Home"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Cost_Price_Curr]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[Cost_Price_Curr]"
+                          name="Cost_Price_Curr"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[01ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[01ID]"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].Columns[01ID]"
+                          name="01ID"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Item_Dim_ID]"
+                          dataType="i4"
+                          name="Item_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Store_Dim_ID]"
+                          dataType="i4"
+                          name="Store_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Calendar_Dim_ID]"
+                          dataType="i2"
+                          name="Calendar_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Calendar_Date]"
+                          dataType="dbDate"
+                          name="Calendar_Date" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Currency_Dim_ID]"
+                          dataType="ui1"
+                          name="Currency_Dim_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[FP_MD_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="FP_MD_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Retail_Price_Home]"
+                          dataType="cy"
+                          name="Retail_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Retail_Price_Curr]"
+                          dataType="cy"
+                          name="Retail_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Promotion_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="Promotion_Flag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Cost_Price_Home]"
+                          dataType="cy"
+                          name="Cost_Price_Home" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[Cost_Price_Curr]"
+                          dataType="cy"
+                          name="Cost_Price_Curr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output].ExternalColumns[01ID]"
+                          dataType="i4"
+                          name="01ID" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[01ID]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[01ID]"
+                          name="01ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Item_Dim_ID]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Item_Dim_ID]"
+                          name="Item_Dim_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Store_Dim_ID]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Store_Dim_ID]"
+                          name="Store_Dim_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Calendar_Dim_ID]"
+                          dataType="i2"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Calendar_Dim_ID]"
+                          name="Calendar_Dim_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Calendar_Date]"
+                          dataType="dbDate"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Calendar_Date]"
+                          name="Calendar_Date" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Currency_Dim_ID]"
+                          dataType="ui1"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Currency_Dim_ID]"
+                          name="Currency_Dim_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[FP_MD_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[FP_MD_Flag]"
+                          name="FP_MD_Flag" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Retail_Price_Home]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Retail_Price_Home]"
+                          name="Retail_Price_Home" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Retail_Price_Curr]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Retail_Price_Curr]"
+                          name="Retail_Price_Curr" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Promotion_Flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Promotion_Flag]"
+                          name="Promotion_Flag" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Cost_Price_Home]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Cost_Price_Home]"
+                          name="Cost_Price_Home" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Cost_Price_Curr]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[Cost_Price_Curr]"
+                          name="Cost_Price_Curr" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[Lookup Match Output]"
+                  description="Exact Match"
+                  endId="Package\Foreach Loop Container\Load Data\End.Inputs[Input 0]"
+                  name="Lookup Match Output"
+                  startId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[Lookup Match Output1]"
+                  endId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Inputs[Lookup Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[Lookup No Match Output]"
+                  endId="Package\Foreach Loop Container\Load Data\Expire Old Price.Inputs[OLE DB Command Input]"
+                  name="Lookup No Match Output"
+                  startId="Package\Foreach Loop Container\Load Data\ActiveStorePrices.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[Lookup No Match Output1]"
+                  endId="Package\Foreach Loop Container\Load Data\Enter New Price.Inputs[OLE DB Destination Input]"
+                  name="Lookup No Match Output"
+                  startId="Package\Foreach Loop Container\Load Data\ActivePrices.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[OLE DB Command Output]"
+                  endId="Package\Foreach Loop Container\Load Data\Enter Changed Price.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Command Output"
+                  startId="Package\Foreach Loop Container\Load Data\Expire Old Price.Outputs[OLE DB Command Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Load Data\Row Count.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Load Data.Paths[Row Count Output 1]"
+                  endId="Package\Foreach Loop Container\Load Data\ActivePrices.Inputs[Lookup Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Foreach Loop Container\Load Data\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\TRUNCATE Store_Item_Price_Day_Fact_03"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="TRUNCATE Store_Item_Price_Day_Fact_03"
+          DTS:DTSID="{5B4DEF75-8782-4CF2-AD53-A658573F2E77}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATE Store_Item_Price_Day_Fact_03"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.Store_Item_Price_Day_Fact_03" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\usp_Store_Item_Price_Day_FactStoreDatesUpdate"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Mark the date as processed"
+          DTS:DTSID="{6F8DF523-A0A0-4547-8482-518AABC52443}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="usp_Store_Item_Price_Day_FactStoreDatesUpdate"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_Store_Item_Price_Day_FactStoreDatesUpdate ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ID"
+                SQLTask:DtsVariableName="User::ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_01Insert"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="usp_Store_Item_Price_Day_Fact_01Insert"
+          DTS:DTSID="{8F672921-6AE1-4533-AF17-BC6A151E74D8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="usp_Store_Item_Price_Day_Fact_01Insert"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_Store_Item_Price_Day_Fact_01Insert ?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Store_Dim_ID"
+                SQLTask:DtsVariableName="User::Store_Dim_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Calendar_Dim_ID"
+                SQLTask:DtsVariableName="User::Calendar_Dim_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_03Expire"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Expire The Old Price"
+          DTS:DTSID="{F3FF88FE-F2D8-4247-A35B-F128AFF0B921}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="usp_Store_Item_Price_Day_Fact_03Expire"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_Store_Item_Price_Day_Fact_03Expire" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{96A14F27-1F10-41F4-84AB-B337C19F7E0F}"
+          DTS:From="Package\Foreach Loop Container\Load Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_03Expire" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{FB70C7E3-6000-4AE3-ADE4-37FB496ECD01}"
+          DTS:From="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_01Insert"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\TRUNCATE Store_Item_Price_Day_Fact_03" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{C0028E78-4392-4848-ADC0-4BFD79CD3AD2}"
+          DTS:From="Package\Foreach Loop Container\TRUNCATE Store_Item_Price_Day_Fact_03"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container\Load Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{5BBA8F6E-EEF3-4174-89E1-7253FF5F4780}"
+          DTS:From="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_03Expire"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach Loop Container\usp_Store_Item_Price_Day_FactStoreDatesUpdate" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{CBBA7DCA-5440-41C9-A915-B1982235326A}"
+          DTS:ObjectName="{CBBA7DCA-5440-41C9-A915-B1982235326A}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::Store_Dim_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{4EFA5E75-21CC-4FFC-A9FB-5073038CA59B}"
+          DTS:ObjectName="{4EFA5E75-21CC-4FFC-A9FB-5073038CA59B}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::Calendar_Dim_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6641D06B-DB91-46A6-854D-2B5BA4A04536}"
+          DTS:ObjectName="{6641D06B-DB91-46A6-854D-2B5BA4A04536}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::ID" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\usp_EmailDuplicatePrices"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="usp_EmailDuplicatePrices"
+      DTS:DTSID="{EED0BA03-DC09-4F2E-9D49-7085E7BC8E22}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="usp_EmailDuplicatePrices"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CA148134-F569-480E-8D57-A6874437296C}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_EmailDuplicatePrices" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\usp_Store_Item_Price_Day_FactStoreDatesInsert"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Insert the next days worth of data to be processed"
+      DTS:DTSID="{134BA2A3-5C16-413E-8C43-DA73D02A1C5F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="usp_Store_Item_Price_Day_FactStoreDatesInsert"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_Store_Item_Price_Day_FactStoreDatesInsert" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\usp_Store_Item_Price_Day_FactStoreDatesSelect"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FC0A907B-AD88-46B5-8484-30E9737435EA}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="usp_Store_Item_Price_Day_FactStoreDatesSelect"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_Store_Item_Price_Day_FactStoreDatesSelect"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::SQLResults" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{827670E7-76E5-48A7-88B6-E53C0BFEAEC2}"
+      DTS:From="Package\usp_Store_Item_Price_Day_FactStoreDatesSelect"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{93EC7C9F-6BAB-4DB7-8F2A-69AA5CE03D82}"
+      DTS:From="Package\usp_Store_Item_Price_Day_FactStoreDatesInsert"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\usp_Store_Item_Price_Day_FactStoreDatesSelect" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{87F6DE9E-3AA7-4BD6-A6DC-24E9C46E9F04}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\usp_EmailDuplicatePrices" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E75F8EA8-8A04-419B-AD16-DE92E2168146}"
+      DTS:From="Package\usp_EmailDuplicatePrices"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Delete RAW File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Delete RAW File"
+          TopLeft="690,554" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Foreach Loop Container\Load Data"
+          TopLeft="267.5,105.5" />
+        <NodeLayout
+          Size="291,42"
+          Id="Package\Foreach Loop Container\TRUNCATE Store_Item_Price_Day_Fact_03"
+          TopLeft="357.5,20.5" />
+        <NodeLayout
+          Size="279,42"
+          Id="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_01Insert"
+          TopLeft="29.5,17.5" />
+        <NodeLayout
+          Size="286,42"
+          Id="Package\Foreach Loop Container\usp_Store_Item_Price_Day_Fact_03Expire"
+          TopLeft="21,207.5" />
+        <NodeLayout
+          Size="325,42"
+          Id="Package\Foreach Loop Container\usp_Store_Item_Price_Day_FactStoreDatesUpdate"
+          TopLeft="368.5,208.5" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="332,147.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-168,60"
+              Start="0,0"
+              End="-168,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-164,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-164,30"
+                    Point2="-168,30"
+                    Point3="-168,34" />
+                  <mssgle:LineSegment
+                    End="-168,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="308.5,40">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49,0"
+              Start="0,0"
+              End="41.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="41.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="503,62.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-171,43"
+              Start="0,0"
+              End="-171,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="-4,21.5" />
+                  <mssgle:LineSegment
+                    End="-167,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-167,21.5"
+                    Point2="-171,21.5"
+                    Point3="-171,25.5" />
+                  <mssgle:LineSegment
+                    End="-171,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="307,229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61.5,0"
+              Start="0,0"
+              End="54,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="54,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="753,285"
+          Size="753,328"
+          Id="Package\Foreach Loop Container"
+          TopLeft="101.5,189.5" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\usp_EmailDuplicatePrices"
+          TopLeft="380,553" />
+        <NodeLayout
+          Size="313,42"
+          Id="Package\usp_Store_Item_Price_Day_FactStoreDatesInsert"
+          TopLeft="315,36.5" />
+        <NodeLayout
+          Size="314,42"
+          Id="Package\usp_Store_Item_Price_Day_FactStoreDatesSelect"
+          TopLeft="315.5,107.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="475.25,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="472,78.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="479,517.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.5"
+              Start="0,0"
+              End="0,28">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="580,574.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="110,0"
+              Start="0,0"
+              End="102.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="102.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Load Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Foreach Loop Container\Load Data\ActiveStorePrices"
+          TopLeft="497,298" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01"
+          TopLeft="241,29" />
+        <NodeLayout
+          Size="99,42"
+          Id="Package\Foreach Loop Container\Load Data\End"
+          TopLeft="790,299" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Foreach Loop Container\Load Data\Row Count"
+          TopLeft="295,116" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Foreach Loop Container\Load Data\Enter Changed Price"
+          TopLeft="485,503" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Foreach Loop Container\Load Data\Expire Old Price"
+          TopLeft="495,407" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Foreach Loop Container\Load Data\ActivePrices"
+          TopLeft="292,212" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Foreach Loop Container\Load Data\Enter New Price"
+          TopLeft="67,300" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[OLE DB Command Output]"
+          TopLeft="573,449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[Lookup No Match Output1]"
+          TopLeft="339,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-194,46"
+              Start="0,0"
+              End="-194,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.7186147186147" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.7186147186147"
+                    Point2="0,18.7186147186147"
+                    Point3="-4,18.7186147186147" />
+                  <mssgle:LineSegment
+                    End="-190,18.7186147186147" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-190,18.7186147186147"
+                    Point2="-194,18.7186147186147"
+                    Point3="-194,22.7186147186147" />
+                  <mssgle:LineSegment
+                    End="-194,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-152.80638671875,23.7186147186147,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[Lookup No Match Output]"
+          TopLeft="575,340">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,23.9453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[Lookup Match Output1]"
+          TopLeft="382,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="195.5,44"
+              Start="0,0"
+              End="195.5,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.9047619047619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.9047619047619"
+                    Point2="0,17.9047619047619"
+                    Point3="4,17.9047619047619" />
+                  <mssgle:LineSegment
+                    End="191.5,17.9047619047619" />
+                  <mssgle:CubicBezierSegment
+                    Point1="191.5,17.9047619047619"
+                    Point2="195.5,17.9047619047619"
+                    Point3="195.5,21.9047619047619" />
+                  <mssgle:LineSegment
+                    End="195.5,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="49.55861328125,22.9047619047619,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[Lookup Match Output]"
+          TopLeft="658,319.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132,0"
+              Start="0,0"
+              End="124.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="124.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.05861328125,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[Row Count Output 1]"
+          TopLeft="360.75,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load Data.Paths[OLE DB Source Output]"
+          TopLeft="358.25,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Store_Item_Price_Day_Fact_02:  Final Price File"
+          ParentId="Package\Foreach Loop Container\Load Data"
+          FontInfo="{assembly:Null}"
+          Size="272,42"
+          Id="3063b61d-f3cb-41f1-b66d-54e99bcc9910"
+          TopLeft="690,61" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load Data\ActiveStorePrices">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load Data\Store_Item_Price_Day_Fact_01">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load Data\Enter Changed Price">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load Data\ActivePrices">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load Data\Enter New Price">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

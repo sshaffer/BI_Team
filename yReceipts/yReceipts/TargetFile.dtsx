@@ -1,0 +1,1954 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/30/2016 2:49:00 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0270"
+  DTS:CreatorName="DUNE\oturner"
+  DTS:DTSID="{B39369D2-E45C-4307-AD91-E86271CF1464}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="TargetFile"
+  DTS:PackageType="5"
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{837F6D97-CB2B-44D8-BA3B-109618C4AD1B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{F84D9831-DA61-4729-98C0-288EB2280D07}"
+      DTS:ObjectName="SMTP">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::SMTP]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=smtp-relay.dune.co.uk;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TargetFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B4846EDD-579A-4B08-B2A6-F90A33625EF7}"
+      DTS:ObjectName="TargetFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::SourceFileNameFQ]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="0">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Store_Number"
+              DTS:DTSID="{1E452823-56F2-4DAF-9AF8-B87DBEEC4B60}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email_Marketing_SignUp_Target"
+              DTS:DTSID="{357C35E6-1BE3-48D8-B5DD-936B6A86F353}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email_Receipts_Target"
+              DTS:DTSID="{BDE4C9F6-686D-4A69-A7E2-61F00445B1AD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Store_Group"
+              DTS:DTSID="{2C56450C-9651-422D-A15D-043BB8350DAD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email_Capture_Target"
+              DTS:DTSID="{9E09BEF9-E5B8-4E14-9CF0-0C897B317687}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5895D9B5-290C-470A-A846-2BAA18289B5E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveFileNameFQ">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7AB61BA3-444A-48FB-B543-1C84F93C2CDC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::ParentFolder01] + &quot;\\Company\\in_the_know\\archive\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\CSONAS01\Company\in_the_know\archive\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B68605D8-74C8-43DD-B416-1C43F5BA9B81}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3324185-4969-46B8-8E9E-4BBD2622FA4F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileNameFQ">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{37EE1870-8437-4546-9A5A-19BEE620087A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::ParentFolder01] + &quot;\\Company\\in_the_know\\import\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\CSONAS01\Company\in_the_know\import\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Error Email"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{91110AA8-F988-4DA5-9EDE-607BD138A22B}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Error Email"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{F84D9831-DA61-4729-98C0-288EB2280D07}"
+          SendMailTask:From="DuneDataWarehouse@thedunegroup.com"
+          SendMailTask:To="BIAdmin@thedunegroup.com"
+          SendMailTask:Subject="Target Data"
+          SendMailTask:Priority="High"
+          SendMailTask:MessageSource="The yReceipt Target Data Table has not updated correctly. The target table maybe blank. " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get the CSV file"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{501134a1-af1d-4922-b524-de98bc109155}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get the CSV file">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{9eb472bc-069b-4df4-aa45-2a5ac696f589}"
+        DTS:ObjectName="{D40836E8-5F88-47A3-B3D9-0112076A4F92}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Project::ParentFolder01] + "\\Company\\in_the_know\\import\\"</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\CSONAS01\Company\in_the_know\import\" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Get the CSV file\Extract CSV Data to Staging"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{15e77448-09f0-4d33-8bbe-dbb592907500}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract CSV Data to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Load data into staging table"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SharePoint_StoreTargetData]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Connections[OleDbConnection]"
+                      connectionManagerID="{2AC2AF9C-1EE3-4EF4-A6E6-9C51790F6820}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].Columns[Store_Number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Store_Number"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Number]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].Columns[Email_Marketing_SignUp_Target]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Email_Marketing_SignUp_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Marketing_SignUp_Target]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].Columns[Email_Receipts_Target]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Email_Receipts_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Receipts_Target]"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Receipts_Target]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].Columns[Store_Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Store_Group"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Store_Group]"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Group]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].Columns[Email_Capture_Target]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Email_Capture_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Capture_Target]"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Capture_Target]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[ContentTypeID]"
+                          dataType="nText"
+                          name="ContentTypeID" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Store_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          dataType="i4"
+                          name="Email_Marketing_SignUp_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Receipts_Target]"
+                          dataType="i4"
+                          name="Email_Receipts_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Email_Capture_Target]"
+                          dataType="i4"
+                          name="Email_Capture_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Store_Group" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[ContentType]"
+                          dataType="nText"
+                          name="ContentType" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Modified]"
+                          dataType="dbTimeStamp"
+                          name="Modified" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Created]"
+                          dataType="dbTimeStamp"
+                          name="Created" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedById]"
+                          dataType="i4"
+                          name="CreatedById" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedById]"
+                          dataType="i4"
+                          name="ModifiedById" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Owshiddenversion]"
+                          dataType="i4"
+                          name="Owshiddenversion" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Version]"
+                          dataType="nText"
+                          name="Version" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input].ExternalColumns[Path]"
+                          dataType="nText"
+                          name="Path" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File"
+                  componentClassID="DTSAdapter.FlatFileSource.3"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="YReceipt CSV File"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[TargetFile]"
+                      connectionManagerRefId="Package.ConnectionManagers[TargetFile]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Store_Number]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Number]"
+                          name="Store_Number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Marketing_SignUp_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Marketing_SignUp_Target]"
+                          name="Email_Marketing_SignUp_Target"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Receipts_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Receipts_Target]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Receipts_Target]"
+                          name="Email_Receipts_Target"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Store_Group]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Store_Group]"
+                          name="Store_Group"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Capture_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Capture_Target]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].Columns[Email_Capture_Target]"
+                          name="Email_Capture_Target"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Store_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Email_Marketing_SignUp_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Receipts_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Email_Receipts_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Store_Group" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output].ExternalColumns[Email_Capture_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Email_Capture_Target" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Get the CSV file\Extract CSV Data to Staging.Paths[Flat File Source Output]"
+                  endId="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table.Inputs[OLE DB Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get the CSV file\Load Data"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{512381c9-1a7d-4cfa-8aa1-449eeca94eac}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Get the CSV file\Load Data\Add Store Number and import date"
+                  componentClassID="DTSTransform.DerivedColumn.3"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Add Store Number and import date"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Inputs[Derived Column Input].Columns[Store_Number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="5"
+                          cachedName="Store_Number"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Number]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\Add Store Number and import date.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[StoreNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="5"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[StoreNumber]"
+                          name="StoreNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[RIGHT]("00000" + #{Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Number]},5)</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">RIGHT("00000" + Store_Number,5)</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[Import_Date]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[Import_Date]"
+                          name="Import_Date"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_DBDATE)[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_DBDATE)GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\Add Store Number and import date.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="InTheKnow_StoreTargetData"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[InTheKnow_StoreTargetData]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Connections[OleDbConnection]"
+                      connectionManagerID="{9969DEC6-1D17-4661-9AE1-B7587BE02A74}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[yReceipts]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Email_Marketing_SignUp_Target]"
+                          cachedDataType="i4"
+                          cachedName="Email_Marketing_SignUp_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Marketing_SignUp_Target]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Email_Receipts_Target]"
+                          cachedDataType="i4"
+                          cachedName="Email_Receipts_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Receipts_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Receipts_Target]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Store_Group]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Store_Group"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Group]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Group]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Store_Dim_ID]"
+                          cachedDataType="i4"
+                          cachedName="Store_Dim_ID"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_Id]"
+                          lineageId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Match Output].Columns[Store_Dim_ID]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[StoreNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="StoreNumber"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[StoreNumber]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Import_Date]"
+                          cachedDataType="dbDate"
+                          cachedName="Import_Date"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Import_Date]"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[Import_Date]" />
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].Columns[Email_Capture_Target]"
+                          cachedDataType="i4"
+                          cachedName="Email_Capture_Target"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Capture_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Capture_Target]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Store_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="Email_Marketing_SignUp_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Receipts_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="Email_Receipts_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Store_Group" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Import_Date]"
+                          dataType="dbDate"
+                          name="Import_Date" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_Id]"
+                          dataType="i4"
+                          name="Store_Dim_Id" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input].ExternalColumns[Email_Capture_Target]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="Email_Capture_Target" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData"
+                  componentClassID="DTSAdapter.OLEDBSource.3"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="SharePoint_StoreTargetData"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SharePoint_StoreTargetData]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Connections[OleDbConnection]"
+                      connectionManagerID="{2AC2AF9C-1EE3-4EF4-A6E6-9C51790F6820}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ContentTypeID]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ContentTypeID]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ContentTypeID]"
+                          name="ContentTypeID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                          length="5"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                          name="Store_Number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Marketing_SignUp_Target]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Marketing_SignUp_Target]"
+                          name="Email_Marketing_SignUp_Target"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Receipts_Target]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Receipts_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Receipts_Target]"
+                          name="Email_Receipts_Target"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Capture_Target]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Capture_Target]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Email_Capture_Target]"
+                          name="Email_Capture_Target"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Store_Group]"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Store_Group]"
+                          name="Store_Group"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Id]"
+                          name="Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ContentType]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ContentType]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ContentType]"
+                          name="ContentType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Modified]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Modified]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Modified]"
+                          name="Modified"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Created]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Created]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Created]"
+                          name="Created"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[CreatedById]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[CreatedById]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[CreatedById]"
+                          name="CreatedById"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ModifiedById]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ModifiedById]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[ModifiedById]"
+                          name="ModifiedById"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Owshiddenversion]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Owshiddenversion]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Owshiddenversion]"
+                          name="Owshiddenversion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Version]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Version]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Version]"
+                          name="Version"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Path]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Path]"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].Columns[Path]"
+                          name="Path"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ContentTypeID]"
+                          dataType="nText"
+                          name="ContentTypeID" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Store_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Marketing_SignUp_Target]"
+                          dataType="i4"
+                          name="Email_Marketing_SignUp_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Receipts_Target]"
+                          dataType="i4"
+                          name="Email_Receipts_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Email_Capture_Target]"
+                          dataType="i4"
+                          name="Email_Capture_Target" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Store_Group" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ContentType]"
+                          dataType="nText"
+                          name="ContentType" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Modified]"
+                          dataType="dbTimeStamp"
+                          name="Modified" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Created]"
+                          dataType="dbTimeStamp"
+                          name="Created" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[CreatedById]"
+                          dataType="i4"
+                          name="CreatedById" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[ModifiedById]"
+                          dataType="i4"
+                          name="ModifiedById" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Owshiddenversion]"
+                          dataType="i4"
+                          name="Owshiddenversion" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Version]"
+                          dataType="nText"
+                          name="Version" />
+                        <externalMetadataColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output].ExternalColumns[Path]"
+                          dataType="nText"
+                          name="Path" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ContentTypeID]"
+                          dataType="nText"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ContentTypeID]"
+                          name="ContentTypeID" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                          name="Store_Number" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Marketing_SignUp_Target]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Marketing_SignUp_Target]"
+                          name="Email_Marketing_SignUp_Target" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Receipts_Target]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Receipts_Target]"
+                          name="Email_Receipts_Target" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Capture_Target]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Email_Capture_Target]"
+                          name="Email_Capture_Target" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Store_Group]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Store_Group]"
+                          name="Store_Group" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          name="Id" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ContentType]"
+                          dataType="nText"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ContentType]"
+                          name="ContentType" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Modified]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Modified]"
+                          name="Modified" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Created]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Created]"
+                          name="Created" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[CreatedById]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[CreatedById]"
+                          name="CreatedById" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ModifiedById]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ModifiedById]"
+                          name="ModifiedById" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Owshiddenversion]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Owshiddenversion]"
+                          name="Owshiddenversion" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Version]"
+                          dataType="nText"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Version]"
+                          name="Version" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Path]"
+                          dataType="nText"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[Path]"
+                          name="Path" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Get the CSV file\Load Data\Store_Dim"
+                  componentClassID="DTSTransform.Lookup.3"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Store_Dim"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+Store_Dim_ID,
+Store_Number
+FROM Store_Dim WHERE Store_Type = 'Dune'</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+Store_Dim_ID,
+Store_Number
+FROM Store_Dim WHERE Store_Type = 'Dune') [refTable]
+where [refTable].[Store_Number] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Store_Dim_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Store_Number" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[StoreNumber]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Get the CSV file\Load Data\Store_Dim.Connections[OleDbConnection]"
+                      connectionManagerID="{D4D5696D-0846-4E54-9532-91E01EAA1E84}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Data_Warehouse]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input].Columns[StoreNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="StoreNumber"
+                          lineageId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output].Columns[StoreNumber]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Store_Number</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Match Output].Columns[Store_Dim_ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Match Output].Columns[Store_Dim_ID]"
+                          name="Store_Dim_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Store_Dim_ID</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Get the CSV file\Load Data.Paths[Derived Column Output]"
+                  endId="Package\Get the CSV file\Load Data\Store_Dim.Inputs[Lookup Input]"
+                  name="Derived Column Output"
+                  startId="Package\Get the CSV file\Load Data\Add Store Number and import date.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Get the CSV file\Load Data.Paths[Lookup Match Output]"
+                  endId="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData.Inputs[OLE DB Destination Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Get the CSV file\Load Data\Store_Dim.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Get the CSV file\Load Data.Paths[OLE DB Source Output]"
+                  endId="Package\Get the CSV file\Load Data\Add Store Number and import date.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get the CSV file\Move file to Archive Folder"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="File System Task"
+          DTS:DTSID="{6c88d778-7e9d-4a71-89f8-cd70ab1112ec}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move file to Archive Folder"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::SourceFileNameFQ"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::ArchiveFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get the CSV file\Truncate In The Know Table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="truncates the table each time new data is loaded"
+          DTS:DTSID="{D245C1F5-F689-4DB3-BDEA-484113FBE59F}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate In The Know Table"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9969DEC6-1D17-4661-9AE1-B7587BE02A74}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [yReceipts].[dbo].[InTheKnow_StoreTargetData]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get the CSV file\Truncate staging table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Clear the table ready for the import"
+          DTS:DTSID="{42d7d114-faf8-4cb6-bcac-4efcb7cc7b1b}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9969DEC6-1D17-4661-9AE1-B7587BE02A74}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [Dune_Data_Warehouse_Staging].[dbo].[SharePoint_StoreTargetData]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get the CSV file.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{98E4AC36-72CD-4A7E-8F55-83AD6041770D}"
+          DTS:From="Package\Get the CSV file\Extract CSV Data to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Get the CSV file\Move file to Archive Folder" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get the CSV file.PrecedenceConstraints[Constraint1]"
+          DTS:CreationName=""
+          DTS:DTSID="{7707A7E6-5BA9-42BE-8428-F07B9253E6D2}"
+          DTS:From="Package\Get the CSV file\Truncate In The Know Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Get the CSV file\Load Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get the CSV file.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{64C2ADF3-19CC-4345-8203-69D2CF7ACDC7}"
+          DTS:From="Package\Get the CSV file\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Get the CSV file\Extract CSV Data to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get the CSV file.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{094A28A1-BCA4-4A5E-8018-65F1306AEEE6}"
+          DTS:From="Package\Get the CSV file\Move file to Archive Folder"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Get the CSV file\Truncate In The Know Table" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{C6B27782-27D0-45BE-9CDF-518BB3105C71}"
+          DTS:ObjectName="{C6B27782-27D0-45BE-9CDF-518BB3105C71}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SourceFileNameFQ" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2BCC087A-5513-4F10-8B3C-206964D92306}"
+      DTS:From="Package\Get the CSV file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Error Email"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Error Email"
+          TopLeft="960,274" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Get the CSV file\Extract CSV Data to Staging"
+          TopLeft="88,100" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Get the CSV file\Load Data"
+          TopLeft="134,401" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Get the CSV file\Move file to Archive Folder"
+          TopLeft="98,201" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Get the CSV file\Truncate In The Know Table"
+          TopLeft="120,299" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Get the CSV file\Truncate staging table"
+          TopLeft="99,5.5" />
+        <EdgeLayout
+          Id="Package\Get the CSV file.PrecedenceConstraints[Constraint]"
+          TopLeft="197.5,142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get the CSV file.PrecedenceConstraints[Constraint1]"
+          TopLeft="200.5,341">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get the CSV file.PrecedenceConstraints[Constraint 1]"
+          TopLeft="193.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.5"
+              Start="0,0"
+              End="0,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get the CSV file.PrecedenceConstraints[Constraint 2]"
+          TopLeft="201.75,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="370,498"
+          Size="370,541"
+          Id="Package\Get the CSV file"
+          TopLeft="464,31" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="834,298.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126,0"
+              Start="0,0"
+              End="118.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="118.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="44.00865234375,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Imports data from \\csonas01\Company\in_the_know\import\"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="358,40"
+          Id="a7c2414e-aafc-400f-beff-2bf7ae44cec9"
+          TopLeft="65,25" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get the CSV file\Extract CSV Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Get the CSV file\Extract CSV Data to Staging\YReceipt CSV File"
+          TopLeft="300,35" />
+        <NodeLayout
+          Size="213,42"
+          Id="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table"
+          TopLeft="282.5,138.5" />
+        <EdgeLayout
+          Id="Package\Get the CSV file\Extract CSV Data to Staging.Paths[Flat File Source Output]"
+          TopLeft="385.25,77">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.5"
+              Start="0,0"
+              End="0,54">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get the CSV file\Extract CSV Data to Staging\Load data into staging table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get the CSV file\Load Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData"
+          TopLeft="303,115" />
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Get the CSV file\Load Data\Add Store Number and import date"
+          TopLeft="289,225" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData"
+          TopLeft="298,410" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Get the CSV file\Load Data\Store_Dim"
+          TopLeft="343,319" />
+        <EdgeLayout
+          Id="Package\Get the CSV file\Load Data.Paths[Lookup Match Output]"
+          TopLeft="407.5,361">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,14.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get the CSV file\Load Data.Paths[Derived Column Output]"
+          TopLeft="410.25,267">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get the CSV file\Load Data.Paths[OLE DB Source Output]"
+          TopLeft="411.5,157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get the CSV file\Load Data\SharePoint_StoreTargetData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get the CSV file\Load Data\InTheKnow_StoreTargetData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get the CSV file\Load Data\Store_Dim">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

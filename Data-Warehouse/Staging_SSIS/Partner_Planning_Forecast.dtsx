@@ -1,0 +1,1359 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/13/2017 4:13:55 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0988"
+  DTS:CreatorName="DUNE\pellis"
+  DTS:DTSID="{93DFB876-B408-4E38-B880-B6FAA8F3EEEA}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Partner_Planning_Forecast"
+  DTS:PackageType="5"
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{51B88253-8FD4-466F-AADD-05A1CD619341}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CSV Connection]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B383E6AE-6A66-4A97-932B-3BC1A0922AC1}"
+      DTS:ObjectName="CSV Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\csonas01\Company\Dune Franchise\Datawarehouse\PlanForecast\Partners_PlanForecast.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fiscal_year"
+              DTS:DTSID="{81E2F874-9C11-42AF-ACAD-EB2D19FD6221}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fiscal_week"
+              DTS:DTSID="{0D1E8A35-96BF-45AB-98A9-4DD39027EA1D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="partner"
+              DTS:DTSID="{F437408C-857A-4C02-BBD2-9AE495631D81}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="currency"
+              DTS:DTSID="{C07CA075-F8FE-45F4-9785-C6DC9191AC9D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="store_number"
+              DTS:DTSID="{06572C15-FEC0-463A-B01A-58A9A8736576}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="store_name"
+              DTS:DTSID="{70B90FF6-C813-4473-B28D-25034ACE0DA8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="plan_value"
+              DTS:DTSID="{057F68C6-BA0C-4471-A7C3-1625CE86FE0E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="forecast_value"
+              DTS:DTSID="{EED912DE-0CEF-4C0E-B1B3-BBA76F9557AB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6FBDFA40-34C9-4352-8AB3-84FDC8BDF368}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Cache_IP_data">
+      <DTS:VariableValue
+        DTS:DataType="17">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{71D2D394-5D00-4D65-A2B9-0CB88365A59F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorDescription">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{42F68697-D9DA-4E5E-9097-5F5403E5B08F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportRowKount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{059634FD-B736-4CF9-9027-556E669DFD3E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Process_Data">
+      <DTS:VariableValue
+        DTS:DataType="17">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5CAC3C5D-5697-4866-813E-899256087303}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Source">
+      <DTS:VariableValue
+        DTS:DataType="8">Partner_Forecasting_Forecasting</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{18975B87-5220-413D-874E-F556BA4A1F07}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Table_Name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:LoggingMode="2" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Data into FACT Table"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Load Data into FACT Table"
+      DTS:DTSID="{6FC55084-E06D-4041-AAF4-0E2E5103A1FE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Data into FACT Table">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Data into FACT Table\Error Loading DWH"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Email IT "
+          DTS:DTSID="{14459724-6d58-457b-b899-1343a3274fe5}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Error Loading DWH"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="exec usp_Partner_Planning_Forecast_Issue_Email ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::TaskName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Data into FACT Table\Merge_Partner_Planning__Forecast_Fact"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6AD1995E-9F76-4D78-8095-362BE3B71165}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge_Partner_Planning__Forecast_Fact"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="EXEC  Merge_Partner_Planning__Forecast_Fact" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::Table_Name"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Source"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="$Project::Cache_IP_Data"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="17"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="$Project::Process_Data"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="17"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Data into FACT Table.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{1434FD28-BF7C-4001-AF7B-77392C86009C}"
+          DTS:From="Package\Load Data into FACT Table\Merge_Partner_Planning__Forecast_Fact"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Data into FACT Table\Error Loading DWH"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Load Data into FACT Table.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{67B5B479-A588-408C-9073-1259B60F53F3}"
+          DTS:EventID="244"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{A034D03C-E237-45C8-8E02-3FED021ADABD}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load Data into FACT Table.EventHandlers[OnError]\Send Mail Task"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Send Mail Task"
+              DTS:DTSID="{DBF61302-1901-474F-94D6-F1C1451D40F9}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Send Mail Task">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SendMailTask:SendMailTaskData
+                  SendMailTask:SMTPServer="{13E328C7-5902-4BA3-9E81-25D232832DAF}"
+                  SendMailTask:From="pellis@thedunegroup.com"
+                  SendMailTask:To="pellis@thedunegroup.com"
+                  SendMailTask:Subject="bad" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Into Staging"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{52607313-BCE2-4F8A-B950-E8619E77123C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Into Staging">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Into Staging\Error Email Team"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{400A8100-BB44-4F4F-ABD9-FF8622A8F87F}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Error Email Team"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="exec usp_Partner_Planning_Forecast_Issue_Email ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::TaskName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Into Staging\Import Data from CSV into Staging"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Taskw"
+          DTS:DTSID="{81E42599-DEE6-4F75-AE15-0B919CCE4B9E}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import Data from CSV into Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion"
+                  componentClassID="DTSTransform.DataConvert.3"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input].Columns[store_number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="store_number"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_number]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input].Columns[store_name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="store_name"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_name]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input].Columns[partner]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="partner"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[partner]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input].Columns[currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="currency"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[currency]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_store_number]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_store_number]"
+                          name="New_store_number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_number]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[Newstore_name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[Newstore_name]"
+                          name="Newstore_name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_name]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_partner]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_partner]"
+                          name="New_partner"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[partner]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_currency]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_currency]"
+                          name="New_currency"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[currency]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV"
+                  componentClassID="DTSAdapter.FlatFileSource.3"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="Partner Planning &amp; Forecast CSV"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[CSV Connection]"
+                      connectionManagerRefId="Package.ConnectionManagers[CSV Connection]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_year]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[fiscal_year]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_year]"
+                          name="fiscal_year"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_week]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[fiscal_week]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_week]"
+                          name="fiscal_week"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[partner]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[partner]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[partner]"
+                          name="partner"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[currency]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[currency]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[currency]"
+                          name="currency"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[store_number]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_number]"
+                          name="store_number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_name]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[store_name]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[store_name]"
+                          name="store_name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[plan_value]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[plan_value]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[plan_value]"
+                          name="plan_value"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[forecast_value]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[forecast_value]"
+                          length="50"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[forecast_value]"
+                          name="forecast_value"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[fiscal_year]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fiscal_year" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[fiscal_week]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fiscal_week" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[partner]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="partner" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="currency" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[store_number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="store_number" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[store_name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="store_name" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[plan_value]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="plan_value" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].ExternalColumns[forecast_value]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="forecast_value" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Partner_Planning_Forecast"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Partner_Planning_Forecast]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Connections[OleDbConnection]"
+                      connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[fiscal_year]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fiscal_year"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_year]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_year]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[fiscal_week]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fiscal_week"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[fiscal_week]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[plan_value]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="plan_value"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[plan_value]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[plan_value]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[forecast_value]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="forecast_value"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[forecast_value]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output].Columns[forecast_value]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[New_store_number]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="New_store_number"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[store_number]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_store_number]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[Newstore_name]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Newstore_name"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[store_name]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[Newstore_name]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[New_partner]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="New_partner"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[partner]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_partner]" />
+                        <inputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].Columns[New_currency]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="New_currency"
+                          externalMetadataColumnId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[currency]"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output].Columns[New_currency]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[store_number]"
+                          dataType="wstr"
+                          length="10"
+                          name="store_number" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[store_name]"
+                          dataType="wstr"
+                          length="100"
+                          name="store_name" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                          dataType="i4"
+                          name="fiscal_week" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_year]"
+                          dataType="i4"
+                          name="fiscal_year" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[partner]"
+                          dataType="wstr"
+                          length="50"
+                          name="partner" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[currency]"
+                          dataType="wstr"
+                          length="10"
+                          name="currency" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[plan_value]"
+                          dataType="numeric"
+                          name="plan_value"
+                          precision="18"
+                          scale="8" />
+                        <externalMetadataColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input].ExternalColumns[forecast_value]"
+                          dataType="numeric"
+                          name="forecast_value"
+                          precision="18"
+                          scale="8" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Load Into Staging\Import Data from CSV into Staging.Paths[Data Conversion Output]"
+                  endId="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Load Into Staging\Import Data from CSV into Staging.Paths[Flat File Source Output]"
+                  endId="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Into Staging\Truncate Partner_Planning_Forecast"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7C895B64-114A-4A80-A1DF-0D79E150C4E4}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Partner_Planning_Forecast"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource=" TRUNCATE TABLE [Dune_Data_Warehouse_Staging].[dbo].[Partner_Planning_Forecast]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Into Staging\Validate Imported Data"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="If no data imported email users"
+          DTS:DTSID="{AFD88D58-11B1-494F-B668-2EF3FA1A1CB8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Validate Imported Data"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="exec usp_Validate_PartnerPlanningForecast_Email" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Into Staging.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{4FBCFAA7-1D7E-4C82-9520-4B2C595109F5}"
+          DTS:From="Package\Load Into Staging\Truncate Partner_Planning_Forecast"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Into Staging\Import Data from CSV into Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Into Staging.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{085B4F13-58A9-476A-B597-F60F1F834BC4}"
+          DTS:From="Package\Load Into Staging\Import Data from CSV into Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Load Into Staging\Validate Imported Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Into Staging.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{90684335-5833-4B72-A7CF-0C9BC9867EB2}"
+          DTS:From="Package\Load Into Staging\Import Data from CSV into Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Load Into Staging\Error Email Team"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{96D2AF78-3077-4560-8F83-03C27588C6B8}"
+      DTS:From="Package\Load Into Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Data into FACT Table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="273,42"
+          Id="Package\Load Data into FACT Table\Merge_Partner_Planning__Forecast_Fact"
+          TopLeft="88,36" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Load Data into FACT Table\Error Loading DWH"
+          TopLeft="141,190" />
+        <EdgeLayout
+          Id="Package\Load Data into FACT Table.PrecedenceConstraints[Constraint]"
+          TopLeft="225.75,78">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,112"
+              Start="0,0"
+              End="0,104.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.24134765625,47.37548828125,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="429,350"
+          Size="429,393"
+          Id="Package\Load Data into FACT Table"
+          TopLeft="1060,90" />
+        <NodeLayout
+          Size="245,42"
+          Id="Package\Load Into Staging\Import Data from CSV into Staging"
+          TopLeft="113,132" />
+        <NodeLayout
+          Size="252,42"
+          Id="Package\Load Into Staging\Truncate Partner_Planning_Forecast"
+          TopLeft="110.5,31.5" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Load Into Staging\Validate Imported Data"
+          TopLeft="97,260" />
+        <EdgeLayout
+          Id="Package\Load Into Staging.PrecedenceConstraints[Constraint]"
+          TopLeft="236,73.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.5"
+              Start="0,0"
+              End="0,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Into Staging.PrecedenceConstraints[Constraint 1]"
+          TopLeft="194.25,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,86"
+              Start="0,0"
+              End="0,78.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,78.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load Into Staging\Error Email Team"
+          TopLeft="407,258" />
+        <EdgeLayout
+          Id="Package\Load Into Staging.PrecedenceConstraints[Constraint 3]"
+          TopLeft="275,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="213.5,84"
+              Start="0,0"
+              End="213.5,76.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9270072992701" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.9270072992701"
+                    Point2="0,33.9270072992701"
+                    Point3="4,33.9270072992701" />
+                  <mssgle:LineSegment
+                    End="209.5,33.9270072992701" />
+                  <mssgle:CubicBezierSegment
+                    Point1="209.5,33.9270072992701"
+                    Point2="213.5,33.9270072992701"
+                    Point3="213.5,37.9270072992701" />
+                  <mssgle:LineSegment
+                    End="213.5,76.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="91.50865234375,38.9270072992701,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="699,371"
+          Size="699,414"
+          Id="Package\Load Into Staging"
+          TopLeft="207,83" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="906,288.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="154,0"
+              Start="0,0"
+              End="146.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="146.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package\Load Data into FACT Table.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Load Data into FACT Table.EventHandlers[OnError]\Send Mail Task"
+          TopLeft="333,142" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Load Into Staging\Import Data from CSV into Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast"
+          TopLeft="170,298" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Load Into Staging\Import Data from CSV into Staging\Partner Planning &amp; Forecast CSV"
+          TopLeft="157,55" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Load Into Staging\Import Data from CSV into Staging\Data Conversion"
+          TopLeft="202,168" />
+        <EdgeLayout
+          Id="Package\Load Into Staging\Import Data from CSV into Staging.Paths[Flat File Source Output]"
+          TopLeft="277.5,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Into Staging\Import Data from CSV into Staging.Paths[Data Conversion Output]"
+          TopLeft="284,210">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88"
+              Start="0,0"
+              End="0,80.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Into Staging\Import Data from CSV into Staging\Partner_Planning_Forecast">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

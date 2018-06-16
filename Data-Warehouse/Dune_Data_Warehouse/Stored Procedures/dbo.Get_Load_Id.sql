@@ -1,0 +1,16 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROC [dbo].[Get_Load_Id]
+AS
+
+SET NOCOUNT ON;
+
+SELECT Last_Load_Id + 1 AS Load_Id
+FROM Last_Load_Id
+WHERE Load_Date = (
+	SELECT MAX(Load_Date)
+	FROM Last_Load_Id
+)
+GO

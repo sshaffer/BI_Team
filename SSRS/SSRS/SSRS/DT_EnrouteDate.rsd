@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>DUNEOCSQL01</DataSourceReference>
+      <CommandText>SELECT        EnrouteDate, SendingStore, SUM(Quantity) AS Items
+FROM            OCS_TRANSFERS WITH (NOLOCK)
+WHERE        (TransferStatus = 'E') AND (TransferType &lt;&gt; 'MT')
+GROUP BY EnrouteDate, SendingStore
+ORDER BY EnrouteDate</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="EnrouteDate">
+        <DataField>EnrouteDate</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SendingStore">
+        <DataField>SendingStore</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Items">
+        <DataField>Items</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,1050 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/4/2017 8:50:23 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0988"
+  DTS:CreatorName="DUNE\pellis"
+  DTS:DTSID="{79558C8F-F414-43E3-B47E-BCE0B332C0B2}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Import of Budget Data"
+  DTS:PackageType="5"
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{7A7ADD0B-5708-4DD1-B2C5-CFE18765E56D}"
+  DTS:VersionMajor="8">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BudgetFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{A1A1B6CE-5785-411F-8439-FC0C58167430}"
+      DTS:ObjectName="BudgetFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::BudgetFolder] + "\\FinanceBudget.csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\dun9909\Company\Dune Finance Datawarehouse\Budget\FinanceBudget.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fiscal_year"
+              DTS:DTSID="{DA15ABF8-B4C8-40F9-A324-874D12B28EC8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fiscal_period"
+              DTS:DTSID="{C0134EA6-DB3A-4508-A19C-FB112496F206}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fiscal_week"
+              DTS:DTSID="{89D334F1-0FDE-4D07-B267-C7093895D8D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="store_number"
+              DTS:DTSID="{04C2F8E0-F008-43CE-B923-3E212E5C7968}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="sales"
+              DTS:DTSID="{737AA080-8BDB-41E3-8903-3E79AA79A221}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="net_sales"
+              DTS:DTSID="{F4F89CC0-C076-4267-84BE-706410441817}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="margin"
+              DTS:DTSID="{05B9066A-60A5-4DFF-999C-10623E7AA3E9}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C1A0519C-D25F-41DB-8CE9-C43DE6CEC32E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::SMTP]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SMTP">
+      <DTS:VariableValue
+        DTS:DataType="8">smtp-relay.dune.co.uk</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract Budget Staging Data"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C6E5C568-3DE5-4BF4-8788-BE05A33F5185}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract Budget Staging Data">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract Budget Staging Data\Error Extracting Data"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{EB01D80D-4548-4C76-94E6-1BE55D505362}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Error Extracting Data"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{4CBAB7E2-6946-4947-9A6B-A85E06FDFA12}"
+              SendMailTask:From="dunereporting@thedunegroup.com"
+              SendMailTask:To="AArnold@thedunegroup.com;KHoppe@thedunegroup.com;KBishop@thedunegroup.com"
+              SendMailTask:BCC="BIAdmin@thedunegroup.com"
+              SendMailTask:Subject="Finance - Budget Imports Extraction Error"
+              SendMailTask:Priority="High"
+              SendMailTask:MessageSource="The process to extract Budget data from the following file has failed;&#xA;&#xA;\\csonas01\Company2\Dune Finance\Datawarehouse\Budget\FinanceBudget.csv&#xA;&#xA;This was due to either&#xA;&#xA;1. The file not being available&#xA;2. The data within this file has missing fields or the data is in the incorrect format.&#xA;3. Another techical/Networking  issue&#xA;&#xA;The BI team are aware of the issue and will contact you." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Budget Staging Data\Extract Budget Data"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{B106FE54-58EC-4B65-B187-C9F0F4FCF84D}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract Budget Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget"
+                  componentClassID="DTSAdapter.FlatFileSource.3"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="CSV File - FinanceBudget"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[BudgetFile]"
+                      connectionManagerRefId="Package.ConnectionManagers[BudgetFile]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_year]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_year]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_year]"
+                          name="fiscal_year"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_period]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_period]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_period]"
+                          name="fiscal_period"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_week]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_week]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_week]"
+                          name="fiscal_week"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[store_number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[store_number]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[store_number]"
+                          name="store_number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[sales]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[sales]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[sales]"
+                          name="sales"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[net_sales]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[net_sales]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[net_sales]"
+                          name="net_sales"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[margin]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[margin]"
+                          length="50"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[margin]"
+                          name="margin"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_year]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fiscal_year" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_period]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fiscal_period" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[fiscal_week]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="fiscal_week" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[store_number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="store_number" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[sales]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="sales" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[net_sales]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="net_sales" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].ExternalColumns[margin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="margin" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion"
+                  componentClassID="DTSTransform.DataConvert.3"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Inputs[Data Conversion Input].Columns[store_number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="store_number"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[store_number]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Output].Columns[Converted_store_number]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="5"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Output].Columns[Converted_store_number]"
+                          name="Converted_store_number"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[store_number]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Staging_Finance_Budget_Week_Fact"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Staging_Finance_Budget_Week_Fact]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Connections[OleDbConnection]"
+                      connectionManagerID="{25508850-2A09-4E0B-87BF-ED6FFD4DA500}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[fiscal_year]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fiscal_year"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Fiscal_year]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_year]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[fiscal_period]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fiscal_period"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Fiscal_Period]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_period]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[fiscal_week]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="fiscal_week"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[fiscal_week]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[sales]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="sales"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Sales]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[sales]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[net_sales]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="net_sales"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Net_sales]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[net_sales]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[margin]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="margin"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Margin]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output].Columns[margin]" />
+                        <inputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].Columns[Converted_store_number]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="Converted_store_number"
+                          externalMetadataColumnId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[store_number]"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Output].Columns[Converted_store_number]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                          dataType="i4"
+                          name="id" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Fiscal_year]"
+                          dataType="i4"
+                          name="Fiscal_year" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Fiscal_Period]"
+                          dataType="i4"
+                          name="Fiscal_Period" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[fiscal_week]"
+                          dataType="i4"
+                          name="fiscal_week" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[store_number]"
+                          dataType="wstr"
+                          length="10"
+                          name="store_number" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Sales]"
+                          dataType="numeric"
+                          name="Sales"
+                          precision="18"
+                          scale="9" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Net_sales]"
+                          dataType="numeric"
+                          name="Net_sales"
+                          precision="18"
+                          scale="9" />
+                        <externalMetadataColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input].ExternalColumns[Margin]"
+                          dataType="numeric"
+                          name="Margin"
+                          precision="18"
+                          scale="9" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Extract Budget Staging Data\Extract Budget Data.Paths[Data Conversion Output]"
+                  endId="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Extract Budget Staging Data\Extract Budget Data.Paths[Flat File Source Output]"
+                  endId="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Budget Staging Data\Truncate staging table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B5FED9DE-6390-4781-ABAF-C97134BC7776}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{25508850-2A09-4E0B-87BF-ED6FFD4DA500}"
+              SQLTask:SqlStatementSource="TRUNCATE  TABLE DBO.Staging_Finance_Budget_Week_Fact" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract Budget Staging Data.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{C9C32560-AF46-480E-87A2-BA85B47C8851}"
+          DTS:From="Package\Extract Budget Staging Data\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract Budget Staging Data\Extract Budget Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract Budget Staging Data.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{227E90F8-5B45-4539-9314-8EF0EBF8E439}"
+          DTS:From="Package\Extract Budget Staging Data\Extract Budget Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract Budget Staging Data\Error Extracting Data"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Budget Data"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{B56627E0-8F8E-41A5-9A74-101485D5A21A}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Budget Data">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Budget Data\Error Loading Mail Users"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{6A00A0F4-BF61-4EA9-B119-2352E36029F1}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Error Loading Mail Users"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{4CBAB7E2-6946-4947-9A6B-A85E06FDFA12}"
+              SendMailTask:From="DuneReporting@thedunegroup.com"
+              SendMailTask:To="AArnold@thedunegroup.com;KHoppe@thedunegroup.com;KBishop@thedunegroup.com"
+              SendMailTask:BCC="BIAdmin@thedunegroup.com"
+              SendMailTask:Subject="Finance - Budget Imports Load Error"
+              SendMailTask:Priority="High"
+              SendMailTask:MessageSource="The process to Load Budget data into [dbo].[Merge_Finnance_Budget_Week_Fact] on BISDW-CL01.&#xA;&#xA;The SSIS package can be found in the solution Financial Budget and the package is called Import of Budget Data.dtsx" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Budget Data\Load Budget Data"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0874AB1A-17D7-4BE6-A908-AC37463F7FA4}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Budget Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6CDAC32B-779E-4827-B7DC-1D6B2389A630}"
+              SQLTask:SqlStatementSource="exec [dbo].[Merge_Finance_Budget_Week_Fact] 1,0,1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Budget Data.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{ECF99C24-5950-41E9-BC5C-29EA08D51535}"
+          DTS:From="Package\Load Budget Data\Load Budget Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Budget Data\Error Loading Mail Users"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8034B1CF-31CB-43D0-AD93-71AF8072F8AC}"
+      DTS:From="Package\Extract Budget Staging Data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Budget Data" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Extract Budget Staging Data\Error Extracting Data"
+          TopLeft="74,230" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Extract Budget Staging Data\Extract Budget Data"
+          TopLeft="77,117" />
+        <NodeLayout
+          Size="192,43"
+          Id="Package\Extract Budget Staging Data\Truncate staging table"
+          TopLeft="72,10" />
+        <EdgeLayout
+          Id="Package\Extract Budget Staging Data.PrecedenceConstraints[Constraint]"
+          TopLeft="166,53">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract Budget Staging Data.PrecedenceConstraints[Constraint 1]"
+          TopLeft="164,159">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.24134765625,26.87548828125,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="422,329"
+          Size="422,372"
+          Id="Package\Extract Budget Staging Data"
+          TopLeft="148,33" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Load Budget Data\Error Loading Mail Users"
+          TopLeft="61,151" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load Budget Data\Load Budget Data"
+          TopLeft="78,51" />
+        <EdgeLayout
+          Id="Package\Load Budget Data.PrecedenceConstraints[Constraint]"
+          TopLeft="159.25,93">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.24134765625,20.37548828125,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="334,251"
+          Size="334,294"
+          Id="Package\Load Budget Data"
+          TopLeft="698,70" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="570,218">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="128,0"
+              Start="0,0"
+              End="120.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="120.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract Budget Staging Data\Extract Budget Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Extract Budget Staging Data\Extract Budget Data\Data Conversion"
+          TopLeft="327,141" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Extract Budget Staging Data\Extract Budget Data\CSV File - FinanceBudget"
+          TopLeft="302,40" />
+        <NodeLayout
+          Size="253,42"
+          Id="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact"
+          TopLeft="275,262" />
+        <EdgeLayout
+          Id="Package\Extract Budget Staging Data\Extract Budget Data.Paths[Flat File Source Output]"
+          TopLeft="403.75,82">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract Budget Staging Data\Extract Budget Data.Paths[Data Conversion Output]"
+          TopLeft="403.75,183">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79"
+              Start="0,0"
+              End="0,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract Budget Staging Data\Extract Budget Data\Staging_Finance_Budget_Week_Fact">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

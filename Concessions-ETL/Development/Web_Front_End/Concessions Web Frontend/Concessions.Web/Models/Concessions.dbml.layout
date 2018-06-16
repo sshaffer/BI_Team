@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 11.375" name="Concessions">
+  <DataContextMoniker Name="/ConcessionsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="ba4df50f-6f89-4401-9c43-fcae387c3904" absoluteBounds="0.75, 9.75, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/ConcessionsDataContext/Configuration" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c3f2c6a5-3a0a-444f-8195-7a3b86f6d591" absoluteBounds="0.765, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="88e02ee2-6902-486a-bbad-556234ea1613" absoluteBounds="0.75, 6.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ConcessionsDataContext/Concession" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d6a85e81-cee2-465c-9c34-8910af29b72b" absoluteBounds="0.765, 7.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6a8f7029-dac3-4ac2-9a69-4ae1f8341b2d" absoluteBounds="3.5, 6.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ConcessionsDataContext/ConcessionConfiguration" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c4508747-3201-45c3-b055-52b5722bcb44" absoluteBounds="3.515, 7.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7713a124-dff7-4fab-bd5f-f2b54760756b" absoluteBounds="3.5, 3.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/ConcessionsDataContext/SSISPackageLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e92c159b-50df-494a-9dd8-0887d0f38eb8" absoluteBounds="3.515, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e75a2d25-8853-4d46-858b-1d288ea06ad8" absoluteBounds="6.25, 3.75, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/ConcessionsDataContext/SSISPackageLogDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="706b9493-6cb9-400d-a77a-67a4f94a5944" absoluteBounds="6.265, 4.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a8c4420f-81f9-45a9-a9f9-9286f3509625" absoluteBounds="9, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ConcessionsDataContext/SSISPackageLogDetailErrorRecord" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d56a2031-12b8-46d2-91f5-ff0401419a2b" absoluteBounds="9.015, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="52aec2b2-553d-4930-860c-7d782e43054e" absoluteBounds="0.75, 4, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/ConcessionsDataContext/SSISPackageLogResultType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="701746cf-eb8c-49f7-993b-c25ab3b26413" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 10.4431469726562); (4.5 : 10.4431469726562); (4.5 : 8.1362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ConcessionsDataContext/Configuration/Configuration_ConcessionConfiguration" />
+      <nodes>
+        <classShapeMoniker Id="ba4df50f-6f89-4401-9c43-fcae387c3904" />
+        <classShapeMoniker Id="6a8f7029-dac3-4ac2-9a69-4ae1f8341b2d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.47199625651042); (3.5 : 7.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ConcessionsDataContext/Concession/Concession_ConcessionConfiguration" />
+      <nodes>
+        <classShapeMoniker Id="88e02ee2-6902-486a-bbad-556234ea1613" />
+        <classShapeMoniker Id="6a8f7029-dac3-4ac2-9a69-4ae1f8341b2d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.63544840494792); (6.25 : 4.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConcessionsDataContext/SSISPackageLog/SSISPackageLog_SSISPackageLogDetail" />
+      <nodes>
+        <classShapeMoniker Id="7713a124-dff7-4fab-bd5f-f2b54760756b" />
+        <classShapeMoniker Id="e75a2d25-8853-4d46-858b-1d288ea06ad8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.66429768880208); (9 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConcessionsDataContext/SSISPackageLogDetail/SSISPackageLogDetail_SSISPackageLogDetailErrorRecord" />
+      <nodes>
+        <classShapeMoniker Id="e75a2d25-8853-4d46-858b-1d288ea06ad8" />
+        <classShapeMoniker Id="a8c4420f-81f9-45a9-a9f9-9286f3509625" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.69314697265625); (3.5 : 4.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConcessionsDataContext/SSISPackageLogResultType/SSISPackageLogResultType_SSISPackageLog" />
+      <nodes>
+        <classShapeMoniker Id="52aec2b2-553d-4930-860c-7d782e43054e" />
+        <classShapeMoniker Id="7713a124-dff7-4fab-bd5f-f2b54760756b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 5.3862939453125); (1.75 : 6.12905110677083); (6.25 : 6.12905110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConcessionsDataContext/SSISPackageLogResultType/SSISPackageLogResultType_SSISPackageLogDetail" />
+      <nodes>
+        <classShapeMoniker Id="52aec2b2-553d-4930-860c-7d782e43054e" />
+        <classShapeMoniker Id="e75a2d25-8853-4d46-858b-1d288ea06ad8" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="67bb4ad1-1726-4901-a736-13856212ca26" absoluteBounds="3.625, 0.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ConcessionsDataContext/SSISPackageLogReport" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8839e97-bc0d-48c3-a48a-726dcaa7f0c5" absoluteBounds="3.6399999999999997, 0.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.5625 : 3.75); (4.5625 : 3.23240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ConcessionsDataContext/SSISPackageLog/SSISPackageLog_SSISPackageLogReport" />
+      <nodes>
+        <classShapeMoniker Id="7713a124-dff7-4fab-bd5f-f2b54760756b" />
+        <classShapeMoniker Id="67bb4ad1-1726-4901-a736-13856212ca26" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

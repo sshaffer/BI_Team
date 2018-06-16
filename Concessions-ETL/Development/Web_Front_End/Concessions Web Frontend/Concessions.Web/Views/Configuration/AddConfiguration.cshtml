@@ -1,0 +1,17 @@
+﻿@model Concessions.Web.Models.Configuration
+
+@{
+    ViewBag.Title = "Concessions Portal - Add Configuration";
+}
+
+<h2 class="alt">Add @Html.ActionLink("Configuration", "ManageConfigurations")</h2>
+
+@if(ViewData.ContainsKey("SuccessMessage")) {
+    <div class="success">@ViewData["SuccessMessage"]</div>   
+}
+
+@{Html.BeginForm();}
+@Html.Label("Name","Name:") @Html.TextBox("Name","",new { @class = "largeTextBox" })
+@Html.Label("Description","Description:") @Html.TextBox("Description","",new {@class="largeTextBox"})
+<input type="submit" id="submit" name="submit" value="Save" />
+@{Html.EndForm();}

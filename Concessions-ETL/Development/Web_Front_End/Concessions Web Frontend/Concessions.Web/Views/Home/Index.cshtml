@@ -1,0 +1,62 @@
+﻿@*@model IEnumerable<Concessions.Data.Models.PackageLog>
+*@
+@model IQueryable<Concessions.Web.Models.SSISPackageLog>
+@{
+    ViewBag.Title = "Concessions Portal - Index";
+}
+
+<div class="span-24 last">
+    <h2 class="alt bottom">ETL Runs</h2>
+</div>
+<div id="date-selector" class="span-24 last">
+    @{Html.BeginForm("Index", "Home");}
+        @Html.Label("From","From: ")@Html.TextBox("startDate")
+        @Html.Label("To","To: ")@Html.TextBox("endDate")
+        <input id="datesButton" type="submit" value="Go"/>
+    @{Html.EndForm();}
+</div>
+<div class="span-24 last">
+<table id="etlTable">
+    <thead>
+        <tr>
+            <th>Concession</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var item in Model) {
+        <tr id="@item.SSISPackageLogId" >
+            <td class="result-@HTML.CSSTag(@item.SSISPackageLogResultType.ResultTypeName)">@item.PackageName</td>
+            <td class="result-@HTML.CSSTag(@item.SSISPackageLogResultType.ResultTypeName)">@item.StartTime</td>
+            <td class="result-@HTML.CSSTag(@item.SSISPackageLogResultType.ResultTypeName)">@item.EndTime</td>
+            <td class="result-@HTML.CSSTag(@item.SSISPackageLogResultType.ResultTypeName)">@JW.TimeDifference(item.StartTime, item.EndTime)</td>
+            <td class="result-@HTML.CSSTag(@item.SSISPackageLogResultType.ResultTypeName)">@item.SSISPackageLogResultType.ResultTypeName</td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+<script>
+    $(document).ready(function () {
+        var dateFormat = "yy-mm-dd";
+        $("#startDate").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#endDate").datepicker({ dateFormat: "dd/mm/yy" });
+
+        if ($("#startDate").val() == "" && $("#endDate").val() == "") {
+            $("#startDate").val("@JW.DateOnly(@DateTime.Now.Date)");
+            $("#endDate").val("@JW.DateOnly(@DateTime.Now.Date)");
+        }
+
+        $("#etlTable tr").not(":first").hover(function () {
+            $(this).addClass("cursor");
+        });
+
+        $("#etlTable tr").not(":first").click(function () {
+            logid = $(this).attr("id");
+            window.location = "/concessions/Details/" + logid;
+        });
+    });
+</script>

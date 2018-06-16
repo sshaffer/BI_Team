@@ -1,0 +1,17 @@
+﻿@helper TimeDifference(DateTime startTime, DateTime endTime) {
+    TimeSpan span = Convert.ToDateTime(endTime) - Convert.ToDateTime(startTime);
+    @span.ToString(@"hh\:mm\:ss");
+}
+
+@helper TimeOnly(DateTime theTime) {
+    @theTime.ToString(@"HH\:mm\:ss");
+}
+
+@helper DateOnly(DateTime theDate) {
+    @theDate.ToString(@"dd/MM/yyyy");
+}
+
+@helper AsCurrency(decimal? amount) {
+    if (amount.HasValue)
+    {    @amount.Value.ToString("C2"); }
+}

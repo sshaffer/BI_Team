@@ -1,0 +1,2239 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/10/2016 11:36:13 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0270"
+  DTS:CreatorName="DUNE\oturner"
+  DTS:DTSID="{A953291D-1F05-45A7-8DCB-570ECD13574C}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="DUNETRANS6_History"
+  DTS:PackageType="5"
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{4CC1FACF-13D7-48F9-AA2F-C5726A76CC7A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EBA134DF-5FED-4023-9524-9F104D72808C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::SalesFactsRAWFolder] + @[User::IP_File_Name] + @[$Project::Cache_File_Extension]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Cache_FQN">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Bisdw-cl01\FTP\DataWarehouse\Cache\SalesFacts\RAW\DUNETRANS6HISTORY.RAW</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{697E6B46-2CED-4CA3-A000-F4375AAB944C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;WITH ReasonCodes AS (&#xA;&#x9;SELECT &#xA;&#x9;IPRCOD,&#xA;&#x9;CAST( COALESCE(TRIM(RESCOD),'') AS CHAR(6)) RESCOD,&#xA;&#x9;ROW_NUMBER() OVER (PARTITION BY IPRCOD ORDER BY RESCOD) AS RowNum&#xA;&#x9;FROM IP£DUNP033.DUNRESN&#xA;),&#xA;FirstReason AS (&#xA;&#x9;SELECT &#xA;&#x9;&#x9;IPRCOD,&#xA;&#x9;&#x9;RESCOD&#xA;&#x9;FROM ReasonCodes&#xA;&#x9;WHERE RowNum = 1&#xA;)&#xA;SELECT &#xA;     CAST('20' || SUBSTR(DIGITS(HDATE),1,2) || '-' || SUBSTR(DIGITS(HDATE),3,2) || '-' || SUBSTR(DIGITS(HDATE),5,2) AS DATE) AS HDATE &#xA;&#x9;,CAST(SUBSTR(DIGITS(HTIME),1,2) || ':' || SUBSTR(DIGITS(HTIME),3,2) AS CHAR(5)) AS HTIME&#xA;&#x9;,TRIM(CAST(ISKU AS CHAR(10))) AS ISKU&#xA;&#x9;,DIGITS(HSTR) AS HSTR&#xA;&#x9;,TENT&#xA;&#x9;,DSEQ&#xA;&#x9;,'RET' AS CHANNEL&#xA;&#x9;,TRIM(COALESCE(TCCD, '')) AS TCCD&#xA;&#x9;,TRIM(CAST(TGR# AS CHAR(14))) AS TRG#&#xA;&#x9;,TRIM(CAST(DDCDE AS CHAR(3))) AS DDCDE&#xA;&#x9;,CAST(DERIVED_01 AS TIMESTAMP) AS DERIVED_01&#xA;&#x9;,TRIM(CAST(TORG AS CHAR(10))) AS TORG&#xA;&#x9;,CAST(DQTY AS DECIMAL(11,3)) AS DQTY&#xA;&#x9;,CAST(DSPRC AS DECIMAL(11,2)) AS DSPRC&#xA;&#x9;,CAST(DDAMT AS DECIMAL(11,2))  AS DDAMT&#xA;&#x9;,CAST(NEWVAT AS DECIMAL(11,2)) AS NEWVAT&#xA;&#x9;,DERIVED_01 AS Process_Timestamp&#xA; &#x9;--,DIGITS(TRSN) TRSN &#xA;&#x9;,FirstReason.RESCOD TRSN&#xA;FROM dupops2.dunetrans6 dunetrans6&#xA;LEFT JOIN FirstReason&#xA;&#x9;ON FirstReason.IPRCOD = dunetrans6.TRSN&#xA;WHERE DERIVED_01 &gt; '&quot; + @[User::Last_Processed_Sales_Timestamp] + &quot;'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DUNETRANS6">
+      <DTS:VariableValue
+        DTS:DataType="8">WITH ReasonCodes AS (
+	SELECT 
+	IPRCOD,
+	CAST( COALESCE(TRIM(RESCOD),'') AS CHAR(6)) RESCOD,
+	ROW_NUMBER() OVER (PARTITION BY IPRCOD ORDER BY RESCOD) AS RowNum
+	FROM IP£DUNP033.DUNRESN
+),
+FirstReason AS (
+	SELECT 
+		IPRCOD,
+		RESCOD
+	FROM ReasonCodes
+	WHERE RowNum = 1
+)
+SELECT 
+     CAST('20' || SUBSTR(DIGITS(HDATE),1,2) || '-' || SUBSTR(DIGITS(HDATE),3,2) || '-' || SUBSTR(DIGITS(HDATE),5,2) AS DATE) AS HDATE 
+	,CAST(SUBSTR(DIGITS(HTIME),1,2) || ':' || SUBSTR(DIGITS(HTIME),3,2) AS CHAR(5)) AS HTIME
+	,TRIM(CAST(ISKU AS CHAR(10))) AS ISKU
+	,DIGITS(HSTR) AS HSTR
+	,TENT
+	,DSEQ
+	,'RET' AS CHANNEL
+	,TRIM(COALESCE(TCCD, '')) AS TCCD
+	,TRIM(CAST(TGR# AS CHAR(14))) AS TRG#
+	,TRIM(CAST(DDCDE AS CHAR(3))) AS DDCDE
+	,CAST(DERIVED_01 AS TIMESTAMP) AS DERIVED_01
+	,TRIM(CAST(TORG AS CHAR(10))) AS TORG
+	,CAST(DQTY AS DECIMAL(11,3)) AS DQTY
+	,CAST(DSPRC AS DECIMAL(11,2)) AS DSPRC
+	,CAST(DDAMT AS DECIMAL(11,2))  AS DDAMT
+	,CAST(NEWVAT AS DECIMAL(11,2)) AS NEWVAT
+	,DERIVED_01 AS Process_Timestamp
+ 	--,DIGITS(TRSN) TRSN 
+	,FirstReason.RESCOD TRSN
+FROM dupops2.dunetrans6 dunetrans6
+LEFT JOIN FirstReason
+	ON FirstReason.IPRCOD = dunetrans6.TRSN
+WHERE DERIVED_01 &gt; '2016-01-01 00:00:00.000'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D0B11EBF-1244-47B5-B85B-569864A48BC6}"
+      DTS:EvaluateAsExpression="True"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="IP_File_Name">
+      <DTS:VariableValue
+        DTS:DataType="8">DUNETRANS6HISTORY</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7DA4B307-7734-4B36-B98D-C535D224706E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Last_Processed_Sales_Timestamp">
+      <DTS:VariableValue
+        DTS:DataType="8">2016-01-01 00:00:00.000</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cache IP Files"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{c15dd511-0b2c-4d5d-ace9-60045b8d3e4c}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cache IP Files"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="[DUNETRANS6].[SqlCommand]">@[User::DUNETRANS6]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cache IP Files\DUNETRANS6"
+              componentClassID="AttunitySSISODBCSrc.2"
+              contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;1"
+              description="ODBC Source"
+              name="DUNETRANS6"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand">WITH ReasonCodes AS (
+	SELECT 
+	IPRCOD,
+	CAST( COALESCE(TRIM(RESCOD),'') AS CHAR(6)) RESCOD,
+	ROW_NUMBER() OVER (PARTITION BY IPRCOD ORDER BY RESCOD) AS RowNum
+	FROM IP£DUNP033.DUNRESN
+),
+FirstReason AS (
+	SELECT 
+		IPRCOD,
+		RESCOD
+	FROM ReasonCodes
+	WHERE RowNum = 1
+)
+SELECT 
+     CAST('20' || SUBSTR(DIGITS(HDATE),1,2) || '-' || SUBSTR(DIGITS(HDATE),3,2) || '-' || SUBSTR(DIGITS(HDATE),5,2) AS DATE) AS HDATE 
+	,CAST(SUBSTR(DIGITS(HTIME),1,2) || ':' || SUBSTR(DIGITS(HTIME),3,2) AS CHAR(5)) AS HTIME
+	,TRIM(CAST(ISKU AS CHAR(10))) AS ISKU
+	,DIGITS(HSTR) AS HSTR
+	,TENT
+	,DSEQ
+	,'RET' AS CHANNEL
+	,TRIM(COALESCE(TCCD, '')) AS TCCD
+	,TRIM(CAST(TGR# AS CHAR(14))) AS TRG#
+	,TRIM(CAST(DDCDE AS CHAR(3))) AS DDCDE
+	,CAST(DERIVED_01 AS TIMESTAMP) AS DERIVED_01
+	,TRIM(CAST(TORG AS CHAR(10))) AS TORG
+	,CAST(DQTY AS DECIMAL(11,3)) AS DQTY
+	,CAST(DSPRC AS DECIMAL(11,2)) AS DSPRC
+	,CAST(DDAMT AS DECIMAL(11,2))  AS DDAMT
+	,CAST(NEWVAT AS DECIMAL(11,2)) AS NEWVAT
+	,DERIVED_01 AS Process_Timestamp
+ 	--,DIGITS(TRSN) TRSN 
+	,FirstReason.RESCOD TRSN
+FROM dupops2.dunetrans6 dunetrans6
+LEFT JOIN FirstReason
+	ON FirstReason.IPRCOD = dunetrans6.TRSN
+WHERE DERIVED_01 &gt; '2016-01-01 00:00:00.000'</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod"
+                  typeConverter="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs"
+                  typeConverter="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs"
+                  typeConverter="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cache IP Files\DUNETRANS6.Connections[ODBCConnection]"
+                  connectionManagerID="{F411DC6E-6012-43DF-A4BD-6422597D46CE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CSOIP02_ODBC]"
+                  description="The ODBC runtime connection"
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HDATE]"
+                      dataType="dbDate"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HDATE]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HDATE]"
+                      name="HDATE" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HTIME]"
+                      length="5"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HTIME]"
+                      name="HTIME" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[ISKU]"
+                      length="10"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[ISKU]"
+                      name="ISKU" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HSTR]"
+                      length="5"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HSTR]"
+                      name="HSTR" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TENT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TENT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TENT]"
+                      name="TENT"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSEQ]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSEQ]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSEQ]"
+                      name="DSEQ"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[CHANNEL]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[CHANNEL]"
+                      name="CHANNEL" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TCCD]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TCCD]"
+                      name="TCCD" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRG#]"
+                      length="14"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRG#]"
+                      name="TRG#" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDCDE]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDCDE]"
+                      name="DDCDE" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DERIVED_01]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DERIVED_01]"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TORG]"
+                      length="10"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TORG]"
+                      name="TORG" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DQTY]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DQTY]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DQTY]"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSPRC]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSPRC]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSPRC]"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDAMT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDAMT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDAMT]"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[NEWVAT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[NEWVAT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[NEWVAT]"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[PROCESS_TIMESTAMP]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[PROCESS_TIMESTAMP]"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRSN]"
+                      length="6"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRSN]"
+                      name="TRSN" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HDATE]"
+                      dataType="dbDate"
+                      name="HDATE" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HTIME" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ISKU" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HSTR" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TENT]"
+                      dataType="numeric"
+                      name="TENT"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSEQ]"
+                      dataType="numeric"
+                      name="DSEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="CHANNEL" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TCCD" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="TRG#" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DDCDE" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TORG" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DQTY]"
+                      dataType="numeric"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSPRC]"
+                      dataType="numeric"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDAMT]"
+                      dataType="numeric"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[NEWVAT]"
+                      dataType="numeric"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="TRSN" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HDATE]"
+                      dataType="dbDate"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HDATE]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HDATE]"
+                      name="HDATE" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HTIME]"
+                      length="5"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HTIME]"
+                      name="HTIME" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[ISKU]"
+                      length="10"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ISKU]"
+                      name="ISKU" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[HSTR]"
+                      length="5"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[HSTR]"
+                      name="HSTR" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TENT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TENT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TENT]"
+                      name="TENT"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DSEQ]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSEQ]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DSEQ]"
+                      name="DSEQ"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[CHANNEL]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[CHANNEL]"
+                      name="CHANNEL" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TCCD]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TCCD]"
+                      name="TCCD" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRG#]"
+                      length="14"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TRG#]"
+                      name="TRG#" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDCDE]"
+                      length="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DDCDE]"
+                      name="DDCDE" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DERIVED_01]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DERIVED_01]"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TORG]"
+                      length="10"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TORG]"
+                      name="TORG" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DQTY]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DQTY]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DQTY]"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DSPRC]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DSPRC]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DSPRC]"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DDAMT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[DDAMT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[DDAMT]"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[NEWVAT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[NEWVAT]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[NEWVAT]"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[PROCESS_TIMESTAMP]"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[PROCESS_TIMESTAMP]"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].ExternalColumns[TRSN]"
+                      length="6"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[TRSN]"
+                      name="TRSN" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW"
+              componentClassID="DTSAdapter.RawDestination.3"
+              contactInfo="Writes raw data that will not require parsing or translation. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers.;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Writes raw data that will not require parsing or translation. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers."
+              name="DUNETRANS6HISTORY RAW"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the file."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Null"
+                  description="Output file name"
+                  name="FileName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.NonValidatingFileNameEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+                <property
+                  dataType="System.String"
+                  description="Name of the variable that contains the file name"
+                  name="FileNameVariable">User::Cache_FQN</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates what option is used to write to the file."
+                  name="WriteOption"
+                  typeConverter="WriteOption">0</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input]"
+                  hasSideEffects="true"
+                  name="Raw File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[HDATE]"
+                      cachedDataType="dbDate"
+                      cachedName="HDATE"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HDATE]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[HTIME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="HTIME"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HTIME]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[ISKU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ISKU"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[ISKU]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[HSTR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="HSTR"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[HSTR]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[TENT]"
+                      cachedDataType="numeric"
+                      cachedName="TENT"
+                      cachedPrecision="9"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TENT]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DSEQ]"
+                      cachedDataType="numeric"
+                      cachedName="DSEQ"
+                      cachedPrecision="5"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSEQ]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[CHANNEL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="CHANNEL"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[CHANNEL]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[TCCD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="TCCD"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TCCD]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[TRG#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="TRG#"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRG#]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DDCDE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="DDCDE"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDCDE]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DERIVED_01]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="DERIVED_01"
+                      cachedScale="6"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DERIVED_01]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[TORG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TORG"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TORG]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DQTY]"
+                      cachedDataType="numeric"
+                      cachedName="DQTY"
+                      cachedPrecision="11"
+                      cachedScale="3"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DQTY]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DSPRC]"
+                      cachedDataType="numeric"
+                      cachedName="DSPRC"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DSPRC]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[DDAMT]"
+                      cachedDataType="numeric"
+                      cachedName="DDAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[DDAMT]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[TRSN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="TRSN"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[TRSN]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[PROCESS_TIMESTAMP]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="PROCESS_TIMESTAMP"
+                      cachedScale="6"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[PROCESS_TIMESTAMP]" />
+                    <inputColumn
+                      refId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input].Columns[NEWVAT]"
+                      cachedDataType="numeric"
+                      cachedName="NEWVAT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      lineageId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output].Columns[NEWVAT]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cache IP Files.Paths[ODBC Source Output]"
+              endId="Package\Cache IP Files\DUNETRANS6HISTORY RAW.Inputs[Raw File Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Cache IP Files\DUNETRANS6.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Disable DUNETRANS6History"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b12dda88-9d6c-4cba-a6a6-33acc83e0c1d}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Disable DUNETRANS6History"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_TableIndexes 'DUNETRANS6History', 'D'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Last Processed_Sales_Timestamp"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{6c4c6242-0c90-4dbc-843e-46482ea9830c}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Last Processed_Sales_Timestamp"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[usp_DUNETRANS6Date]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::Last_Processed_Sales_Timestamp" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rebuild DUNETRANS6History"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{98b818a4-fe40-443b-89c0-df29208526a1}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rebuild DUNETRANS6History"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_TableIndexes 'DUNETRANS6History', 'D'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage DUNETRANS6"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{29c5bdbf-a593-4616-880d-c9c2fd8fe33b}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage DUNETRANS6"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="dcLoadDUNETRANS6"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input].Columns[HDATE]"
+                      cachedDataType="dbDate"
+                      cachedName="HDATE"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HDATE]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input].Columns[ISKU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ISKU"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[ISKU]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input].Columns[HSTR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="HSTR"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HSTR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[PackageName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[PackageName]"
+                      name="PackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[TaskName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[TaskName]"
+                      name="TaskName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)@[System::TaskName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)@[System::TaskName]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[ErrorLog]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="189"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[ErrorLog]"
+                      name="ErrorLog"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"&lt;Date&gt;" + (DT_STR,50,1252)#{Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HDATE]} + "&lt;/Date&gt;&lt;Store&gt;" + (DT_STR,50,1252)#{Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HSTR]} + "&lt;/Store&gt;&lt;SKU&gt;" + (DT_STR,50,1252)#{Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[ISKU]} + "&lt;/SKU&gt;"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"&lt;Date&gt;" + (DT_STR,50,1252)HDATE + "&lt;/Date&gt;&lt;Store&gt;" + (DT_STR,50,1252)HSTR + "&lt;/Store&gt;&lt;SKU&gt;" + (DT_STR,50,1252)ISKU + "&lt;/SKU&gt;"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[DateTimeCreated]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[DateTimeCreated]"
+                      name="DateTimeCreated"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[Component]"
+                      name="Component"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)"Load DUNETRANS6_History"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)"Load DUNETRANS6_History"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY"
+              componentClassID="DTSAdapter.RawSource.3"
+              contactInfo="Reads raw data from a flat file that was previously written by the Raw File destination. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers.;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Reads raw data from a flat file that was previously written by the Raw File destination. For example, allow packages to run faster by reading from a local raw file instead of a slow source or manually distribute data for parallel processing on multiple computers."
+              name="DUNETRANS6HISTORY"
+              validateExternalMetadata="False"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the file."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Null"
+                  description="Output file name"
+                  name="FileName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.NonValidatingFileNameEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+                <property
+                  dataType="System.String"
+                  description="Name of the variable that contains the file name"
+                  name="FileNameVariable">User::Cache_FQN</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output]"
+                  name="Raw File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HDATE]"
+                      dataType="dbDate"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HDATE]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HDATE]"
+                      name="HDATE" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HTIME]"
+                      length="5"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HTIME]"
+                      name="HTIME" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[ISKU]"
+                      length="10"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[ISKU]"
+                      name="ISKU" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HSTR]"
+                      length="5"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HSTR]"
+                      name="HSTR" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TENT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TENT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TENT]"
+                      name="TENT"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSEQ]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DSEQ]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSEQ]"
+                      name="DSEQ"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[CHANNEL]"
+                      length="3"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[CHANNEL]"
+                      name="CHANNEL" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TCCD]"
+                      length="3"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TCCD]"
+                      name="TCCD" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TRG#]"
+                      length="14"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRG#]"
+                      name="TRG#" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DDCDE]"
+                      length="3"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDCDE]"
+                      name="DDCDE" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DERIVED_01]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DERIVED_01]"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TORG]"
+                      length="10"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TORG]"
+                      name="TORG" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DQTY]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DQTY]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DQTY]"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSPRC]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DSPRC]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSPRC]"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDAMT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DDAMT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDAMT]"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TRSN]"
+                      length="6"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRSN]"
+                      name="TRSN" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[PROCESS_TIMESTAMP]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[PROCESS_TIMESTAMP]"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[NEWVAT]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[NEWVAT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[NEWVAT]"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HDATE]"
+                      dataType="dbDate"
+                      name="HDATE" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HTIME" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ISKU" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HSTR" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TENT]"
+                      dataType="numeric"
+                      name="TENT"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DSEQ]"
+                      dataType="numeric"
+                      name="DSEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="CHANNEL" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TCCD" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="TRG#" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DDCDE" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TORG" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DQTY]"
+                      dataType="numeric"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DSPRC]"
+                      dataType="numeric"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[DDAMT]"
+                      dataType="numeric"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="TRSN" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].ExternalColumns[NEWVAT]"
+                      dataType="numeric"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="errLoadDUNETRANS6"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[SSISErrorLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Connections[OleDbConnection]"
+                  connectionManagerID="{CA148134-F569-480E-8D57-A6874437296C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DBA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].Columns[PackageName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PackageName"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[PackageName]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].Columns[TaskName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="TaskName"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[TaskName]"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[TaskName]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].Columns[ErrorLog]"
+                      cachedDataType="wstr"
+                      cachedLength="189"
+                      cachedName="ErrorLog"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[ErrorLog]"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[ErrorLog]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].Columns[DateTimeCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateTimeCreated"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[DateTimeCreated]"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[DateTimeCreated]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].Columns[Component]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Component"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[Component]"
+                      lineageId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output].Columns[Component]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[SSISErrorLogID]"
+                      dataType="i4"
+                      name="SSISErrorLogID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[TaskName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TaskName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[ErrorLog]"
+                      dataType="nText"
+                      name="ErrorLog" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[DateTimeCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateTimeCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input].ExternalColumns[Component]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Component" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load DUNETRANS6_History"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DUNETRANS6History]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[HDATE]"
+                      cachedDataType="dbDate"
+                      cachedName="HDATE"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HDATE]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HDATE]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[HTIME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="HTIME"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HTIME]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HTIME]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[ISKU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="ISKU"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[ISKU]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[ISKU]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[HSTR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="HSTR"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HSTR]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[HSTR]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[TENT]"
+                      cachedDataType="numeric"
+                      cachedName="TENT"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TENT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TENT]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DSEQ]"
+                      cachedDataType="numeric"
+                      cachedName="DSEQ"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DSEQ]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSEQ]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[CHANNEL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="CHANNEL"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[CHANNEL]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[CHANNEL]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[TCCD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="TCCD"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TCCD]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TCCD]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[TRG#]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="TRG#"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TRG#]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRG#]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DDCDE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="DDCDE"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DDCDE]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDCDE]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DERIVED_01]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="DERIVED_01"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DERIVED_01]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DERIVED_01]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[TORG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TORG"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TORG]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TORG]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DQTY]"
+                      cachedDataType="numeric"
+                      cachedName="DQTY"
+                      cachedPrecision="11"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DQTY]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DQTY]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DSPRC]"
+                      cachedDataType="numeric"
+                      cachedName="DSPRC"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DSPRC]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DSPRC]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[DDAMT]"
+                      cachedDataType="numeric"
+                      cachedName="DDAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DDAMT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[DDAMT]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[TRSN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="TRSN"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TRSN]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[TRSN]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[PROCESS_TIMESTAMP]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="PROCESS_TIMESTAMP"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[PROCESS_TIMESTAMP]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[PROCESS_TIMESTAMP]" />
+                    <inputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].Columns[NEWVAT]"
+                      cachedDataType="numeric"
+                      cachedName="NEWVAT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[NEWVAT]"
+                      lineageId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output].Columns[NEWVAT]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HDATE]"
+                      dataType="dbDate"
+                      name="HDATE" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HTIME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HTIME" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[ISKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ISKU" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[HSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="HSTR" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TENT]"
+                      dataType="numeric"
+                      name="TENT"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DSEQ]"
+                      dataType="numeric"
+                      name="DSEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[CHANNEL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="CHANNEL" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TCCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TCCD" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TRG#]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="TRG#" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DDCDE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DDCDE" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DERIVED_01]"
+                      dataType="dbTimeStamp2"
+                      name="DERIVED_01"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TORG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TORG" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DQTY]"
+                      dataType="numeric"
+                      name="DQTY"
+                      precision="11"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DSPRC]"
+                      dataType="numeric"
+                      name="DSPRC"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[DDAMT]"
+                      dataType="numeric"
+                      name="DDAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[TRSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="TRSN" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[PROCESS_TIMESTAMP]"
+                      dataType="dbTimeStamp2"
+                      name="PROCESS_TIMESTAMP"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input].ExternalColumns[NEWVAT]"
+                      dataType="numeric"
+                      name="NEWVAT"
+                      precision="11"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage DUNETRANS6.Paths[Derived Column Output]"
+              endId="Package\Stage DUNETRANS6\errLoadDUNETRANS6.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Stage DUNETRANS6.Paths[OLE DB Destination Error Output]"
+              endId="Package\Stage DUNETRANS6\dcLoadDUNETRANS6.Inputs[Derived Column Input]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Outputs[OLE DB Destination Error Output]" />
+            <path
+              refId="Package\Stage DUNETRANS6.Paths[Raw File Source Output]"
+              endId="Package\Stage DUNETRANS6\Load DUNETRANS6_History.Inputs[OLE DB Destination Input]"
+              name="Raw File Source Output"
+              startId="Package\Stage DUNETRANS6\DUNETRANS6HISTORY.Outputs[Raw File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DUNETRANS6History"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8b38e1e3-5d6d-48dd-b33d-f7deb589bcdc}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DUNETRANS6History"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DUNETRANS6History;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2FA56487-6A71-458D-9C4A-992782FFF886}"
+      DTS:From="Package\Stage DUNETRANS6"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Rebuild DUNETRANS6History" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{337F6477-4524-42B3-9756-69153B05087D}"
+      DTS:From="Package\Truncate DUNETRANS6History"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Stage DUNETRANS6" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F4BE5625-F2FA-47BC-951C-8A9423461935}"
+      DTS:From="Package\Disable DUNETRANS6History"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Truncate DUNETRANS6History" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2BE453A-63F3-447F-B979-649639214980}"
+      DTS:From="Package\Cache IP Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Disable DUNETRANS6History" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{8019DF16-8790-40CE-AED9-B566A9E4529F}"
+      DTS:From="Package\Get Last Processed_Sales_Timestamp"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Cache IP Files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Cache IP Files"
+          TopLeft="109,111" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Disable DUNETRANS6History"
+          TopLeft="72,199" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Rebuild DUNETRANS6History"
+          TopLeft="78,450" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Stage DUNETRANS6"
+          TopLeft="99.5,366" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Truncate DUNETRANS6History"
+          TopLeft="67,277" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="186.75,408">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="184.75,319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="180.75,241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="180.5,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="257,42"
+          Id="Package\Get Last Processed_Sales_Timestamp"
+          TopLeft="47,26" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="178.5,68">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="2015-12-31 00:00:00.000"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="160,60"
+          Id="057bf192-f3cb-4b7e-8571-e9cca5e1dcef"
+          TopLeft="340,113" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cache IP Files">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Cache IP Files\DUNETRANS6HISTORY RAW"
+          TopLeft="178.128103356712,139.885621735406" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Cache IP Files\DUNETRANS6"
+          TopLeft="210.555150598057,27.0170541238887" />
+        <EdgeLayout
+          Id="Package\Cache IP Files.Paths[ODBC Source Output]"
+          TopLeft="284.841626977385,69.0170541238887">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.8685676115173"
+              Start="0,0"
+              End="0,63.3685676115173">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.3685676115173" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Stage DUNETRANS6">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Stage DUNETRANS6\Load DUNETRANS6_History"
+          TopLeft="38.5,158.5" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Stage DUNETRANS6\DUNETRANS6HISTORY"
+          TopLeft="56.5,36.5" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Stage DUNETRANS6\errLoadDUNETRANS6"
+          TopLeft="649,164" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Stage DUNETRANS6\dcLoadDUNETRANS6"
+          TopLeft="375.5,159.5" />
+        <EdgeLayout
+          Id="Package\Stage DUNETRANS6.Paths[Raw File Source Output]"
+          TopLeft="147.75,78.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80"
+              Start="0,0"
+              End="0,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage DUNETRANS6.Paths[OLE DB Destination Error Output]"
+          TopLeft="249.5,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126,0"
+              Start="0,0"
+              End="118.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="118.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-13.95890625,5,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Stage DUNETRANS6.Paths[Derived Column Output]"
+          TopLeft="555.5,182.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.5,0"
+              Start="0,0"
+              End="86,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="86,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage DUNETRANS6\Load DUNETRANS6_History">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>BISDW-CL01</DataSourceReference>
+      <CommandType>StoredProcedure</CommandType>
+      <CommandText>usp_Recociliation_Week</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Fiscal_Year">
+        <DataField>Fiscal_Year</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Fiscal_Week">
+        <DataField>Fiscal_Week</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Sales_Qty">
+        <DataField>Sales_Qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Actual_Sales_Value_Home">
+        <DataField>Actual_Sales_Value_Home</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="wSales_Qty">
+        <DataField>wSales_Qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="wActual_Sales_Value_Home">
+        <DataField>wActual_Sales_Value_Home</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="iSales_Qty">
+        <DataField>iSales_Qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="iActual_Sales_Value_Home">
+        <DataField>iActual_Sales_Value_Home</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

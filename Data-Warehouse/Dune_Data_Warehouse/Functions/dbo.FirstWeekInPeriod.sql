@@ -1,0 +1,13 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE FUNCTION	dbo.FirstWeekInPeriod()
+RETURNS BIT
+AS BEGIN
+
+DECLARE @IsFirstWeek BIT = CASE WHEN (SELECT Week_in_Fiscal_Period FROM dbo.BIS_Calendar_Dim WHERE Relative_Day = 0) = 1 THEN 1 ELSE 0 END;
+RETURN(@IsFirstWeek);
+
+END;
+GO

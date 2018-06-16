@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "BIS Sales Data Load", "BIS Sales Data Load\BIS Sales Data Load.dtproj", "{9FEFE39C-87E4-4B0F-BEE8-60C83B145D17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FEFE39C-87E4-4B0F-BEE8-60C83B145D17}.Development|Default.ActiveCfg = Development
+		{9FEFE39C-87E4-4B0F-BEE8-60C83B145D17}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

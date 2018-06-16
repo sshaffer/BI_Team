@@ -1,0 +1,74 @@
+﻿body
+{
+    margin-top:10px;
+}
+.cursor
+{
+    cursor:pointer;
+}
+#etlTable, #etlTable tr td
+{
+    border-top:1px solid gray;
+}
+#etlTable
+{
+    border-bottom:1px solid gray;
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+}
+#etlTable tbody tr:hover td, #etlTable tbody tr:hover td.result-warning, #etlTable tbody tr:hover td.result-failed {
+    background-color:lightslategray;
+}
+#etlTable tbody tr td.result-failed {
+    background-color:lightpink;
+}
+tbody tr td.result-warning
+{
+    background-color:#fff6bf;
+}
+.caption
+{
+    background: #eee;
+    padding: 0px 3px 0px 3px;
+    border-bottom:1px;
+    border-bottom-style: solid;
+    border-color: black;
+}
+#date-selector
+{
+    text-align:right;
+}
+.right-align
+{
+    text-align: right;
+}
+input, select
+{
+    padding: 5px;
+}
+input.largeTextBox
+{
+    width:100%;
+}
+.bordered
+{
+    border: 1px solid silver;
+    border-radius: 10px 10px;
+    padding: 10px;
+}
+#etlTable.noHover tbody tr:nth-child(even) td, tbody tr.even td {background:#e5ecf9;}
+#etlTable.noHover tbody tr:nth-child(odd) td, tbody tr.odd td {background:transparent;}
+tfoot td
+{
+    font-weight: bold;
+    background: silver;
+    font-style:normal;
+}
+.errorRows
+{
+    font-family: 'Courier New';
+}
+Table
+{
+    border-collapse:collapse;
+}

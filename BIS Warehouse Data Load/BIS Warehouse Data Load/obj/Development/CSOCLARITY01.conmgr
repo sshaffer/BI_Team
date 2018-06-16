@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CSOCLARITY01"
+  DTS:DTSID="{36B782D6-5E59-4BC1-9956-C90F621AE2BC}"
+  DTS:CreationName="ODBC">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">"Data Source=" + @[$Project::ClarityServer] + ";Initial Catalog=OCS;Provider=SQLNCLI11.1;User Id=" + @[$Project::ClarityUser] + ";Password="+ @[$Project::ClarityPassword] + ";Auto Translate=False;"</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=CSOCLARITY01;User Id=matrasa;Initial Catalog=OCS;Provider=SQLNCLI11.1;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArMnuxClqs0+rkN8WEZ32vgAAAAACAAAAAAADZgAAwAAAABAAAAB/92WHjFsV4yMK4QQ3UKDjAAAAAASAAACgAAAAEAAAAJqLj42L8C+6zXc2fAUAxI94AAAA+Zh6/aOxW28fxTx9589rw+TCrkdEsSAlpFmvrcSCG3n2XBjIFoyXaZO6Oy4pviZiisIrIwXdveyIBfvAjRhjRTREQkaiOUTkyNCKNINtZHD4rLbvKa16NiSUyTXAidSsfly+YO2dSuc+hw3y+20Q0hJBpvcVVyuMFAAAAKiPi6049Y/8590tueI05JlGNK4I</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

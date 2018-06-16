@@ -1,0 +1,6 @@
+CREATE TABLE [dbo].[IP_DORDPAY]
+(
+[DCONUM] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[DPTTYP] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+GO

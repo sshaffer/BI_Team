@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>CSOSQL01_SUNDB433</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@TRANS_DATE">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandType>StoredProcedure</CommandType>
+      <CommandText>usp_HistoricReport</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="SUNDatabase">
+        <DataField>SUNDatabase</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ACCNT_CODE">
+        <DataField>ACCNT_CODE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PERIOD">
+        <DataField>PERIOD</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="TRANS_DATE">
+        <DataField>TRANS_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="JRNAL_NO">
+        <DataField>JRNAL_NO</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="JRNAL_LINE">
+        <DataField>JRNAL_LINE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="AMOUNT">
+        <DataField>AMOUNT</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="D_C">
+        <DataField>D_C</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ALLOCATION">
+        <DataField>ALLOCATION</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="JRNAL_TYPE">
+        <DataField>JRNAL_TYPE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="JRNAL_SRCE">
+        <DataField>JRNAL_SRCE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TREFERENCE">
+        <DataField>TREFERENCE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="DESCRIPTN">
+        <DataField>DESCRIPTN</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ENTRY_DATE">
+        <DataField>ENTRY_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ENTRY_PRD">
+        <DataField>ENTRY_PRD</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="DUE_DATE">
+        <DataField>DUE_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ALLOC_REF">
+        <DataField>ALLOC_REF</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ALLOC_DATE">
+        <DataField>ALLOC_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ALLOC_PERIOD">
+        <DataField>ALLOC_PERIOD</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ASSET_IND">
+        <DataField>ASSET_IND</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ASSET_CODE">
+        <DataField>ASSET_CODE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ASSET_SUB">
+        <DataField>ASSET_SUB</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="CONV_CODE">
+        <DataField>CONV_CODE</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="CONV_RATE">
+        <DataField>CONV_RATE</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="OTHER_AMT">
+        <DataField>OTHER_AMT</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="OTHER_DP">
+        <DataField>OTHER_DP</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="CLEARDOWN">
+        <DataField>CLEARDOWN</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="REVERSAL">
+        <DataField>REVERSAL</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="LOSS_GAIN">
+        <DataField>LOSS_GAIN</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ROUGH_FLAG">
+        <DataField>ROUGH_FLAG</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="IN_USE_FLAG">
+        <DataField>IN_USE_FLAG</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T0">
+        <DataField>ANAL_T0</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T1">
+        <DataField>ANAL_T1</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T2">
+        <DataField>ANAL_T2</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T3">
+        <DataField>ANAL_T3</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T4">
+        <DataField>ANAL_T4</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T5">
+        <DataField>ANAL_T5</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T6">
+        <DataField>ANAL_T6</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T7">
+        <DataField>ANAL_T7</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T8">
+        <DataField>ANAL_T8</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ANAL_T9">
+        <DataField>ANAL_T9</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="POSTING_DATE">
+        <DataField>POSTING_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ALLOC_IN_PROGRESS">
+        <DataField>ALLOC_IN_PROGRESS</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="HOLD_REF">
+        <DataField>HOLD_REF</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="HOLD_OP_ID">
+        <DataField>HOLD_OP_ID</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="LAST_CHANGE_USER_ID">
+        <DataField>LAST_CHANGE_USER_ID</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="LAST_CHANGE_DATE">
+        <DataField>LAST_CHANGE_DATE</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="ORIGINATOR_ID">
+        <DataField>ORIGINATOR_ID</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

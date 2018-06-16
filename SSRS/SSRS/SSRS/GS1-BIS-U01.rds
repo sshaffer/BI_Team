@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="GS1-BIS-U01">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=GS1-BIS-U01;Initial Catalog=DBA</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>800a1a8a-1ffa-493b-b106-b623207fd833</DataSourceID>
+</RptDataSource>

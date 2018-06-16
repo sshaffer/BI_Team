@@ -1,0 +1,14 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE FUNCTION dbo.YearAfterWeek53()
+RETURNS BIT
+AS BEGIN
+
+DECLARE @CurrentYear CHAR(4) = (SELECT Fiscal_Year FROM dbo.Calendar_Dim WHERE Relative_Day = 0);
+DECLARE @IsAfterWeek52 BIT = CASE WHEN @CurrentYear IN ('2015') THEN 1 ELSE 0 END;
+RETURN (@IsAfterWeek52);
+
+END;
+GO

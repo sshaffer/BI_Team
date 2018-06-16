@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="CSOIP02"
+  DTS:DTSID="{462AC7A7-C619-4395-B18B-687A0960F310}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::IPPassword]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::IPUser]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=CSOIP02;User ID=IPTSOCS;Initial Catalog=S065BA9P;Provider=IBMDA400.DataSource.1;Persist Security Info=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9gh1Oww9rUe/pSNsP9iLFQAAAAACAAAAAAADZgAAwAAAABAAAACxM2Z3Upm2QlCZwbHOIS/7AAAAAASAAACgAAAAEAAAAJGgB2426+MkYo4ECf6g1/V4AAAAJSyhij1ERuTN3M9Vo15NpRvK5b/WU1mTv3fasdTEAri6ERvYmRwLNXRKQ6oO5bHI2+sVMuprQGGnwTQlzeRmy8Rnkv2tjMLUx3LNjPofq0fVrVgmwUz2ORqlWZttXKX9oU4KzJOY/aEmGg49VQJnOyz27ppiKVr8FAAAACpa46SA0FIx7RlTRnmndpQkDOl3</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

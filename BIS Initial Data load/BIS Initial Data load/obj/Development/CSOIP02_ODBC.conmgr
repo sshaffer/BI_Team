@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="CSOIP02_ODBC"
+  DTS:DTSID="{F411DC6E-6012-43DF-A4BD-6422597D46CE}"
+  DTS:CreationName="ODBC">
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::IP_Password]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::IP_Server_Name]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::IP_User]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="data source=CSOIP02;uid=BISLIVE;Dsn=CSOIP02;">
+      <DTS:Password
+        DTS:Name="pwd"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABMTwsvCPDUKHjqwA0yentgAAAAACAAAAAAADZgAAwAAAABAAAAAhltHY4pRRPe/uyKtlmMjlAAAAAASAAACgAAAAEAAAANM4l/YEe5CabEJKEs22OeVwAAAAMi9TGABEEBgL0Hv+jYmJVeysX5hLfv0hileZnq7d7FiFedyFSZ5G4WrqEoeiyr06raKjZOYeqjm3oZQ9tMJ/I1Rl5E6mco/nPBr5jD5xKW52bIcsf90kXTwWhCS1certtvIiEdzqYpU19DR6X1Rr5hQAAABrY7kSlPwp7AmKhMsWx1ytxIXBYA==</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

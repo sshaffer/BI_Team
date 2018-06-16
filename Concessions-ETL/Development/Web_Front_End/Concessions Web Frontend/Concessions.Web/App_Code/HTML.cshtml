@@ -1,0 +1,12 @@
+﻿@helper CSS(string cssFile, string mediaType) {
+        <link href="@VirtualPathUtility.ToAbsolute("~/Content/CSS/" + cssFile)" rel="stylesheet" type="text/css" media="@(mediaType.IsEmpty() ? "screen" : mediaType)" } />
+}
+
+@helper CSSTag(string cssClass) {
+    @cssClass.Replace(" ", "-").ToLower();
+}
+
+@helper JS(string jsFile) {
+        <script src="@VirtualPathUtility.ToAbsolute("~/Scripts/" + jsFile)" type="text/javascript"></script>
+}
+

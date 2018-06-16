@@ -1,0 +1,1166 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/13/2014 2:49:29 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="GS1-DEV-01"
+  DTS:CreatorName="DUNE\jwolfisz"
+  DTS:DTSID="{0783F5F8-978C-497C-886B-61179CA06594}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3368.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Budget_Intake"
+  DTS:PackageType="5"
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{9F667FF3-66F1-4781-A3A4-428D99C7EB22}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DataWarehouse]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9CEC1A87-94F1-447E-862B-048CD3555F6A}"
+      DTS:ObjectName="DataWarehouse">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Package::DataWarehouseServer]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BISDW-CL01;Initial Catalog=Dune_Data_Warehouse;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DepartmentSourceFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5e7b3b1d-aae8-4e6a-9ca6-1663e760a1fb}"
+      DTS:ObjectName="DepartmentSourceFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::DepartmentBudgetIntakeCSV]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\dune\private\Redirected Folders\jwolfisz\My Documents\Development\BudgetIntake\Department AW15.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Department_Code"
+              DTS:DTSID="{DD7DBB5A-891B-424A-B37E-C1708C5C5D8F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Department_Name"
+              DTS:DTSID="{B5557D5C-BCB9-45F8-9D70-3C4AA21656FA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Season"
+              DTS:DTSID="{84180CCE-AE55-4EF3-9C6C-25E6DF02DD51}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Budget_Intake"
+              DTS:DTSID="{D77CED35-17AC-4073-9EA3-BF0E09AEAF9E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DivisionSourceFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F95E902C-63CD-4890-A207-3081554E8055}"
+      DTS:ObjectName="DivisionSourceFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::DivisionBudgetIntakeCSV]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\dune\private\Redirected Folders\jwolfisz\My Documents\Development\BudgetIntake\Division AW15.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Division_Code"
+              DTS:DTSID="{0E4DAFE9-4950-4F16-AFA7-78FBFA6B0CCB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Division_Name"
+              DTS:DTSID="{0BEF4C24-3FB9-4F8F-BDFD-81FD56F07DC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Season"
+              DTS:DTSID="{7C849F1E-E087-4080-9014-73A3547A5B4B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="131"
+              DTS:DataPrecision="7"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Budget_Intake"
+              DTS:DTSID="{27B56CF2-C4A9-4566-8959-2B747625A03F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{47D12AC7-3639-4612-8D10-A9B3511C41DE}"
+      DTS:ObjectName="Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Package::DataWarehouseServer]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BISDW-CL01;Initial Catalog=Dune_Data_Warehouse_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{AB7990EA-D7EF-4CF4-A51C-E37F7F5A0B76}"
+      DTS:ObjectName="DataWarehouseServer">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">GS1-BISDW-01</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5CC53DDC-1A05-4BAB-BB43-0DEF241EF592}"
+      DTS:ObjectName="DepartmentBudgetIntakeCSV"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\dune\private\Redirected Folders\jwolfisz\My Documents\Development\BudgetIntake\Department AW15.csv</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{E53034D4-1212-4F68-AD15-93B305D57A62}"
+      DTS:ObjectName="DivisionBudgetIntakeCSV"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\dune\private\Redirected Folders\jwolfisz\My Documents\Development\BudgetIntake\Division AW15.csv</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Merge into DW"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6BDD98EE-B931-4298-AAC1-18764652A68A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge into DW"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9CEC1A87-94F1-447E-862B-048CD3555F6A}"
+          SQLTask:SqlStatementSource="MERGE INTO dbo.Budget_Intake_Division_Week_Fact target&#xA;USING (&#xA;&#x9;SELECT&#xA;&#x9;&#x9;cal.Calendar_Week_Dim_Id,&#xA;&#x9;&#x9;d.Division_Dim_ID,&#xA;&#x9;&#x9;f.Budget_Intake&#xA;&#x9;FROM Dune_Data_Warehouse_Staging.dbo.Budget_Intake_Division f&#xA;&#x9;JOIN Division_Dim d&#xA;&#x9;&#x9;ON LTRIM(RTRIM(d.Division_Code)) = RIGHT('00' + CONVERT(VARCHAR(2),f.Division_Code),2)&#xA;&#x9;JOIN (&#xA;&#x9;&#x9;SELECT DISTINCT&#xA;&#x9;&#x9;&#x9;Fiscal_Year,&#xA;&#x9;&#x9;&#x9;Merchandise_Season,&#xA;&#x9;&#x9;&#x9;Fiscal_Week,&#xA;&#x9;&#x9;&#x9;Calendar_Week_Dim_Id&#xA;&#x9;&#x9;FROM BIS_Calendar_Dim&#xA;&#x9;) cal&#xA;&#x9;&#x9;ON cal.Merchandise_Season = f.Season&#xA;) source&#xA;&#x9;ON source.Calendar_Week_Dim_Id = target.Calendar_Week_Dim_ID&#xA;&#x9;AND source.Division_Dim_ID = target.Division_Dim_ID&#xA;WHEN MATCHED THEN&#x9;&#xA;UPDATE SET&#xA;&#x9;Budget_Intake = source.Budget_Intake&#xA;WHEN NOT MATCHED THEN &#xA;INSERT (&#xA;&#x9;Calendar_Week_Dim_ID,&#xA;&#x9;Division_Dim_ID,&#xA;&#x9;Budget_Intake&#xA;) VALUES (&#xA;&#x9;source.Calendar_Week_Dim_Id,&#xA;&#x9;source.Division_Dim_ID,&#xA;&#x9;source.Budget_Intake&#xA;);&#xA;&#xA;&#xA;MERGE INTO dbo.Budget_Intake_Department_Week_Fact target&#xA;USING (&#xA;&#x9;SELECT&#xA;&#x9;&#x9;cal.Calendar_Week_Dim_Id,&#xA;&#x9;&#x9;d.Division_Dim_ID,&#xA;&#x9;&#x9;d.Department_Dim_ID,&#xA;&#x9;&#x9;f.Budget_Intake&#xA;&#x9;FROM Dune_Data_Warehouse_Staging.dbo.Budget_Intake_Department f&#xA;&#x9;JOIN dbo.Department_Dim d&#xA;&#x9;&#x9;ON LTRIM(RTRIM(d.Department_Code)) = RIGHT('000' + CONVERT(VARCHAR(3),f.Department_Code),3)&#xA;&#x9;JOIN (&#xA;&#x9;&#x9;SELECT DISTINCT&#xA;&#x9;&#x9;&#x9;Fiscal_Year,&#xA;&#x9;&#x9;&#x9;Merchandise_Season,&#xA;&#x9;&#x9;&#x9;Fiscal_Week,&#xA;&#x9;&#x9;&#x9;Calendar_Week_Dim_Id&#xA;&#x9;&#x9;FROM BIS_Calendar_Dim&#xA;&#x9;) cal&#xA;&#x9;&#x9;ON cal.Merchandise_Season = f.Season&#xA;) source&#xA;&#x9;ON source.Calendar_Week_Dim_Id = target.Calendar_Week_Dim_ID&#xA;&#x9;AND source.Division_Dim_ID = target.Division_Dim_ID&#xA;&#x9;AND source.Department_Dim_ID = target.Department_Dim_ID&#xA;WHEN MATCHED THEN &#xA;UPDATE SET&#xA;&#x9;Budget_Intake = source.Budget_Intake&#xA;WHEN NOT MATCHED THEN&#x9;&#xA;INSERT (&#xA;&#x9;Calendar_Week_Dim_ID,&#xA;&#x9;Division_Dim_ID,&#xA;&#x9;Department_Dim_ID,&#xA;&#x9;Budget_Intake&#xA;) VALUES (&#xA;&#x9;source.Calendar_Week_Dim_ID,&#xA;&#x9;source.Division_Dim_ID,&#xA;&#x9;source.Department_Dim_ID,&#xA;&#x9;source.Budget_Intake&#xA;);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Department"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D6156495-72FA-47EC-AC49-E1744C3719A2}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Department"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Department\Department"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Department"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Department\Department.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DepartmentSourceFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[DepartmentSourceFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Department\Department.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Department_Code]"
+                      length="3"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Code]"
+                      name="Department_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Department_Name]"
+                      length="25"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Name]"
+                      name="Department_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Season]"
+                      length="4"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Season]"
+                      name="Season"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Budget_Intake]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Budget_Intake]"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Budget_Intake]"
+                      name="Budget_Intake"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Department_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Department_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Department_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Department_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Season" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Output].ExternalColumns[Budget_Intake]"
+                      dataType="r4"
+                      name="Budget_Intake" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Department\Department.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Department\Stage"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Budget_Intake_Department]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Department\Stage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].Columns[Department_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Department_Code"
+                      externalMetadataColumnId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Department_Code]"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Code]" />
+                    <inputColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].Columns[Department_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Department_Name"
+                      externalMetadataColumnId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Department_Name]"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Department_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].Columns[Season]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Season"
+                      externalMetadataColumnId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Season]"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Season]" />
+                    <inputColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].Columns[Budget_Intake]"
+                      cachedDataType="r4"
+                      cachedName="Budget_Intake"
+                      externalMetadataColumnId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Budget_Intake]"
+                      lineageId="Package\Stage Department\Department.Outputs[Flat File Source Output].Columns[Budget_Intake]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Department_Code]"
+                      dataType="ui1"
+                      name="Department_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Department_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Department_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Season" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Budget_Intake]"
+                      dataType="numeric"
+                      name="Budget_Intake"
+                      precision="7"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Department\Stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Department\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Department\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Department\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Department\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Department.Paths[Flat File Source Output]"
+              endId="Package\Stage Department\Stage.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Stage Department\Department.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Division"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0ADEEB1B-441F-48E5-8A4D-FFAAD4B748F5}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Division"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Division\Division"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Division"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Division\Division.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DivisionSourceFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[DivisionSourceFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Division\Division.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Division_Code]"
+                      length="2"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Code]"
+                      name="Division_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Division_Name]"
+                      length="25"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Name]"
+                      name="Division_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Season]"
+                      length="4"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Season]"
+                      name="Season"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Budget_Intake]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Budget_Intake]"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Budget_Intake]"
+                      name="Budget_Intake"
+                      precision="7"
+                      scale="3"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Division_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Division_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Division_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Season" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Output].ExternalColumns[Budget_Intake]"
+                      dataType="numeric"
+                      name="Budget_Intake"
+                      precision="7"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Division\Division.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Division\Stage"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stage"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Budget_Intake_Division]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Division\Stage.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].Columns[Division_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Division_Code"
+                      externalMetadataColumnId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Division_Code]"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Code]" />
+                    <inputColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].Columns[Division_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Division_Name"
+                      externalMetadataColumnId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Division_Name]"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Division_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].Columns[Season]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Season"
+                      externalMetadataColumnId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Season]"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Season]" />
+                    <inputColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].Columns[Budget_Intake]"
+                      cachedDataType="numeric"
+                      cachedName="Budget_Intake"
+                      cachedPrecision="7"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Budget_Intake]"
+                      lineageId="Package\Stage Division\Division.Outputs[Flat File Source Output].Columns[Budget_Intake]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Division_Code]"
+                      dataType="ui1"
+                      name="Division_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Division_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Season]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Season" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input].ExternalColumns[Budget_Intake]"
+                      dataType="numeric"
+                      name="Budget_Intake"
+                      precision="7"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Division\Stage.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Division\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Division\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Division\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Division\Stage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Division.Paths[Flat File Source Output]"
+              endId="Package\Stage Division\Stage.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Stage Division\Division.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F536B082-D37C-4952-B535-19132F1A410F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{47D12AC7-3639-4612-8D10-A9B3511C41DE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.Budget_Intake_Division;&#xA;TRUNCATE TABLE dbo.Budget_Intake_Department;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D8A16BE-3B49-4B25-BB65-1D6A7018CEFA}"
+      DTS:From="Package\Truncate Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Division" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BAFB6420-ED28-47C7-A820-183DF3F96252}"
+      DTS:From="Package\Stage Division"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Stage Department" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{FEEFA2B4-F4CB-43E4-84E7-9B5CC5335899}"
+      DTS:From="Package\Stage Department"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge into DW" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Stage Division"
+          TopLeft="15.5,107.5" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Truncate Staging"
+          TopLeft="8.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="89,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Stage Department"
+          TopLeft="5.50000000000003,209.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="89,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Merge into DW"
+          TopLeft="13.5,311.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="89,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage Division">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Stage Division\Division"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage Division\Stage"
+          TopLeft="10,107.5" />
+        <EdgeLayout
+          Id="Package\Stage Division.Paths[Flat File Source Output]"
+          TopLeft="64,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Division\Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Department">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Stage Department\Department"
+          TopLeft="124,53" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Stage Department\Stage"
+          TopLeft="145.303160345399,170.709654742832" />
+        <EdgeLayout
+          Id="Package\Stage Department.Paths[Flat File Source Output]"
+          TopLeft="195.9015801727,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.7096547428322"
+              Start="0,0"
+              End="0,68.2096547428322">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.2096547428322" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Department\Stage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

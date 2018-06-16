@@ -1,0 +1,2903 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/14/2017 3:35:05 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="OWEN-PC-01"
+  DTS:CreatorName="DUNE\OTurner"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{8801CF37-C30D-4FEE-B4A6-AFC3AA532CEC}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="StoreCommercialDiary"
+  DTS:PackageType="5"
+  DTS:VersionBuild="101"
+  DTS:VersionGUID="{BA0DAB6C-A83F-444F-8FE0-6260807D038F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1EB736AB-C8D9-4064-80D9-B5DCC5F19145}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DailyRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC41D4B7-5092-4251-B283-5FD8829119DC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DivisionRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DailyErrorEmail"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{096848E8-D352-4318-80A5-3FD5C3143F5F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DailyErrorEmail"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{13E328C7-5902-4BA3-9E81-25D232832DAF}"
+          SendMailTask:From="datawarehouse@thedunegroup.com"
+          SendMailTask:To="oturner@thedunegroup.com"
+          SendMailTask:Subject="Commercial Store Diary:  Error"
+          SendMailTask:MessageSource="The daily percentages add upto more than 100%&#xA;&#xA;https://thedunegroup.sharepoint.com/IT/BI/SiteAssets/Commercial%20Diary.aspx&#xA;&#xA;The data will not be loaded until this has been corrected.&#xA;&#xA;This is an automated email please do not reply&#xA;&#xA;Regards,&#xA;The BI Team" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DailyPercentageCheck"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7AE175AA-F03D-4F44-B0AC-99D593B9DF44}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DailyPercentageCheck"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DailyPercentageCheck\Row Count"
+              componentClassID="DTSTransform.RowCount.3"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::DailyRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DailyPercentageCheck\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DailyPercentageCheck\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DailyPercentageCheck\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DailyPercentageCheck\StoreCDDaily"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StoreCDDaily"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        Store_Number, SUM(DayPercentage) AS DayPercentage
+FROM            StoreCDDaily
+GROUP BY Store_Number
+HAVING        (SUM(DayPercentage) &gt; 100)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DailyPercentageCheck\StoreCDDaily.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                      length="5"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                      name="Store_Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].Columns[DayPercentage]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].ExternalColumns[DayPercentage]"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].Columns[DayPercentage]"
+                      name="DayPercentage"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store_Number" />
+                    <externalMetadataColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output].ExternalColumns[DayPercentage]"
+                      dataType="numeric"
+                      name="DayPercentage"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                      name="Store_Number" />
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[DayPercentage]"
+                      dataType="numeric"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[DayPercentage]"
+                      name="DayPercentage"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DailyPercentageCheck.Paths[OLE DB Source Output]"
+              endId="Package\DailyPercentageCheck\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\DailyPercentageCheck\StoreCDDaily.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DivisionErrorEmail"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{7957918d-0a52-4808-bc2c-c40e1c27594c}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DivisionErrorEmail"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{13E328C7-5902-4BA3-9E81-25D232832DAF}"
+          SendMailTask:From="datawarehouse@thedunegroup.com"
+          SendMailTask:To="oturner@thedunegroup.com"
+          SendMailTask:Subject="Commercial Store Diary:  Error"
+          SendMailTask:MessageSource="The division percentages add upto more than 100%&#xA;&#xA;https://thedunegroup.sharepoint.com/IT/BI/SiteAssets/Commercial%20Diary.aspx&#xA;&#xA;The data will not be loaded until this has been corrected.&#xA;&#xA;This is an automated email please do not reply&#xA;&#xA;Regards,&#xA;The BI Team" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DivisionPercentageCheck"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5af2055b-e96c-4480-a924-cc663410602b}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DivisionPercentageCheck"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DivisionPercentageCheck\Row Count"
+              componentClassID="DTSTransform.RowCount.3"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::DivisionRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DivisionPercentageCheck\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DivisionPercentageCheck\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DivisionPercentageCheck\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DivisionPercentageCheck\StoreCDDivision"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StoreCDDivision"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        Store_Number, Division_Name, SUM(DivisionPercentage) AS DivisionPercentage
+FROM            StoreCDDivision
+GROUP BY Store_Number, Division_Name
+HAVING        (SUM(DivisionPercentage) &gt; 100)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DivisionPercentageCheck\StoreCDDivision.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                      length="5"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[Store_Number]"
+                      name="Store_Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[Division_Name]"
+                      length="25"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[Division_Name]"
+                      name="Division_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[DivisionPercentage]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[DivisionPercentage]"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].Columns[DivisionPercentage]"
+                      name="DivisionPercentage"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store_Number" />
+                    <externalMetadataColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Division_Name" />
+                    <externalMetadataColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output].ExternalColumns[DivisionPercentage]"
+                      dataType="numeric"
+                      name="DivisionPercentage"
+                      precision="38"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[Store_Number]"
+                      name="Store_Number" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[Division_Name]"
+                      name="Division_Name" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[DivisionPercentage]"
+                      dataType="numeric"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[DivisionPercentage]"
+                      name="DivisionPercentage"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DivisionPercentageCheck.Paths[OLE DB Source Output]"
+              endId="Package\DivisionPercentageCheck\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\DivisionPercentageCheck\StoreCDDivision.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE StoreCDDaily"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9E7FBAB3-B6D7-4CF6-AE57-E36AB397F62E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE StoreCDDaily"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.StoreCDDaily" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE StoreCDDivision"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9420e46b-eddf-449e-ae44-ffbde3c156b6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE StoreCDDivision"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.StoreCDDivision" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Unpivot_DailyList"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{316B39FA-B388-4BB3-A38F-2B0F9F64DAD0}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Unpivot_DailyList"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Unpivot_DailyList\Derived Column"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Unpivot_DailyList\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Derived Column.Inputs[Derived Column Input].Columns[Day]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Day"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Day]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Unpivot_DailyList\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Output].Columns[Calendar_Day_of_Week]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Output].Columns[Calendar_Day_of_Week]"
+                      name="Calendar_Day_of_Week"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Day]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)Day</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Unpivot_DailyList\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_DailyList\StoreCDDaily"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StoreCDDaily"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StoreCDDaily]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Unpivot_DailyList\StoreCDDaily.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].Columns[DayPercentage]"
+                      cachedDataType="numeric"
+                      cachedName="DayPercentage"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[DayPercentage]"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]" />
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].Columns[Store]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Store"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Store]" />
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].Columns[Calendar_Day_of_Week]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Calendar_Day_of_Week"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Day_of_Week]"
+                      lineageId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Output].Columns[Calendar_Day_of_Week]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[StoreCDDailyID]"
+                      dataType="i4"
+                      name="StoreCDDailyID" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Day_of_Week_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Calendar_Day_of_Week_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[DayPercentage]"
+                      dataType="numeric"
+                      name="DayPercentage"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input].ExternalColumns[Calendar_Day_of_Week]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Calendar_Day_of_Week" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_DailyList\StoreCDDaily.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDaily.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDaily.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDaily.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_DailyList\StoreCDDailyList"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StoreCDDailyList"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StoreCDDailyList]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Unpivot_DailyList\StoreCDDailyList.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      length="5"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]"
+                      name="Store"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Sunday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Sunday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Sunday]"
+                      name="Sunday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Monday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Monday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Monday]"
+                      name="Monday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Tuesday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Tuesday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Tuesday]"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Wednesday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Wednesday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Wednesday]"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Thursday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Thursday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Thursday]"
+                      name="Thursday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Friday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Friday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Friday]"
+                      name="Friday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Saturday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Saturday]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Saturday]"
+                      name="Saturday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Ladies]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Ladies]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Ladies]"
+                      name="Ladies"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Mens]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Mens]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Mens]"
+                      name="Mens"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Accessories]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Accessories]"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Accessories]"
+                      name="Accessories"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Sunday]"
+                      dataType="numeric"
+                      name="Sunday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Monday]"
+                      dataType="numeric"
+                      name="Monday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Tuesday]"
+                      dataType="numeric"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Wednesday]"
+                      dataType="numeric"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Thursday]"
+                      dataType="numeric"
+                      name="Thursday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Friday]"
+                      dataType="numeric"
+                      name="Friday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Saturday]"
+                      dataType="numeric"
+                      name="Saturday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Ladies]"
+                      dataType="numeric"
+                      name="Ladies"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Mens]"
+                      dataType="numeric"
+                      name="Mens"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Accessories]"
+                      dataType="numeric"
+                      name="Accessories"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      name="Store" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Sunday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Sunday]"
+                      name="Sunday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Monday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Monday]"
+                      name="Monday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Tuesday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Tuesday]"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Wednesday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Wednesday]"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Thursday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Thursday]"
+                      name="Thursday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Friday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Friday]"
+                      name="Friday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Saturday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Saturday]"
+                      name="Saturday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Ladies]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Ladies]"
+                      name="Ladies"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Mens]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Mens]"
+                      name="Mens"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Accessories]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Accessories]"
+                      name="Accessories"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_DailyList\Unpivot"
+              componentClassID="DTSTransform.UnPivot.3"
+              contactInfo="Unpivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Expands an un-normalized data flow into a more normalized version. Values from multiple columns of a single record expand to multiple records in a single column. For example, expand a table that lists athletic scores with a column for each game to more records and a single score column."
+              name="Unpivot">
+              <inputs>
+                <input
+                  refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input]"
+                  hasSideEffects="true"
+                  name="Unpivot Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Sunday]"
+                      cachedDataType="numeric"
+                      cachedName="Sunday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Sunday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Sunday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Monday]"
+                      cachedDataType="numeric"
+                      cachedName="Monday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Monday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Monday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Tuesday]"
+                      cachedDataType="numeric"
+                      cachedName="Tuesday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Tuesday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Tuesday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Wednesday]"
+                      cachedDataType="numeric"
+                      cachedName="Wednesday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Wednesday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Wednesday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Thursday]"
+                      cachedDataType="numeric"
+                      cachedName="Thursday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Thursday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Thursday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Friday]"
+                      cachedDataType="numeric"
+                      cachedName="Friday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Friday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Friday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Saturday]"
+                      cachedDataType="numeric"
+                      cachedName="Saturday"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Saturday]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Saturday</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input].Columns[Store]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Store"
+                      lineageId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Store]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output]"
+                  name="Unpivot Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Day]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Day]"
+                      name="Day">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">true</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[DayPercentage]"
+                      name="DayPercentage"
+                      precision="18"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output].Columns[Store]"
+                      name="Store">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Unpivot_DailyList.Paths[Derived Column Output]"
+              endId="Package\Unpivot_DailyList\StoreCDDaily.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Unpivot_DailyList\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Unpivot_DailyList.Paths[OLE DB Source Output]"
+              endId="Package\Unpivot_DailyList\Unpivot.Inputs[Unpivot Input]"
+              name="OLE DB Source Output"
+              startId="Package\Unpivot_DailyList\StoreCDDailyList.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Unpivot_DailyList.Paths[Unpivot Output]"
+              endId="Package\Unpivot_DailyList\Derived Column.Inputs[Derived Column Input]"
+              name="Unpivot Output"
+              startId="Package\Unpivot_DailyList\Unpivot.Outputs[Unpivot Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Unpivot_Division"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4f72f413-f691-472f-9963-4dd429115996}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Unpivot_Division"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Unpivot_Division\Derived Column"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Unpivot_Division\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\Derived Column.Inputs[Derived Column Input].Columns[DivisionName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DivisionName"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Unpivot_Division\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Output].Columns[strDivisionName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Output].Columns[strDivisionName]"
+                      name="strDivisionName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,25,1252)#{Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionName]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,25,1252)DivisionName</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Unpivot_Division\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_Division\StoreCDDailyList"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StoreCDDailyList"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StoreCDDailyList]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Unpivot_Division\StoreCDDailyList.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      length="5"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]"
+                      name="Store"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Sunday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Sunday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Sunday]"
+                      name="Sunday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Monday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Monday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Monday]"
+                      name="Monday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Tuesday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Tuesday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Tuesday]"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Wednesday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Wednesday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Wednesday]"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Thursday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Thursday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Thursday]"
+                      name="Thursday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Friday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Friday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Friday]"
+                      name="Friday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Saturday]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Saturday]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Saturday]"
+                      name="Saturday"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Ladies]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Ladies]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Ladies]"
+                      name="Ladies"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Mens]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Mens]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Mens]"
+                      name="Mens"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Accessories]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Accessories]"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Accessories]"
+                      name="Accessories"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Sunday]"
+                      dataType="numeric"
+                      name="Sunday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Monday]"
+                      dataType="numeric"
+                      name="Monday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Tuesday]"
+                      dataType="numeric"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Wednesday]"
+                      dataType="numeric"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Thursday]"
+                      dataType="numeric"
+                      name="Thursday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Friday]"
+                      dataType="numeric"
+                      name="Friday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Saturday]"
+                      dataType="numeric"
+                      name="Saturday"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Ladies]"
+                      dataType="numeric"
+                      name="Ladies"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Mens]"
+                      dataType="numeric"
+                      name="Mens"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].ExternalColumns[Accessories]"
+                      dataType="numeric"
+                      name="Accessories"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      name="Store" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Sunday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Sunday]"
+                      name="Sunday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Monday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Monday]"
+                      name="Monday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Tuesday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Tuesday]"
+                      name="Tuesday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Wednesday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Wednesday]"
+                      name="Wednesday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Thursday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Thursday]"
+                      name="Thursday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Friday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Friday]"
+                      name="Friday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Saturday]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Saturday]"
+                      name="Saturday"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Ladies]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Ladies]"
+                      name="Ladies"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Mens]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Mens]"
+                      name="Mens"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Accessories]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[Accessories]"
+                      name="Accessories"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_Division\StoreCDDivision"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StoreCDDivision"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StoreCDDivision]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Unpivot_Division\StoreCDDivision.Connections[OleDbConnection]"
+                  connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].Columns[Store]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Store"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[Store]" />
+                    <inputColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].Columns[DivisionPercentage]"
+                      cachedDataType="numeric"
+                      cachedName="DivisionPercentage"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[DivisionPercentage]"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]" />
+                    <inputColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].Columns[strDivisionName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="strDivisionName"
+                      externalMetadataColumnId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[Division_Name]"
+                      lineageId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Output].Columns[strDivisionName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[Store_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Store_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[StoreCDDivisionID]"
+                      dataType="i4"
+                      name="StoreCDDivisionID" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[Division_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Division_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input].ExternalColumns[DivisionPercentage]"
+                      dataType="numeric"
+                      name="DivisionPercentage"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_Division\StoreCDDivision.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\StoreCDDivision.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Unpivot_Division\StoreCDDivision.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Unpivot_Division\StoreCDDivision.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Unpivot_Division\Unpivot"
+              componentClassID="DTSTransform.UnPivot.3"
+              contactInfo="Unpivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Expands an un-normalized data flow into a more normalized version. Values from multiple columns of a single record expand to multiple records in a single column. For example, expand a table that lists athletic scores with a column for each game to more records and a single score column."
+              name="Unpivot">
+              <inputs>
+                <input
+                  refId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input]"
+                  hasSideEffects="true"
+                  name="Unpivot Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input].Columns[Store]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Store"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Store]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[Store]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input].Columns[Ladies]"
+                      cachedDataType="numeric"
+                      cachedName="Ladies"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Ladies]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Ladies</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input].Columns[Mens]"
+                      cachedDataType="numeric"
+                      cachedName="Mens"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Mens]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Mens</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input].Columns[Accessories]"
+                      cachedDataType="numeric"
+                      cachedName="Accessories"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output].Columns[Accessories]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage ID of the output column that will receive the value from this input column. Or -1 if column’s value is not used in output rows."
+                          name="DestinationColumn">#{Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the value written to the PivotKey column in the output row."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Accessories</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output]"
+                  name="Unpivot Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionName]"
+                      name="DivisionName">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">true</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[Store]"
+                      name="Store">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]"
+                      dataType="numeric"
+                      lineageId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output].Columns[DivisionPercentage]"
+                      name="DivisionPercentage"
+                      precision="18"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the value in the PivotKeyValue property is written to the column in the new row."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Unpivot_Division.Paths[Derived Column Output]"
+              endId="Package\Unpivot_Division\StoreCDDivision.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Unpivot_Division\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Unpivot_Division.Paths[OLE DB Source Output]"
+              endId="Package\Unpivot_Division\Unpivot.Inputs[Unpivot Input]"
+              name="OLE DB Source Output"
+              startId="Package\Unpivot_Division\StoreCDDailyList.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Unpivot_Division.Paths[Unpivot Output]"
+              endId="Package\Unpivot_Division\Derived Column.Inputs[Derived Column Input]"
+              name="Unpivot Output"
+              startId="Package\Unpivot_Division\Unpivot.Outputs[Unpivot Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateDayOfTheWeekNumber"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2793142B-0650-490A-A966-577CDB6B2D09}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateDayOfTheWeekNumber"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+          SQLTask:SqlStatementSource="UPDATE  dbo.StoreCDDaily&#xA;SET     Calendar_Day_of_Week_Number = CASE WHEN Calendar_Day_of_Week = 'Sunday' THEN 1&#xA;                                           WHEN Calendar_Day_of_Week = 'Monday' THEN 2&#xA;                                           WHEN Calendar_Day_of_Week = 'Tuesday' THEN 3&#xA;                                           WHEN Calendar_Day_of_Week = 'Wednesday' THEN 4&#xA;                                           WHEN Calendar_Day_of_Week = 'Thursday' THEN 5&#xA;                                           WHEN Calendar_Day_of_Week = 'Friday' THEN 6&#xA;                                           WHEN Calendar_Day_of_Week = 'Saturday' THEN 7&#xA;                                           ELSE 0&#xA;                                      END&#xA;WHERE   ( Calendar_Day_of_Week_Number IS NULL )&#xA;        OR ( Calendar_Day_of_Week_Number = '0' );" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\usp_StoreCDDailyTarget"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="usp_StoreCDDailyTarget"
+      DTS:DTSID="{DF385D14-B742-410E-9DED-94E16C71209A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="usp_StoreCDDailyTarget"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_StoreCDDailyTarget" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\usp_StoreCDDivisionTarget"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="usp_StoreCDDivisionTarget"
+      DTS:DTSID="{3cace56d-5a8f-4e90-bd7c-431672b6a8ae}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="usp_StoreCDDivisionTarget"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_StoreCDDivisionTarget" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{20384771-0E1E-4846-B654-2654BB1BE8AE}"
+      DTS:From="Package\TRUNCATE StoreCDDaily"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\TRUNCATE StoreCDDivision" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{315299E3-4718-4D93-B29E-9CD76492D5F2}"
+      DTS:From="Package\usp_StoreCDDailyTarget"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DivisionPercentageCheck" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{E23D50FF-EBB7-4D67-8924-998C99312664}"
+      DTS:From="Package\Unpivot_Division"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\UpdateDayOfTheWeekNumber" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7479058B-5C9D-4C15-A950-E929580AC0D7}"
+      DTS:From="Package\TRUNCATE StoreCDDivision"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Unpivot_DailyList" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{57ECA6CA-0A85-4F3A-BC12-64B9BA35D89E}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::DailyRowCount]  == 0"
+      DTS:From="Package\DailyPercentageCheck"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\usp_StoreCDDailyTarget" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{29660D96-9937-42AA-A14D-153E49BB39E5}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::DivisionRowCount] == 0"
+      DTS:From="Package\DivisionPercentageCheck"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\usp_StoreCDDivisionTarget" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{0A2524D9-1AB4-4E16-A96C-0D27FF404F73}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::DailyRowCount]  != 0"
+      DTS:From="Package\DailyPercentageCheck"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\DailyErrorEmail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF0CA1FD-EB20-4DFE-819C-8BF425301F05}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::DivisionRowCount]  != 0"
+      DTS:From="Package\DivisionPercentageCheck"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\DivisionErrorEmail" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{703018D0-871F-4A21-AD18-5F9087708A4E}"
+      DTS:From="Package\Unpivot_DailyList"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Unpivot_Division" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{6A2067F0-ACAF-4520-AB2C-FBDCAA505BD2}"
+      DTS:From="Package\UpdateDayOfTheWeekNumber"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\DailyPercentageCheck" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\DailyErrorEmail"
+          TopLeft="404,578" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\DailyPercentageCheck"
+          TopLeft="121.5,581.5" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\DivisionErrorEmail"
+          TopLeft="439,785" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\DivisionPercentageCheck"
+          TopLeft="116,783" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\TRUNCATE StoreCDDaily"
+          TopLeft="112,76" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\TRUNCATE StoreCDDivision"
+          TopLeft="103,164" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Unpivot_DailyList"
+          TopLeft="120,282" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Unpivot_Division"
+          TopLeft="122,398" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\UpdateDayOfTheWeekNumber"
+          TopLeft="97,489" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\usp_StoreCDDailyTarget"
+          TopLeft="117,688" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\usp_StoreCDDivisionTarget"
+          TopLeft="114,890" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="208.75,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="214.5,730">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="208.75,440">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="210,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76"
+              Start="0,0"
+              End="0,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="214,623.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.5"
+              Start="0,0"
+              End="0,57">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,20.5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="215.75,825">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,20.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="304.5,600.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.5,0"
+              Start="0,0"
+              End="92,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="92,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="38,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="312,805">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127,0"
+              Start="0,0"
+              End="119.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="119.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="51.75,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="210.75,324">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="210.75,531">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.5"
+              Start="0,0"
+              End="0,43">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="02/10/2017 - Removed all connections to sharepoint due to issue"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="376,40"
+          Id="538c5fe7-7ef1-4fc9-9ee3-1104f950ca0e"
+          TopLeft="49,20" />
+        <AnnotationLayout
+          Text="This has now been moved to its own Solution &#xD;&#xA;BIS Store Commercial Diary.&#xD;&#xA;Please close this package, and open the revised package."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="330,72"
+          Id="4074c8a5-430b-4ac5-ae79-dab860f36821"
+          TopLeft="319,54" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DailyPercentageCheck">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42"
+          Id="Package\DailyPercentageCheck\StoreCDDaily"
+          TopLeft="186.5,54.5" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\DailyPercentageCheck\Row Count"
+          TopLeft="191,155" />
+        <EdgeLayout
+          Id="Package\DailyPercentageCheck.Paths[OLE DB Source Output]"
+          TopLeft="256.25,96.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,58.5"
+              Start="0,0"
+              End="0,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DailyPercentageCheck\StoreCDDaily">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DivisionPercentageCheck">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\DivisionPercentageCheck\StoreCDDivision"
+          TopLeft="186.5,54.5" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\DivisionPercentageCheck\Row Count"
+          TopLeft="191,155" />
+        <EdgeLayout
+          Id="Package\DivisionPercentageCheck.Paths[OLE DB Source Output]"
+          TopLeft="259.75,96.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,58.5"
+              Start="0,0"
+              End="0,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DivisionPercentageCheck\StoreCDDivision">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Unpivot_DailyList">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Unpivot_DailyList\StoreCDDaily"
+          TopLeft="219,351" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Unpivot_DailyList\Derived Column"
+          TopLeft="212.5,249.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Unpivot_DailyList\StoreCDDailyList"
+          TopLeft="212,52" />
+        <NodeLayout
+          Size="115,42"
+          Id="Package\Unpivot_DailyList\Unpivot"
+          TopLeft="230,159" />
+        <EdgeLayout
+          Id="Package\Unpivot_DailyList.Paths[Derived Column Output]"
+          TopLeft="289.25,291.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,59.5"
+              Start="0,0"
+              End="0,52">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unpivot_DailyList.Paths[Unpivot Output]"
+          TopLeft="288.5,201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,48.5"
+              Start="0,0"
+              End="0,41">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unpivot_DailyList.Paths[OLE DB Source Output]"
+          TopLeft="288.75,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unpivot_DailyList\StoreCDDaily">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unpivot_DailyList\StoreCDDailyList">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Unpivot_Division">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Unpivot_Division\StoreCDDailyList"
+          TopLeft="212,56" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Unpivot_Division\StoreCDDivision"
+          TopLeft="210,362" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Unpivot_Division\Derived Column"
+          TopLeft="212,256" />
+        <NodeLayout
+          Size="115,42"
+          Id="Package\Unpivot_Division\Unpivot"
+          TopLeft="230,159" />
+        <EdgeLayout
+          Id="Package\Unpivot_Division.Paths[Unpivot Output]"
+          TopLeft="288.25,201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unpivot_Division.Paths[OLE DB Source Output]"
+          TopLeft="288.75,98">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unpivot_Division.Paths[Derived Column Output]"
+          TopLeft="288,298">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unpivot_Division\StoreCDDailyList">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unpivot_Division\StoreCDDivision">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

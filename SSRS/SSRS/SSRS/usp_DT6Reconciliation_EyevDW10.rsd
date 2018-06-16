@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>BISDW-CL01</DataSourceReference>
+      <CommandType>StoredProcedure</CommandType>
+      <CommandText>usp_DT6Reconciliation_EyevDW10</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Fiscal_Year">
+        <DataField>Fiscal_Year</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Store_Number">
+        <DataField>Store_Number</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Fiscal_Week">
+        <DataField>Fiscal_Week</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Eye">
+        <DataField>Eye</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="DT6">
+        <DataField>DT6</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Sale_Day_Fact">
+        <DataField>Sale_Day_Fact</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Eye_v_Sale_Day_Fact">
+        <DataField>Eye_v_Sale_Day_Fact</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Eye_v_DT6">
+        <DataField>Eye_v_DT6</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="DT6_v_Sale_Day_Fact">
+        <DataField>DT6_v_Sale_Day_Fact</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Difference">
+        <DataField>Difference</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

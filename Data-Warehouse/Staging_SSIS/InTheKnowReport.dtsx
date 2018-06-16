@@ -1,0 +1,169 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/6/2017 5:23:37 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0988"
+  DTS:CreatorName="DUNE\PEllis"
+  DTS:DTSID="{EC86FC3F-DB0F-4052-933F-A160BB690A6D}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="InTheKnowReport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{FA65AD07-EB19-48D2-9F2A-C5CB7EF4AD84}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{27B7B666-06A2-4CA9-9A2B-BF3EC2BBACB7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReportFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">In the Know Daily Report-en-gb.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{50D7AC8A-79A7-45DA-8CE7-C41FF86E9805}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReportPathName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\cso-nas-02\Data\Cognos\ECommerce\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Email In The Know Report"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D5665CBA-6E9B-4E6A-8ED7-D550B4D5E6F3}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Email In The Know Report">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Email In The Know Report\Email Failure"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{808FC017-6FE3-499D-AFFF-BA395D34C95D}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Email Failure"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{13E328C7-5902-4BA3-9E81-25D232832DAF}"
+              SendMailTask:From="DuneReporting@thedunegroup.com"
+              SendMailTask:To="pellis@thedunegroup.com ;BIAdmin@thedunegroup.com"
+              SendMailTask:Subject="In The Know Report Email Failure"
+              SendMailTask:Priority="High"
+              SendMailTask:MessageSource="The In The Know Report Failed when emailing to users" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Email In The Know Report\Email Users"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Email stores daily In The Know Report"
+          DTS:DTSID="{9D2392AA-B0F7-4588-B049-D1470B8B9E39}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Email Users"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="FileAttachments">@[User::ReportPathName] + @[User::ReportFileName]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{13E328C7-5902-4BA3-9E81-25D232832DAF}"
+              SendMailTask:From="DuneReporting@thedunegroup.com"
+              SendMailTask:BCC="AreaManagers@thedunegroup.com; Allsolusstores@thedunegroup.com; InTheKnowReporting@thedunegroup.com;pellis@thedunegroup.com"
+              SendMailTask:Subject="In The Know Report"
+              SendMailTask:MessageSource="This is an “In The Know” daily report to show the transactions that have been linked to customers, for the previous days within the current financial week. &#xA;This is an automated email, please do not reply directly to this email.&#xA;If you have experienced any issues with this report then please contact the IT Help Desk at Help@thedunegroup.com&#xA;&#xA;Regards,&#xA;Dune IT" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+              <SendMailTask:Attachments
+                SendMailTask:FileName="\\cso-nas-02\Data\Cognos\ECommerce\In the Know Daily Report-en-gb.xlsx" />
+            </SendMailTask:SendMailTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Email In The Know Report.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D0E6E8E2-38D2-4AAE-A178-3370E6F9FBF3}"
+          DTS:From="Package\Email In The Know Report\Email Users"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Email In The Know Report\Email Failure"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Email In The Know Report\Email Failure"
+          TopLeft="287,28" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Email In The Know Report\Email Users"
+          TopLeft="34,33" />
+        <EdgeLayout
+          Id="Package\Email In The Know Report.PrecedenceConstraints[Constraint]"
+          TopLeft="174,51.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="113,0"
+              Start="0,0"
+              End="105.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="105.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="37.50865234375,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="458,138"
+          Size="458,181"
+          Id="Package\Email In The Know Report"
+          TopLeft="136,30" />
+        <AnnotationLayout
+          Text="Data file found at  \\cso-nas-02\Data\Cognos\ECommerce\"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="402,42"
+          Id="5dbe87fd-6f11-4150-bb03-caa251e6b127"
+          TopLeft="169,240" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,31 @@
+CREATE TABLE [dbo].[PO_Hist_Fact]
+(
+[SEQUENCE_KEY] [nvarchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[SEQUENCE] [numeric] (3, 0) NULL,
+[HONO] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HBYR] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HVIA] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HANM] [varchar] (25) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HTRM] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HCUR] [varchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HCLO] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[IONO] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ISEQ] [numeric] (3, 0) NULL,
+[IERR] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[IRET] [numeric] (11, 2) NULL,
+[IQTY] [numeric] (9, 0) NULL,
+[Purchase_Order_Component_Qty] [numeric] (9, 0) NULL,
+[ITQR] [numeric] (9, 0) NULL,
+[ILNC] [numeric] (9, 4) NULL,
+[IASN] [varchar] (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[IHND] [varchar] (8) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Item_Dim_ID] [int] NULL,
+[Purchase_Order_Date_Dim_ID] [smallint] NULL,
+[Store_Dim_ID] [int] NULL,
+[Currency_Dim_ID] [tinyint] NULL,
+[FreightDutyValue] [decimal] (28, 15) NULL,
+[FreightDutyType] [varchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[HUSR] [char] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL CONSTRAINT [PO_Hist_Fact_HUSR_DF] DEFAULT (''),
+[IHOM] [money] NOT NULL CONSTRAINT [PO_Hist_Fact_IHOM_DF] DEFAULT ((0))
+) ON [PRIMARY]
+GO

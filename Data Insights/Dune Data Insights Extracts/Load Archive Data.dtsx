@@ -1,0 +1,2517 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/18/2018 3:03:01 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DUN0988"
+  DTS:CreatorName="DUNE\pellis"
+  DTS:DTSID="{4EA73B5E-DA1B-4DCA-9ACD-6660856A0FEB}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Load Archive Data"
+  DTS:PackageType="5"
+  DTS:VersionBuild="120"
+  DTS:VersionGUID="{DB842893-D32B-465D-A2AC-7A27B90B31D8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BISDW-CL01.Dune_DataInsights]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5FB5CDC6-4F6D-45EE-84FB-EC1422C4DCAF}"
+      DTS:ObjectName="BISDW-CL01.Dune_DataInsights">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BISDW-CL01;Initial Catalog=Dune_DataInsights;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[JSON Files]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{53110325-9649-472A-9D87-71BE85D7CF73}"
+      DTS:ObjectName="JSON Files">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="\\cso-nas-02\yReceipts\JSON Files" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{EED115BD-BFBA-4780-8F8F-297463154BD0}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=smtp-relay.dune.co.uk;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{4C096048-49CA-44AF-9A07-2D8C139F9501}"
+      DTS:ObjectName="JSONFileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\cso-nas-02\yReceipts\archive\</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C670D87C-C7DE-42AB-9659-EF9560C20A9D}"
+      DTS:ObjectName="ZipJSONFileName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\cso-nas-02\yReceipts\Inbound\</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C954FBB4-4470-463D-A48E-1521BE2A2CB9}"
+      DTS:ObjectName="ZipName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\cso-nas-02\yReceipts\JSON Files\</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E7454F80-D4AE-4AFC-9013-B23C331FA6CA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDestination">
+      <DTS:VariableValue
+        DTS:DataType="8">\\cso-nas-02\yReceipts\JSON Files\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DF069450-5BA3-4F0E-9444-E51C0313690A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::ExtractFolder] +  @[User::JSONFName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JSONFileNameFQ">
+      <DTS:VariableValue
+        DTS:DataType="8">\\cso-nas-02\yReceipts\json files\0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{243FE232-6D45-44A0-AC7B-036A4E1FF0DD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="JSONFName">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{07E6538A-DB1D-466E-B155-C6874C5FF1E3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ZipDestinFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\cso-nas-02\yReceipts\JSON Files\0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8DE07EFC-4583-416D-938B-6548632835AE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ZipFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ZipFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1C9694C5-F556-47D8-8843-DD5411B9B10C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::ZipFolder]  +  @[User::ZipFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ZipSourceFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\cso-nas-02\yReceipts\ArchiveZip\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Email Error Occured"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{64ee174f-2dfd-41ba-8431-50e777ede6cb}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Email Error Occured">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Email Error Occured\Error Email to DataInsight Team"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{c22e4b44-5cca-4da3-9d1a-64c10d203930}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Error Email to DataInsight Team"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{EED115BD-BFBA-4780-8F8F-297463154BD0}"
+              SendMailTask:From="DuneReporting@thedunegroup.com"
+              SendMailTask:To="BIAdmin@thedunegroup.com"
+              SendMailTask:BCC="pellis@thedunegroup.com"
+              SendMailTask:Subject="Dune Data Insights Extract Failure"
+              SendMailTask:Priority="High"
+              SendMailTask:MessageSource="This is to inform you that the daily Y Receipts extract to the Dune Data Insights database has failed. We are currently looking into the reason why this failed and will update you shorty. " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Each zip file"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{8527D6A2-BEC5-4630-A15A-1587D739DA32}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Each zip file">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{DC4897DA-7D94-45C0-9D05-6FB92F556CCB}"
+        DTS:ObjectName="{DC4897DA-7D94-45C0-9D05-6FB92F556CCB}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\cso-nas-02\yReceipts\Inbound\" />
+            <FEFEProperty
+              FileSpec="*.zip" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Get Each zip file\Extract files from Zip File"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute Process Task"
+          DTS:DTSID="{615D6407-7F6A-40B1-8077-08C3306EF5FF}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract files from Zip File"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="Arguments">"-ExecutionPolicy ByPass -command \". '\\\\cso-nas-02\\yReceipts\\PowerShell\\UnZip2.ps1' '\"" + @[User::ZipFileName]  + "\"'"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <ExecuteProcessData
+              Executable="C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.exe"
+              Arguments="-ExecutionPolicy ByPass -command &quot;. '\\cso-nas-02\yReceipts\PowerShell\UnZip2.ps1' '&quot;&quot;'" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get Each zip file\Get each JSON File"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{C8D90A66-CED3-4D65-94E9-7A90C6AF120E}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get each JSON File">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="DTS.ForEachFileEnumerator.3"
+            DTS:DTSID="{CF1EE36E-D5C0-4ECC-B19F-D0AA145EF972}"
+            DTS:ObjectName="{CF1EE36E-D5C0-4ECC-B19F-D0AA145EF972}">
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\cso-nas-02\yReceipts\json files" />
+                <FEFEProperty
+                  FileSpec="*.json" />
+                <FEFEProperty
+                  FileNameRetrievalType="1" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Get Each zip file\Get each JSON File\Delete Processed JSON File"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="File System Task"
+              DTS:DTSID="{783CCC91-7CD0-4F8D-BAEA-573C72C47F7C}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete Processed JSON File"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="DeleteFile"
+                  TaskSourcePath="User::JSONFileNameFQ"
+                  TaskIsSourceVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{ea50ee03-822e-4077-b741-1f76c3ae6422}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load JSON File Data"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name"
+                      componentClassID="DTSTransform.DataConvert.3"
+                      contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Data Conversion"
+                      name="Convert File Name"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Inputs[Data Conversion Input]"
+                          name="Data Conversion Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Inputs[Data Conversion Input].Columns[__FileName]"
+                              cachedDataType="wstr"
+                              cachedLength="150"
+                              cachedName="__FileName"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__FileName]" />
+                          </inputColumns>
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Output]"
+                          exclusionGroup="1"
+                          name="Data Conversion Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Inputs[Data Conversion Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Output].Columns[Copy of __FileName]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="150"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Output].Columns[Copy of __FileName]"
+                              name="Copy of __FileName"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__FileName]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Data Conversion Error Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Inputs[Data Conversion Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion"
+                      componentClassID="DTSTransform.DataConvert.3"
+                      contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Data Conversion"
+                      name="Data Conversion"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input]"
+                          name="Data Conversion Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input].Columns[discount_text]"
+                              cachedDataType="wstr"
+                              cachedLength="510"
+                              cachedName="discount_text"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount_text]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input].Columns[pos_item_id]"
+                              cachedDataType="wstr"
+                              cachedLength="26"
+                              cachedName="pos_item_id"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[pos_item_id]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input].Columns[receipt]"
+                              cachedDataType="wstr"
+                              cachedLength="108"
+                              cachedName="receipt"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[receipt]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input].Columns[text]"
+                              cachedDataType="wstr"
+                              cachedLength="600"
+                              cachedName="text"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[text]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input].Columns[__key__]"
+                              cachedDataType="wstr"
+                              cachedLength="110"
+                              cachedName="__key__"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[__key__]" />
+                          </inputColumns>
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output]"
+                          exclusionGroup="1"
+                          name="Data Conversion Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_discount_text]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="510"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_discount_text]"
+                              name="New_discount_text"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount_text]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_pos_item_id]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="26"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_pos_item_id]"
+                              name="New_pos_item_id"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[pos_item_id]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_receipt]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="110"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_receipt]"
+                              name="New_receipt"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[receipt]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_text]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="600"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_text]"
+                              name="New_text"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[text]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New__key__]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              length="110"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New__key__]"
+                              name="New__key__"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.Int32"
+                                  description="Specifies the input column used as the source of data for the conversion."
+                                  name="SourceInputColumnLineageID">#{Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[__key__]}</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Data Conversion Error Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed"
+                      componentClassID="DTSAdapter.OLEDBDestination.3"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="DataProcessed"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[DataProcessed]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[BISDW-CL01.Dune_DataInsights]"
+                          connectionManagerRefId="Package.ConnectionManagers[BISDW-CL01.Dune_DataInsights]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input].Columns[Copy of __FileName]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="150"
+                              cachedName="Copy of __FileName"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input].ExternalColumns[FileNameProcessed]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Output].Columns[Copy of __FileName]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                              dataType="i4"
+                              name="id" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input].ExternalColumns[FileNameProcessed]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              name="FileNameProcessed" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input].ExternalColumns[DateFileProcessed]"
+                              dataType="dbDate"
+                              name="DateFileProcessed" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform"
+                      componentClassID="DTS.ManagedComponentWrapper.3"
+                      contactInfo="JSON Parser Transform; ZappySys LLC (c) All Rights Reserved; SSIS PowerPack; http://www.zappysys.com/support"
+                      description="Parse incoming JSON String into columns. You can also parse and transform single JSON record into multiple rows by filtering data based on JSON Path (e.g. $.Customer.Orders[*])"
+                      name="JSON Parser Transform"
+                      usesDispositions="true"
+                      version="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="LoggingMode determines how much information is logged during Package Execution. Set Logging mode to Debugging for maximum log."
+                          expressionType="Notify"
+                          name="LoggingMode"
+                          typeConverter="ZappySys.PowerPack.Common.LoggingMode, ZappySys.PowerPack90, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you enable this property it will prefix timestamp before Log messages."
+                          expressionType="Notify"
+                          name="PrefixTimestamp">false</property>
+                        <property
+                          dataType="System.Null"
+                          expressionType="Notify"
+                          name="SelfRef"
+                          typeConverter="NOTBROWSABLE" />
+                        <property
+                          dataType="System.Boolean"
+                          description="Treat empty string as NULL for any numeric datatypes"
+                          expressionType="Notify"
+                          name="TreatBlankNumberAsNull">true</property>
+                        <property
+                          dataType="System.String"
+                          description="Sample JSON data used to parse output columns."
+                          expressionType="Notify"
+                          name="SampleData"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">{
+  "SaleItem_list": [
+        {
+            "__key__": "ahBzfnlyZWNlaXB0cy1wcm9kchULEghTYWxlSXRlbRiAgODnjpWXCAw", 
+            "discount": null, 
+            "discount_text": null, 
+            "order_on_receipt": 0, 
+            "pos_item_id": "5054618103177", 
+            "quantity": 0, 
+            "receipt": "ahBzfnlyZWNlaXB0cy1wcm9kchQLEgdSZWNlaXB0GICA4OeX1OcLDA", 
+            "text": "TIMI \n484TIMI", 
+            "total": 149.00, 
+            "unitprice": 0.00
+        }
+    ]
+ }</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Include all upstream parent columns into output except the one you selected to parse. By default only parsed columns from Input document is included in the output. If you wish to include all other upstream columns in the output too then check this option."
+                          expressionType="Notify"
+                          name="OutputAllUpstreamColumns">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum JSON records to fetch. Set this value to 0 for all records"
+                          expressionType="Notify"
+                          name="MaxRows">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Enter expression here to filter data.(Example:  $.Users[*].UserName ) This will fetch User names from users records"
+                          expressionType="Notify"
+                          name="Filter"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">$.SaleItem_list[*]</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Use this option to include parent properties (Non array) in the output along with Filtered Rows"
+                          expressionType="Notify"
+                          name="IncludeParentColumns">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="By default child and parent information is not included in the output if children not found for specified expression. For example if you want to extract all orders from all customers nodes then you can type $.Customers[*].Orders[*]. This will fetch all orders from all customers. By default customers records without orders wont be included in the output. If you want to include those customers where orders not found then check this option (Output null information for order attributes). This behavior is similar to LEFT OUTER JOIN in SQL (Left side is parent, right side is child). This option is ***resource intensive*** so only check if you really care about this behavior."
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWhenChildMissing">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output parent columns which are array. By default any parent column which is an array is not included in output. See also FilterForParentColumnsWithArrayType property if you set this property"
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWithArrayType">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Set this option to true if you want to output parent columns which are array. By default any parent column which is an array is not included in output. See also FilterForParentColumnsWithArrayType property if you set this property"
+                          expressionType="Notify"
+                          name="FilterForParentColumnsWithArrayType"></property>
+                        <property
+                          dataType="System.String"
+                          description="Prefix for parent column name. This option is only valid if you have set IncludeParentColumns=True"
+                          expressionType="Notify"
+                          name="ParentColumnPrefix"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Throw error if property name specified in filter expression is missing. By default it will ignore any missing property errors."
+                          expressionType="Notify"
+                          name="ThrowErrorIfPropertyMissing">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="This property how many nested levels should be scanned to fetch various properties. 0=Scan all child levels."
+                          expressionType="Notify"
+                          name="MaxLevelsToScan">0</property>
+                        <property
+                          dataType="System.String"
+                          description="List comma separated property names from JSON document which you want to exclude from output. Specify parent property name to exclude all child nodes."
+                          expressionType="Notify"
+                          name="ExcludedProperties"></property>
+                        <property
+                          dataType="System.String"
+                          description="Property level separator used in generated property name. Use this if default separator is producing duplicate property name which is conflicting with existing name."
+                          expressionType="Notify"
+                          name="LevelSeparator">_</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies how custom date formatted strings are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateFormatString"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies how date formatted strings, e.g. Date(1198908717056) and 2012-03-21T05:40Z, are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateParseHandling"
+                          typeConverter="ZappySys.Common.DateParseHandling, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">1</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Output as raw JSON document rather than parsing individual fields. This option is helpful if you have documents stored in a file and you want to pass them downstream as raw JSON string rather than parsing into columns."
+                          expressionType="Notify"
+                          name="OutputRawDocument">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indent JSON output so its easy to read."
+                          expressionType="Notify"
+                          name="IndentOutput">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this property is true then Column is converted to Row. Pivoted names will appear under  Pivot_Name column and values will appear under Pivot_Value field."
+                          expressionType="Notify"
+                          name="EnablePivot">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Array Transformation you want to apply. Useful for case when you have 2-Dimensional arrays with rows/columns in separate arrays."
+                          expressionType="Notify"
+                          name="ArrayTransformationType"
+                          typeConverter="ZappySys.Json.ArrayTransformType, ZappySys.Json, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression to use to extract column names for array transformation."
+                          expressionType="Notify"
+                          name="ArrayTransColumnNameFilter"></property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression for row values (Not applicable for simple array transformation)."
+                          expressionType="Notify"
+                          name="ArrayTransRowValueFilter"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you have 2D array but don't have column list specified in a separate array then use this option (e.g. { arr: [[10,11],[21,22]] } )."
+                          expressionType="Notify"
+                          name="ArrayTransEnableCustomColumns">false</property>
+                        <property
+                          dataType="System.String"
+                          description="When you have 2D array but don't have column list specified in a separate array then use specify column names here. Use comma separated list (e.g col1,col2,col3 ). Column name Order must match value order."
+                          expressionType="Notify"
+                          name="ArrayTransCustomColumns"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Metadata scan mode controls how data type and length is determined. By default few records scanned to determine datatype/length. Changing ScanMode affects length/datatype accuracy."
+                          expressionType="Notify"
+                          name="MetaDataScanMode"
+                          typeConverter="ZappySys.Common.Data.MetaDataScanMode, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">3</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Length for all string column. This option is only valid for MetaDataScanMode=Custom"
+                          expressionType="Notify"
+                          name="MetaDataCustomLength">1000</property>
+                        <property
+                          dataType="System.String"
+                          name="UserComponentTypeName">ZappySys.PowerPack.Transform.JsonParserTransform.JsonParserTransform, ZappySys.PowerPack110, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1903265a93eae502</property>
+                      </properties>
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Inputs[JsonParserTransformInput]"
+                          errorRowDisposition="FailComponent"
+                          name="JsonParserTransformInput"
+                          truncationRowDisposition="FailComponent">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Inputs[JsonParserTransformInput].Columns[__DOCUMENT__]"
+                              cachedDataType="nText"
+                              cachedName="__DOCUMENT__"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__DOCUMENT__]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True" />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput]"
+                          errorOrTruncationOperation="Error"
+                          errorRowDisposition="FailComponent"
+                          name="JsonParserTransformOutput"
+                          truncationRowDisposition="FailComponent">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[__key__]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[__key__]"
+                              length="110"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[__key__]"
+                              name="__key__">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[discount]"
+                              length="510"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount]"
+                              name="discount">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount_text]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[discount_text]"
+                              length="510"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount_text]"
+                              name="discount_text">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[order_on_receipt]"
+                              dataType="i8"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[order_on_receipt]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[order_on_receipt]"
+                              name="order_on_receipt">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[pos_item_id]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[pos_item_id]"
+                              length="26"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[pos_item_id]"
+                              name="pos_item_id">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[quantity]"
+                              dataType="i8"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[quantity]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[quantity]"
+                              name="quantity">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[receipt]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[receipt]"
+                              length="108"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[receipt]"
+                              name="receipt">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[text]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[text]"
+                              length="600"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[text]"
+                              name="text">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[total]"
+                              dataType="r8"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[total]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[total]"
+                              name="total">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[unitprice]"
+                              dataType="r8"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[unitprice]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[unitprice]"
+                              name="unitprice">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[__key__]"
+                              dataType="wstr"
+                              length="110"
+                              name="__key__">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[discount]"
+                              dataType="wstr"
+                              length="510"
+                              name="discount">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[discount_text]"
+                              dataType="wstr"
+                              length="510"
+                              name="discount_text">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[order_on_receipt]"
+                              dataType="i8"
+                              name="order_on_receipt">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[pos_item_id]"
+                              dataType="wstr"
+                              length="26"
+                              name="pos_item_id">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[quantity]"
+                              dataType="i8"
+                              name="quantity">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[receipt]"
+                              dataType="wstr"
+                              length="108"
+                              name="receipt">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[text]"
+                              dataType="wstr"
+                              length="26"
+                              name="text">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[total]"
+                              dataType="r8"
+                              name="total">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].ExternalColumns[unitprice]"
+                              dataType="r8"
+                              name="unitprice">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="This flag indicates column is locked so it doesn't refresh datatype automatically or column is manually added by user rather than auto detect"
+                                  expressionType="Notify"
+                                  name="ManuallyAdded">true</property>
+                              </properties>
+                            </externalMetadataColumn>
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output]"
+                          isErrorOut="true"
+                          name="JsonParserTransform Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[__key__]"
+                              dataType="wstr"
+                              length="110"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[__key__]"
+                              name="__key__" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[discount]"
+                              dataType="wstr"
+                              length="510"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[discount]"
+                              name="discount" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[discount_text]"
+                              dataType="wstr"
+                              length="510"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[discount_text]"
+                              name="discount_text" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[order_on_receipt]"
+                              dataType="i8"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[order_on_receipt]"
+                              name="order_on_receipt" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[pos_item_id]"
+                              dataType="wstr"
+                              length="26"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[pos_item_id]"
+                              name="pos_item_id" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[quantity]"
+                              dataType="i8"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[quantity]"
+                              name="quantity" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[receipt]"
+                              dataType="wstr"
+                              length="108"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[receipt]"
+                              name="receipt" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[text]"
+                              dataType="wstr"
+                              length="600"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[text]"
+                              name="text" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[total]"
+                              dataType="r8"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[total]"
+                              name="total" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[unitprice]"
+                              dataType="r8"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[unitprice]"
+                              name="unitprice" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorColumnName]"
+                              codePage="1252"
+                              dataType="str"
+                              length="128"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorColumnName]"
+                              name="ErrorColumnName" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorMessage]"
+                              dataType="wstr"
+                              length="1024"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorMessage]"
+                              name="ErrorMessage" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorRawData]"
+                              dataType="nText"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransform Error Output].Columns[ErrorRawData]"
+                              name="ErrorRawData" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File)"
+                      componentClassID="DTS.ManagedComponentWrapper.3"
+                      contactInfo="JSON Source (REST API or File); ZappySys LLC (c) All Rights Reserved; SSIS PowerPack; http://www.zappysys.com/support"
+                      description="The JSON source is used to read data from JSON files, RESTful Web Service or direct JSON String."
+                      name="JSON Source (REST API or File)"
+                      usesDispositions="true"
+                      version="25">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="LoggingMode determines how much information is logged during Package Execution. Set Logging mode to Debugging for maximum log."
+                          expressionType="Notify"
+                          name="LoggingMode"
+                          typeConverter="ZappySys.PowerPack.Common.LoggingMode, ZappySys.PowerPack90, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you enable this property it will prefix timestamp before Log messages."
+                          expressionType="Notify"
+                          name="PrefixTimestamp">false</property>
+                        <property
+                          dataType="System.Null"
+                          expressionType="Notify"
+                          name="SelfRef"
+                          typeConverter="NOTBROWSABLE" />
+                        <property
+                          dataType="System.Boolean"
+                          description="Treat empty string as NULL for any numeric datatypes"
+                          expressionType="Notify"
+                          name="TreatBlankNumberAsNull">true</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Defines how to read the JSON file or direct string"
+                          expressionType="Notify"
+                          name="AccessMode"
+                          typeConverter="ZappySys.Common.Ssis.FileValueAccessMode, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Defines how to read the JSON file or direct string"
+                          expressionType="Notify"
+                          name="DirectValue"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">\\cso-nas-02\yReceipts\Testing\0</property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which holds JSON string"
+                          expressionType="Notify"
+                          name="ValueVariable"
+                          typeConverter="ZappySys.PowerPack.Converters.VariableEditor,ZappySys.PowerPack110.UI,Version=1.0.0.0,Culture=neutral,PublicKeyToken=1903265a93eae502">$Package::JSONFileName</property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which holds data file path or url"
+                          expressionType="Notify"
+                          name="PathVariable"
+                          typeConverter="ZappySys.PowerPack.Converters.VariableEditor,ZappySys.PowerPack110.UI,Version=1.0.0.0,Culture=neutral,PublicKeyToken=1903265a93eae502">User::JSONFileNameFQ</property>
+                        <property
+                          dataType="System.String"
+                          description="JSON file file path (e.g. c:\data\myfile.json) or pattern to process multiple files (e.g. c:\data\*.json)"
+                          expressionType="Notify"
+                          name="DirectPath"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">\\cso-nas-02\yReceipts\Testing\test1.json</property>
+                        <property
+                          dataType="System.String"
+                          description="Set this if you want to set custom Http headers. You may use variable anywhere in the header value using syntax {{User::YourVarName}}. Syntax of Header key value pair is : &amp;lt;request&amp;gt;&amp;lt;header&amp;gt;&amp;lt;name&amp;gt;x-myheader-1&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;AAA&amp;lt;/value&amp;gt;&amp;lt;/header&amp;gt; &amp;lt;header&amp;gt;&amp;lt;name&amp;gt;x-myheader-2&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;BBB&amp;lt;/value&amp;gt;&amp;lt;/header&amp;gt;&amp;lt;/request&amp;gt;"
+                          expressionType="Notify"
+                          name="HttpHeaders">&lt;request&gt;&lt;header&gt;&lt;name&gt;Accept&lt;/name&gt;&lt;value&gt;*/*&lt;/value&gt;&lt;/header&gt;&lt;header&gt;&lt;name&gt;Cache-Control&lt;/name&gt;&lt;value&gt;no-cache&lt;/value&gt;&lt;/header&gt;&lt;/request&gt;</property>
+                        <property
+                          dataType="System.String"
+                          description="User defined data you wish to send along with your HTTP Request (e.g. Upload file data, Form POST data). Usually you have to set content-type of your data but if you select RequestMethod=POST then system will automatically set content-type=application/x-www-form-urlencoded."
+                          expressionType="Notify"
+                          name="HttpRequestData"></property>
+                        <property
+                          dataType="System.String"
+                          description="Http Web Request Method (e.g. POST, GET, PUT, LIST, DELETE...). Refer your API documentation if you are not sure which method you have to use."
+                          expressionType="Notify"
+                          name="HttpRequestMethod">GET</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies content type for data you wish to POST. If you select Default option then system default content type will be used (i.e. application/x-www-form-urlencoded). If you specify Content-Type header along with this option then header value takes precedence."
+                          expressionType="Notify"
+                          name="HttpRequestContentType"
+                          typeConverter="ZappySys.Common.Web.HttpRequestContentType, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Data format coming from HTTP Response. This is useful for example when you have OData service and you want to automatically consume all pages of data using odata.netUrl. Setting JsonFormat=Odata will automatically do it for you. This setting is only applicable if JSON is coming from HTTP WebRequest."
+                          expressionType="Notify"
+                          name="JsonFormat"
+                          typeConverter="ZappySys.Json.JsonFormat, ZappySys.Json, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable custom proxy settings (If this is not set then system default proxy will be used. To disable proxy totally uncheck this option and check DoNotUseDefaultProxy option if available)"
+                          expressionType="Notify"
+                          name="UseProxy">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Web URL of Proxy server (including port  if necessary). [e.g. http://myproxyserver:8080/]"
+                          expressionType="Notify"
+                          name="ProxyUrl"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable passing userid and password to proxy server"
+                          expressionType="Notify"
+                          name="UseProxyCreds">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Proxy username"
+                          expressionType="Notify"
+                          name="ProxyUserName"></property>
+                        <property
+                          dataType="System.String"
+                          description="Proxy password"
+                          expressionType="Notify"
+                          name="ProxyPassword"></property>
+                        <property
+                          dataType="System.String"
+                          description="If Service response support pagination using some sort of next url attribute then specify which attribute name in JSON Response string which holds next url. If no attribute found or its null then component will stop fetching next resultset"
+                          expressionType="Notify"
+                          name="NextUrlAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="If Service response support pagination using some sort of prev/next url attribute then specify which previous link attribute name from JSON Response string which holds previous url."
+                          expressionType="Notify"
+                          name="PrevUrlAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies value for NextUrlAttribute or StopIndicatorAttribute which indicates last page to stop pagination. If you have specified StopIndicatorAttribute then you can use Regular expression rather than static value to indicate last page. To use regular expression value of this property must start with regex= prefix. Example : regex=FALSE|N  (assuming you set StopIndicatorAttribute to something like $.hasMore)"
+                          expressionType="Notify"
+                          name="NextUrlStopIndicator"></property>
+                        <property
+                          dataType="System.String"
+                          description="Attribute name or expression for attribute which can be used as stop indicator (e.g. hasmore --or-- $.pagination.hasmore). If this value is blank then NextUrlAttribute is used"
+                          expressionType="Notify"
+                          name="StopIndicatorAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="If you want to include certain text (or parameters) at the end of Next url then specify this attribute (e.g. &amp;format=json)"
+                          expressionType="Notify"
+                          name="NextUrlSuffix"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="This property indicates total number of milliseconds you want to wait before sending next request. This option allows you to adjust how many API calls can be made within certain timeframe. If your API Service has no limit then set this option to zero"
+                          expressionType="Notify"
+                          name="NextUrlWait">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="If this option is true then component will continue without exception on 404 error (Url not found). This allows you to consume data gracefully."
+                          expressionType="Notify"
+                          name="ContinueOnUrlNotFoundError">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Cookie Container can be used to maintain state between multiple web requests. Example: You can login to site like wordpress and then extract any private page content by simply passing authentication cookies using this variable."
+                          expressionType="Notify"
+                          name="CookieContainerVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Http request Timeout in seconds. Set this to 0 if you want to use system default value (i.e. 100 seconds)"
+                          expressionType="Notify"
+                          name="RequestTimeout">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies which security protocol is supported for HTTPS communication. Using this option you can enable legacy protocol or enforce to use latest version of security protocol (Note: TLS 1.2 is only supported in SSIS 2014 or Higher)."
+                          expressionType="Notify"
+                          name="SecurityProtocol"
+                          typeConverter="ZappySys.PowerPack.Common.HttpsSecurityProtocolType, ZappySys.PowerPack90, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable support for gzip or deflate compression. When you check this option compressed response automatically de-compressed saving bandwidth. This option is only valid if web server supports compressed response stream. Check your API documentation for more information."
+                          expressionType="Notify"
+                          name="EnableCompressionSupport">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Ignore SSL certificate related errors. Example: if you getting SSL/TLS errors because of certificate expired or certificate is not from trusted authority or certificate is self-signed. By checking this option you will not get SSL/TLS error."
+                          expressionType="Notify"
+                          name="IgnoreCertificateErrors">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Use connection to pass credentials for authentication (e.g. Use UserID/Password or Use OAuth Protocol for token based approach)"
+                          expressionType="Notify"
+                          name="UseConnection">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specified how you want to loop through multiple pages returned by REST API."
+                          expressionType="Notify"
+                          name="PagingMode"
+                          typeConverter="ZappySys.Common.RestApiPagingMode, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.String"
+                          description="e.g. Type page_num if URL looks like this =&gt; http://abc.com/?page_num=1&amp;sort=true  (page number via query string)&#xA;--or-- Type &lt;%page%&gt; if page number is inside URL path like this =&gt; http://abc.com/1/?sort=true  (e.g. replace page number in url with placeholder http://abc.com/&lt;%page%&gt;/?sort=true)&#xA;Page number will be incremented by one for next URL until last page is reached or [Max Page Number] is reached"
+                          expressionType="Notify"
+                          name="PageNumberAttributeNameInUrl"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum page number until which auto increment is allowed. Type zero for no limit. Next URL contains next page number (increment by one) until last page is detected or [Max Page Number] limit is reached."
+                          expressionType="Notify"
+                          name="MaxPageNumber">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which will hold starting page number. This is ignored if you useing parameter name from query string to indicate page number."
+                          expressionType="Notify"
+                          name="StartPageNumberVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Page counter increment. By default next page is incremented by one if this value is zero. You can also enter negative number if you want to decrease page counter."
+                          expressionType="Notify"
+                          name="PageNumberIncrement">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specified how you want detect last page."
+                          expressionType="Notify"
+                          name="PagingEndStrategy"
+                          typeConverter="ZappySys.Common.UrlPagingEndDetectionStrategy, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Condition result to compare to detect last page. Set this property to True if you want detect last page if condition is true else set this to False."
+                          expressionType="Notify"
+                          name="LastPageWhenConditionEqualsTo">true</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Minimum bytes expected from response."
+                          expressionType="Notify"
+                          name="ResponseMinBytes">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum bytes from response."
+                          expressionType="Notify"
+                          name="ResponseMaxBytes">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Expected error message sub string from response."
+                          expressionType="Notify"
+                          name="ResponseErrorString">not found</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Expected status code from response when page number you trying to access not found."
+                          expressionType="Notify"
+                          name="ResponseStatusCode">404</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum JSON records to fetch. Set this value to 0 for all records"
+                          expressionType="Notify"
+                          name="MaxRows">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Enter expression here to filter data.(Example:  $.Users[*].UserName ) This will fetch User names from users records"
+                          expressionType="Notify"
+                          name="Filter"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Use this option to include parent properties (Non array) in the output along with Filtered Rows"
+                          expressionType="Notify"
+                          name="IncludeParentColumns">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="By default child and parent information is not included in the output if children not found for specified expression. For example if you want to extract all orders from all customers nodes then you can type $.Customers[*].Orders[*]. This will fetch all orders from all customers. By default customers records without orders wont be included in the output. If you want to include those customers where orders not found then check this option (Output null information for order attributes). This behavior is similar to LEFT OUTER JOIN in SQL (Left side is parent, right side is child). This option is ***resource intensive*** so only check if you really care about this behavior."
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWhenChildMissing">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output parent columns which are array. By default any parent column which is an array is not included in output. See also FilterForParentColumnsWithArrayType property if you set this property"
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWithArrayType">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Set this option to true if you want to output parent columns which are array. By default any parent column which is an array is not included in output. See also FilterForParentColumnsWithArrayType property if you set this property"
+                          expressionType="Notify"
+                          name="FilterForParentColumnsWithArrayType"></property>
+                        <property
+                          dataType="System.String"
+                          description="Prefix for parent column name. This option is only valid if you have set IncludeParentColumns=True"
+                          expressionType="Notify"
+                          name="ParentColumnPrefix">P_</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Throw error if property name specified in filter expression is missing. By default it will ignore any missing property errors."
+                          expressionType="Notify"
+                          name="ThrowErrorIfPropertyMissing">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="This property how many nested levels should be scanned to fetch various properties. 0=Scan all child levels."
+                          expressionType="Notify"
+                          name="MaxLevelsToScan">0</property>
+                        <property
+                          dataType="System.String"
+                          description="List comma separated property names from JSON document which you want to exclude from output. Specify parent property name to exclude all child nodes."
+                          expressionType="Notify"
+                          name="ExcludedProperties"></property>
+                        <property
+                          dataType="System.String"
+                          description="Property level separator used in generated property name. Use this if default separator is producing duplicate property name which is conflicting with existing name."
+                          expressionType="Notify"
+                          name="LevelSeparator">_</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Compression format for source file (e.g. gzip, zip)"
+                          expressionType="Notify"
+                          name="FileCompressionType"
+                          typeConverter="ZappySys.Common.FileCompressionType, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Array Transformation you want to apply. Useful for case when you have 2-Dimensional arrays with rows/columns in separate arrays."
+                          expressionType="Notify"
+                          name="ArrayTransformationType"
+                          typeConverter="ZappySys.Json.ArrayTransformType, ZappySys.Json, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression to use to extract column names for array transformation."
+                          expressionType="Notify"
+                          name="ArrayTransColumnNameFilter"></property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression for row values (Not applicable for simple array transformation)."
+                          expressionType="Notify"
+                          name="ArrayTransRowValueFilter"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you have 2D array but don't have column list specified in a separate array then use this option (e.g. { arr: [[10,11],[21,22]] } )."
+                          expressionType="Notify"
+                          name="ArrayTransEnableCustomColumns">false</property>
+                        <property
+                          dataType="System.String"
+                          description="When you have 2D array but don't have column list specified in a separate array then use specify column names here. Use comma separated list (e.g col1,col2,col3 ). Column name Order must match value order."
+                          expressionType="Notify"
+                          name="ArrayTransCustomColumns"></property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies how custom date formatted strings are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateFormatString"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies how date formatted strings, e.g. Date(1198908717056) and 2012-03-21T05:40Z, are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateParseHandling"
+                          typeConverter="ZappySys.Common.DateParseHandling, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">1</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Output as raw JSON document rather than parsing individual fields. This option is helpful if you have documents stored in a file and you want to pass them downstream as raw JSON string rather than parsing into columns."
+                          expressionType="Notify"
+                          name="OutputRawDocument">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indent JSON output so its easy to read."
+                          expressionType="Notify"
+                          name="IndentOutput">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output FilePath. This option is ignored when you consume DirectValue or data from Url rather than local files. Output column name will be __FilePath"
+                          expressionType="Notify"
+                          name="OutputFilePath">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output FileName. This option is ignored when you consume DirectValue or data from Url rather than local files. Output column name will be __FileName"
+                          expressionType="Notify"
+                          name="OutputFileName">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to move processed file to archive folder."
+                          expressionType="Notify"
+                          name="EnableArchiveFile">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Folder path where you want to move processed file."
+                          expressionType="Notify"
+                          name="ArchiveFolderPath"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Folder path where you want to move processed file."
+                          expressionType="Notify"
+                          name="OverwriteFileInArchiveFolder">false</property>
+                        <property
+                          dataType="System.String"
+                          description="File naming convention for archived file. By default it will same name as original source file processed. But you can control naming format using {%name%} and {%ext%} placeholders. e.g. {%name%}_processed{%ext%} or {%name%}{%ext%}.{{System::ContainerStartTime,yyyyMMdd_HHmmss_fff}}"
+                          expressionType="Notify"
+                          name="ArchiveFileNamingConvention"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this property is true then Column is converted to Row. Pivoted names will appear under  Pivot_Name column and values will appear under Pivot_Value field."
+                          expressionType="Notify"
+                          name="EnablePivot">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Metadata scan mode controls how data type and length is determined. By default few records scanned to determine datatype/length. Changing ScanMode affects length/datatype accuracy."
+                          expressionType="Notify"
+                          name="MetaDataScanMode"
+                          typeConverter="ZappySys.Common.Data.MetaDataScanMode, ZappySys.Common, Version=1.0.2017.11220, Culture=neutral, PublicKeyToken=1903265a93eae502">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Length for all string column. This option is only valid for MetaDataScanMode=Custom"
+                          expressionType="Notify"
+                          name="MetaDataCustomLength">1000</property>
+                        <property
+                          dataType="System.String"
+                          name="UserComponentTypeName">ZappySys.PowerPack.Adapter.JsonSource.JsonSource, ZappySys.PowerPack110, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1903265a93eae502</property>
+                      </properties>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput]"
+                          errorOrTruncationOperation="Error"
+                          errorRowDisposition="FailComponent"
+                          name="JsonSourceOutput"
+                          truncationRowDisposition="FailComponent">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__DOCUMENT__]"
+                              dataType="nText"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[__DOCUMENT__]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__DOCUMENT__]"
+                              name="__DOCUMENT__" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__FileName]"
+                              dataType="wstr"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[__FileName]"
+                              length="150"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[__FileName]"
+                              name="__FileName" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[__DOCUMENT__]"
+                              dataType="nText"
+                              name="__DOCUMENT__" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[__FileName]"
+                              dataType="wstr"
+                              length="150"
+                              name="__FileName" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output]"
+                          isErrorOut="true"
+                          name="JsonSource Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[__DOCUMENT__]"
+                              dataType="nText"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[__DOCUMENT__]"
+                              name="__DOCUMENT__" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[__FileName]"
+                              dataType="wstr"
+                              length="150"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[__FileName]"
+                              name="__FileName" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumnName]"
+                              codePage="1252"
+                              dataType="str"
+                              length="128"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumnName]"
+                              name="ErrorColumnName" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorMessage]"
+                              dataType="wstr"
+                              length="1024"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorMessage]"
+                              name="ErrorMessage" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast"
+                      componentClassID="DTSTransform.Multicast.3"
+                      contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+                      name="Multicast">
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Inputs[Multicast Input 1]"
+                          name="Multicast Input 1">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Outputs[Multicast Output 1]"
+                          deleteOutputOnPathDetached="true"
+                          name="Multicast Output 1"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Inputs[Multicast Input 1]">
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Outputs[Multicast Output 2]"
+                          deleteOutputOnPathDetached="true"
+                          name="Multicast Output 2"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Inputs[Multicast Input 1]">
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Outputs[Multicast Output 3]"
+                          dangling="true"
+                          deleteOutputOnPathDetached="true"
+                          name="Multicast Output 3"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Inputs[Multicast Input 1]">
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line"
+                      componentClassID="DTSAdapter.OLEDBDestination.3"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="Receipt_Order_Line"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[Receipt_Order_Line]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[BISDW-CL01.Dune_DataInsights]"
+                          connectionManagerRefId="Package.ConnectionManagers[BISDW-CL01.Dune_DataInsights]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[discount]"
+                              cachedDataType="wstr"
+                              cachedLength="510"
+                              cachedName="discount"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[discount]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[order_on_receipt]"
+                              cachedDataType="i8"
+                              cachedName="order_on_receipt"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[order_on_receipt]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[order_on_receipt]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[quantity]"
+                              cachedDataType="i8"
+                              cachedName="quantity"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[quantity]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[total]"
+                              cachedDataType="r8"
+                              cachedName="total"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[total]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[total]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[unitprice]"
+                              cachedDataType="r8"
+                              cachedName="unitprice"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[unitprice]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput].Columns[unitprice]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[New_discount_text]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="510"
+                              cachedName="New_discount_text"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Discount_Text]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_discount_text]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[New_pos_item_id]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="26"
+                              cachedName="New_pos_item_id"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[pos_item_id]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_pos_item_id]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[New_receipt]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="110"
+                              cachedName="New_receipt"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[receipt]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_receipt]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[New_text]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="600"
+                              cachedName="New_text"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[text]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New_text]" />
+                            <inputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].Columns[New__key__]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="110"
+                              cachedName="New__key__"
+                              externalMetadataColumnId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[ReceiptKey]"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output].Columns[New__key__]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                              dataType="i4"
+                              name="id" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[ReceiptKey]"
+                              codePage="1252"
+                              dataType="str"
+                              length="250"
+                              name="ReceiptKey" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                              dataType="numeric"
+                              name="Discount"
+                              precision="18"
+                              scale="9" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Discount_Text]"
+                              codePage="1252"
+                              dataType="str"
+                              length="600"
+                              name="Discount_Text" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Footer]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="Footer" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[Header]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="Header" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[order_on_receipt]"
+                              dataType="i4"
+                              name="order_on_receipt" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[pos_item_id]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="pos_item_id" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                              dataType="i4"
+                              name="quantity" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[receipt]"
+                              codePage="1252"
+                              dataType="str"
+                              length="110"
+                              name="receipt" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[regularprice]"
+                              dataType="numeric"
+                              name="regularprice"
+                              precision="18"
+                              scale="9" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[sale_block_marker]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="sale_block_marker" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[text]"
+                              codePage="1252"
+                              dataType="str"
+                              length="600"
+                              name="text" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[total]"
+                              dataType="numeric"
+                              name="total"
+                              precision="18"
+                              scale="9" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[unitprice]"
+                              dataType="numeric"
+                              name="unitprice"
+                              precision="18"
+                              scale="9" />
+                            <externalMetadataColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input].ExternalColumns[type]"
+                              codePage="1252"
+                              dataType="str"
+                              length="500"
+                              name="type" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Data Conversion Output]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line.Inputs[OLE DB Destination Input]"
+                      name="Data Conversion Output"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Outputs[Data Conversion Output]" />
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Data Conversion Output1]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed.Inputs[OLE DB Destination Input]"
+                      name="Data Conversion Output"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Outputs[Data Conversion Output]" />
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[JsonParserTransformOutput]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion.Inputs[Data Conversion Input]"
+                      name="JsonParserTransformOutput"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Outputs[JsonParserTransformOutput]" />
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[JsonSourceOutput]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Inputs[Multicast Input 1]"
+                      name="JsonSourceOutput"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File).Outputs[JsonSourceOutput]" />
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Multicast Output 1]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform.Inputs[JsonParserTransformInput]"
+                      name="Multicast Output 1"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Outputs[Multicast Output 1]" />
+                    <path
+                      refId="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Multicast Output 2]"
+                      endId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name.Inputs[Data Conversion Input]"
+                      name="Multicast Output 2"
+                      startId="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast.Outputs[Multicast Output 2]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Get Each zip file\Get each JSON File.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{6048DEC2-C516-4C2F-9FCC-717F78A48FD4}"
+              DTS:From="Package\Get Each zip file\Get each JSON File\Load JSON File Data"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Get Each zip file\Get each JSON File\Delete Processed JSON File" />
+          </DTS:PrecedenceConstraints>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{89924DD1-D699-4088-8766-926FE17B87B0}"
+              DTS:ObjectName="{89924DD1-D699-4088-8766-926FE17B87B0}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::JSONFName" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Get Each zip file\Move Zip File to JSON Files"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{83E7EF75-10CE-4463-A813-57E69DFFA63E}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move Zip File to JSON Files"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskSourcePath="User::ZipFileName"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="JSON Files" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get Each zip file.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{7D423AD7-A87C-40A6-9816-5CA3EB4F249D}"
+          DTS:From="Package\Get Each zip file\Move Zip File to JSON Files"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Get Each zip file\Extract files from Zip File" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Get Each zip file.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{B6173832-FFE9-4A2A-A33B-F430D4F45281}"
+          DTS:From="Package\Get Each zip file\Extract files from Zip File"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Get Each zip file\Get each JSON File" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{4258AA55-B45A-49A9-8E32-6C42F0370DCB}"
+          DTS:ObjectName="{4258AA55-B45A-49A9-8E32-6C42F0370DCB}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::ZipFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC7D81C8-DFAE-48CC-853C-285476088BD1}"
+      DTS:From="Package\Get Each zip file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Email Error Occured"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Get Each zip file\Extract files from Zip File"
+          TopLeft="128,103" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Get Each zip file\Get each JSON File\Delete Processed JSON File"
+          TopLeft="66,161" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data"
+          TopLeft="84,63" />
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File.PrecedenceConstraints[Constraint]"
+          TopLeft="171.5,105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="374,262"
+          Size="374,305"
+          Id="Package\Get Each zip file\Get each JSON File"
+          TopLeft="43,232" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Get Each zip file\Move Zip File to JSON Files"
+          TopLeft="130,22" />
+        <EdgeLayout
+          Id="Package\Get Each zip file.PrecedenceConstraints[Constraint]"
+          TopLeft="230.5,64">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file.PrecedenceConstraints[Constraint 1]"
+          TopLeft="228.5,145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,87"
+              Start="0,0"
+              End="0,79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Daily Load of Y Receipt JSON Files"
+          ParentId="Package\Get Each zip file"
+          FontInfo="{assembly:Null}"
+          Size="211,42"
+          Id="61094fa7-aa41-44f9-8ba9-2dae3fee3c1c"
+          TopLeft="347,29" />
+        <AnnotationLayout
+          Text="This Package is called from SQl Agent Job"
+          ParentId="Package\Get Each zip file"
+          FontInfo="{assembly:Null}"
+          Size="252,42"
+          Id="fb1f77cd-5e7a-48fe-b8b3-06f7b83ca13d"
+          TopLeft="345,68" />
+        <AnnotationLayout
+          Text="Data Insights Daily Y Receipt Data"
+          ParentId="Package\Get Each zip file"
+          FontInfo="{assembly:Null}"
+          Size="210,42"
+          Id="22ad35c4-8d6e-4899-aa7d-96f6fe680c56"
+          TopLeft="347,107" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="602,655"
+          Size="602,698"
+          Id="Package\Get Each zip file"
+          TopLeft="63,37" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Email Error Occured\Error Email to DataInsight Team"
+          TopLeft="14,80" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="261,254"
+          Size="261,297"
+          Id="Package\Email Error Occured"
+          TopLeft="819,233" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="665,383.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="154,0"
+              Start="0,0"
+              End="146.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="146.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="58.00865234375,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get Each zip file\Get each JSON File\Load JSON File Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Multicast"
+          TopLeft="260,161" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Source (REST API or File)"
+          TopLeft="206.5,38.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Data Conversion"
+          TopLeft="232,466" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\JSON Parser Transform"
+          TopLeft="220,271" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed"
+          TopLeft="744,238" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line"
+          TopLeft="228,573" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Convert File Name"
+          TopLeft="469,237" />
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Multicast Output 2]"
+          TopLeft="340,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="212.5,34"
+              Start="0,0"
+              End="212.5,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.86407766990291" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.86407766990291"
+                    Point2="0,13.8640776699029"
+                    Point3="4,13.8640776699029" />
+                  <mssgle:LineSegment
+                    End="208.5,13.8640776699029" />
+                  <mssgle:CubicBezierSegment
+                    Point1="208.5,13.8640776699029"
+                    Point2="212.5,13.8640776699029"
+                    Point3="212.5,17.8640776699029" />
+                  <mssgle:LineSegment
+                    End="212.5,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Multicast Output 1]"
+          TopLeft="318.25,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[JsonSourceOutput]"
+          TopLeft="321.25,80.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80.5"
+              Start="0,0"
+              End="0,73">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[JsonParserTransformOutput]"
+          TopLeft="313.25,313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,153"
+              Start="0,0"
+              End="0,145.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,145.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Data Conversion Output1]"
+          TopLeft="636,258.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108,0"
+              Start="0,0"
+              End="100.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="100.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Each zip file\Get each JSON File\Load JSON File Data.Paths[Data Conversion Output]"
+          TopLeft="312.75,508">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Each zip file\Get each JSON File\Load JSON File Data\DataProcessed">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Each zip file\Get each JSON File\Load JSON File Data\Receipt_Order_Line">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

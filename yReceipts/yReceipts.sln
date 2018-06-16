@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "yReceipts", "yReceipts\yReceipts.dtproj", "{1B6D0A06-D11D-4972-9785-AE70DA6BB147}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B6D0A06-D11D-4972-9785-AE70DA6BB147}.Development|Default.ActiveCfg = Development
+		{1B6D0A06-D11D-4972-9785-AE70DA6BB147}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

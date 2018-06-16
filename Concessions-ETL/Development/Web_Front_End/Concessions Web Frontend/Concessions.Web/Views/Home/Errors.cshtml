@@ -1,0 +1,31 @@
+﻿@using Concessions.Web.Models;
+@model IQueryable<SSISPackageLogDetailErrorRecord>
+@{
+    ViewBag.Title = "Concessions Portal - Row Level Errors";
+
+    SSISPackageLogDetail detail = Model.First().SSISPackageLogDetail;
+}
+
+<h2 class="alt">Errors</h2>
+
+<div class="span-24 last">    
+    @Html.ActionLink(@detail.TaskName, "Details", new { controller = "Home", id = @detail.SSISPackageLogID}) (@detail.SSISPackageLogResultType.ResultTypeName) <span class="quiet small">@JW.TimeOnly(Convert.ToDateTime(@detail.StartTime)) - @JW.TimeOnly(Convert.ToDateTime(@detail.EndTime))</span>
+</div>
+<div class="span-24 last">
+    <table id="etlTable" class="noHover">
+        <thead>
+            <tr>
+                <th>Error Record</th>
+                <th>Row Number</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var error in Model) {
+            <tr id="@error.SSISPackageLogDetailErrorRecordId" >
+                <td class="errorRows">@error.ErrorRecord</td>
+                <td class="errorRows">@error.RowNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

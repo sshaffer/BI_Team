@@ -1,0 +1,1795 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/23/2015 1:11:58 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="GS1-DEV-01"
+  DTS:CreatorName="DUNE\prowley"
+  DTS:DTSID="{732DC18D-9400-41C1-AB76-7A1BBEB1083A}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.3436.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Intake_Reconciliation"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="129"
+  DTS:VersionGUID="{C6E22645-331D-433D-B179-303FC915296A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Intake_FileCheck]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{6DB6F736-31B2-4DB2-97B6-8C4C72E3CEC0}"
+      DTS:ObjectName="Intake_FileCheck">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DATE"
+              DTS:DTSID="{C6A202B9-76A1-42AB-9BE5-779FD4F6EE03}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STORE"
+              DTS:DTSID="{E1580641-7BEE-4BC2-9102-725D622A2379}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM"
+              DTS:DTSID="{4AAE8A9A-1A7B-4198-8E36-B836E157D958}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QTY"
+              DTS:DTSID="{46C01F19-FAE7-4858-A6E1-8A614E3BCCCE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_COST"
+              DTS:DTSID="{548CAF6B-76D5-45F5-8505-E9DE64A082E3}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[StoreFileCheck]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{3DF464C7-0623-415E-A6C4-02BBAAA32018}"
+      DTS:ObjectName="StoreFileCheck">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_DATE"
+              DTS:DTSID="{519F5A8F-330C-4FEE-B71E-4BF1099B1C9E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_TIME"
+              DTS:DTSID="{0A66D565-ADE7-4A96-8163-AD16EAA549B0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STORE"
+              DTS:DTSID="{FF695E49-8A81-495C-9264-F5DA1FCD9C90}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM"
+              DTS:DTSID="{B1C30467-8F5A-4CB6-A657-725277F95E02}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_QTY"
+              DTS:DTSID="{411B694F-F341-4963-9FB3-81ED726BF720}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UNIT_PRICE"
+              DTS:DTSID="{9AFEC71B-466B-4E24-95A0-579E60CBBA05}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DISCOUNT_VALUE"
+              DTS:DTSID="{3D5B9EA2-E977-48D7-AA63-9214AA791E64}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FP_MD"
+              DTS:DTSID="{057F61AE-417D-44C7-BA2A-F4CAB208911C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_RETURN"
+              DTS:DTSID="{83413770-E330-4770-9622-B9C933F1E362}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_COST"
+              DTS:DTSID="{0C5BD5F6-08B8-41F3-B575-A5AA29484B94}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8226AED3-2A42-46CB-82D6-B0E1A27C5A50}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Calendar_Dim_Id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{65BA5CC3-E837-4ED0-A897-7FFD06D735F6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{454EB78D-4E51-4624-AACE-4C269BD43916}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportDate">
+      <DTS:VariableValue
+        DTS:DataType="7">5/6/2015 11:39:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Import Intake File"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{67BDC997-397A-425E-B6C2-754C7690340A}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Import Intake File">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Import Intake File\Intake File"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{8DC1FFE5-4DCB-4520-BABA-5B3608892865}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Intake File">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="DTS.ForEachFileEnumerator.3"
+            DTS:DTSID="{17E331D2-79C9-40A4-8CA6-89FE86435F13}"
+            DTS:ObjectName="{17E331D2-79C9-40A4-8CA6-89FE86435F13}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[$Project::Apparel_Source_Folder]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\GS1-bisdw-01\u$\apparel\source\" />
+                <FEFEProperty
+                  FileSpec="IN_*.csv" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Import Intake File\Intake File\Import Intake File"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{79E0FEBF-97EF-413D-8C1B-59067F07CA0B}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Import Intake File"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column"
+                      componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                      contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                      name="Derived Column"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Inputs[Derived Column Input]"
+                          description="Input to the Derived Column Transformation"
+                          name="Derived Column Input">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output]"
+                          description="Default Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          name="Derived Column Output"
+                          synchronousInputId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="150"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[FILE_NAME]"
+                              name="FILE_NAME"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">(DT_STR,150,1252)@[User::FileName]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,150,1252)@[User::FileName]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[IMPORT_DATE]"
+                              dataType="date"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[IMPORT_DATE]"
+                              name="IMPORT_DATE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">@[User::ImportDate]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">@[User::ImportDate]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[Import_Calendar_Dim_Id]"
+                              name="Import_Calendar_Dim_Id"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">@[User::Calendar_Dim_Id]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">@[User::Calendar_Dim_Id]</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Error Output]"
+                          description="Error Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Derived Column Error Output"
+                          synchronousInputId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile"
+                      componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                      contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Flat File Source"
+                      localeId="2057"
+                      name="IntakeFile"
+                      usesDispositions="true"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Specifies whether zero-length columns are treated as null."
+                          name="RetainNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                          name="FileNameColumnName"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Connections[FlatFileConnection]"
+                          connectionManagerID="Package.ConnectionManagers[Intake_FileCheck]"
+                          connectionManagerRefId="Package.ConnectionManagers[Intake_FileCheck]"
+                          name="FlatFileConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output]"
+                          name="Flat File Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[DATE]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[DATE]"
+                              name="DATE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[STORE]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[STORE]"
+                              name="STORE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[ITEM]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM]"
+                              name="ITEM"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[QTY]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[QTY]"
+                              name="QTY"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[ITEM_COST]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM_COST]"
+                              name="ITEM_COST"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].ExternalColumns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM_COST" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output]"
+                          isErrorOut="true"
+                          name="Flat File Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              codePage="1252"
+                              dataType="text"
+                              description="Flat File Source Error Output Column"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              name="Flat File Source Error Output Column" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check"
+                      componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="Stage_Intake_Check"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[Stage_IntakeCheck]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Connections[OleDbConnection]"
+                          connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          connectionManagerRefId="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[DATE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="DATE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[DATE]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[DATE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[STORE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="STORE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[STORE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[ITEM]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ITEM"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[QTY]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="QTY"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[QTY]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[QTY]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[ITEM_COST]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ITEM_COST"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[ITEM_COST]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output].Columns[ITEM_COST]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[FILE_NAME]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="150"
+                              cachedName="FILE_NAME"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[FILE_NAME]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[FILE_NAME]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[IMPORT_DATE]"
+                              cachedDataType="date"
+                              cachedName="IMPORT_DATE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[IMPORT_DATE]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[IMPORT_DATE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].Columns[Import_Calendar_Dim_Id]"
+                              cachedDataType="i4"
+                              cachedName="Import_Calendar_Dim_Id"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[Import_Calendar_Dim_Id]"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output].Columns[Import_Calendar_Dim_Id]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM_COST" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              name="FILE_NAME" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[IMPORT_DATE]"
+                              dataType="dbTimeStamp"
+                              name="IMPORT_DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input].ExternalColumns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              name="Import_Calendar_Dim_Id" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Import Intake File\Intake File\Import Intake File.Paths[Derived Column Output]"
+                      endId="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check.Inputs[OLE DB Destination Input]"
+                      name="Derived Column Output"
+                      startId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Outputs[Derived Column Output]" />
+                    <path
+                      refId="Package\Import Intake File\Intake File\Import Intake File.Paths[Flat File Source Output]"
+                      endId="Package\Import Intake File\Intake File\Import Intake File\Derived Column.Inputs[Derived Column Input]"
+                      name="Flat File Source Output"
+                      startId="Package\Import Intake File\Intake File\Import Intake File\IntakeFile.Outputs[Flat File Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import Intake File\Intake File\Load to View"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{A47530EA-D5D1-4917-A93E-E98C7DD22983}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load to View"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck"
+                      componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="FF_IntakeCheck"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[FF_IntakeCheck]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Connections[OleDbConnection]"
+                          connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          connectionManagerRefId="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[DATE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="DATE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[DATE]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[DATE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[STORE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="STORE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[STORE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[ITEM]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ITEM"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[QTY]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="QTY"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[QTY]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[QTY]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[ITEM_COST]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ITEM_COST"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[ITEM_COST]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM_COST]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[FILE_NAME]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="150"
+                              cachedName="FILE_NAME"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[FILE_NAME]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[FILE_NAME]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[IMPORT_DATE]"
+                              cachedDataType="dbTimeStamp"
+                              cachedName="IMPORT_DATE"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[IMPORT_DATE]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[IMPORT_DATE]" />
+                            <inputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].Columns[Import_Calendar_Dim_Id]"
+                              cachedDataType="i4"
+                              cachedName="Import_Calendar_Dim_Id"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[Import_Calendar_Dim_Id]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[Import_Calendar_Dim_Id]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM_COST" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              name="FILE_NAME" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[IMPORT_DATE]"
+                              dataType="dbTimeStamp"
+                              name="IMPORT_DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input].ExternalColumns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              name="Import_Calendar_Dim_Id" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck"
+                      componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                      contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                      description="OLE DB Source"
+                      name="Stage_InTakeCheck"
+                      usesDispositions="true"
+                      version="7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[Stage_IntakeCheck]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="The variable that contains the SQL command to be executed."
+                          name="SqlCommandVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">0</property>
+                        <property
+                          dataType="System.String"
+                          description="The mappings between the parameters in the SQL command and variables."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Connections[OleDbConnection]"
+                          connectionManagerID="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          connectionManagerRefId="{72F5967A-8223-4502-A6E2-F416BB590DF9}:invalid"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output]"
+                          name="OLE DB Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[DATE]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[DATE]"
+                              name="DATE"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[STORE]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[STORE]"
+                              name="STORE"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[ITEM]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM]"
+                              name="ITEM"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[QTY]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[QTY]"
+                              name="QTY"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[ITEM_COST]"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[ITEM_COST]"
+                              name="ITEM_COST"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[FILE_NAME]"
+                              length="150"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[FILE_NAME]"
+                              name="FILE_NAME"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[IMPORT_DATE]"
+                              dataType="dbTimeStamp"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[IMPORT_DATE]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[IMPORT_DATE]"
+                              name="IMPORT_DATE"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[Import_Calendar_Dim_Id]"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].Columns[Import_Calendar_Dim_Id]"
+                              name="Import_Calendar_Dim_Id"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM_COST" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              name="FILE_NAME" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[IMPORT_DATE]"
+                              dataType="dbTimeStamp"
+                              name="IMPORT_DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output].ExternalColumns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              name="Import_Calendar_Dim_Id" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output]"
+                          isErrorOut="true"
+                          name="OLE DB Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[DATE]"
+                              name="DATE" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[STORE]"
+                              name="STORE" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ITEM]"
+                              name="ITEM" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[QTY]"
+                              name="QTY" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ITEM_COST]"
+                              name="ITEM_COST" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[FILE_NAME]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[FILE_NAME]"
+                              name="FILE_NAME" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[IMPORT_DATE]"
+                              dataType="dbTimeStamp"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[IMPORT_DATE]"
+                              name="IMPORT_DATE" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[Import_Calendar_Dim_Id]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[Import_Calendar_Dim_Id]"
+                              name="Import_Calendar_Dim_Id" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Import Intake File\Intake File\Load to View.Paths[OLE DB Source Output]"
+                      endId="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck.Inputs[OLE DB Destination Input]"
+                      name="OLE DB Source Output"
+                      startId="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck.Outputs[OLE DB Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import Intake File\Intake File.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{E0FE756F-6795-4267-ABAD-2A0D5BB48041}"
+              DTS:From="Package\Import Intake File\Intake File\Import Intake File"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Import Intake File\Intake File\Load to View" />
+          </DTS:PrecedenceConstraints>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{F94CDC01-A981-4885-989E-F5FFB82C5C4B}"
+              DTS:ObjectName="{F94CDC01-A981-4885-989E-F5FFB82C5C4B}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::FileName" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Import Intake File\Truncate Staging Table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{399A0E42-0560-40F6-8BEF-A469C1C0BA96}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Staging Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{72F5967A-8223-4502-A6E2-F416BB590DF9}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE Stage_IntakeCheck" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Import Intake File.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6F33496A-6F58-4B7C-940C-64C9EE20AA94}"
+          DTS:From="Package\Import Intake File\Truncate Staging Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Import Intake File\Intake File" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preserve previous sales history"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{0BF5612E-D98F-4358-ACA1-1C74929CF24B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preserve previous sales history">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Preserve previous sales history\GetCalendarDimId"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E5EBC7C3-6605-43AE-B150-358CE9D44A8D}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="GetCalendarDimId"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="SELECT DISTINCT Calendar_Dim_Id from Dune_Data_Warehouse.dbo.BIS_Calendar_DIM where Calendar_Date = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Calendar_Dim_Id" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ImportDate"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Preserve previous sales history\ImportDate"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{345118E6-F259-4D69-A79A-D5186B4861CC}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ImportDate"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="SELECT CONVERT(DATE,GETDATE())"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::ImportDate" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Preserve previous sales history.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{06016605-C748-4BE6-9502-1BD31751690B}"
+          DTS:From="Package\Preserve previous sales history\ImportDate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Preserve previous sales history\GetCalendarDimId" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{740FCDB5-D290-4829-8666-6F056A901E0F}"
+      DTS:From="Package\Preserve previous sales history"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Import Intake File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Import Intake File\Intake File\Import Intake File"
+          TopLeft="9.5,31.5" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Import Intake File\Intake File\Load to View"
+          TopLeft="22,97" />
+        <EdgeLayout
+          Id="Package\Import Intake File\Intake File.PrecedenceConstraints[Constraint]"
+          TopLeft="92.75,73.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.5"
+              Start="0,0"
+              End="0,16">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="188,162"
+          Size="188,205"
+          Id="Package\Import Intake File\Intake File"
+          TopLeft="10.5000000000001,118.5" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Import Intake File\Truncate Staging Table"
+          TopLeft="5.5,23" />
+        <EdgeLayout
+          Id="Package\Import Intake File.PrecedenceConstraints[Constraint]"
+          TopLeft="102.5,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.5"
+              Start="0,0"
+              End="0,46">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="207,340"
+          Size="207,384"
+          Id="Package\Import Intake File"
+          TopLeft="311,127.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Preserve previous sales history\GetCalendarDimId"
+          TopLeft="7.50000000000001,107.5" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Preserve previous sales history\ImportDate"
+          TopLeft="24.5,26.5" />
+        <EdgeLayout
+          Id="Package\Preserve previous sales history.PrecedenceConstraints[Constraint 1]"
+          TopLeft="91.5,68.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="178,205"
+          Size="178,248"
+          Id="Package\Preserve previous sales history"
+          TopLeft="21.5,18.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="199.5,142.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.5,177"
+              Start="0,0"
+              End="104,177">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="51.75,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.75,0"
+                    Point2="55.75,0"
+                    Point3="55.75,4" />
+                  <mssgle:LineSegment
+                    End="55.75,173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.75,173"
+                    Point2="55.75,177"
+                    Point3="59.75,177" />
+                  <mssgle:LineSegment
+                    End="104,177" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Import Intake File\Intake File\Import Intake File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Import Intake File\Intake File\Import Intake File\Derived Column"
+          TopLeft="44.5,108.5" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Import Intake File\Intake File\Import Intake File\IntakeFile"
+          TopLeft="13.5,5.5" />
+        <EdgeLayout
+          Id="Package\Import Intake File\Intake File\Import Intake File.Paths[Flat File Source Output]"
+          TopLeft="77,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.5,61"
+              Start="0,0"
+              End="45.5,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="4,30.5" />
+                  <mssgle:LineSegment
+                    End="41.5,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.5,30.5"
+                    Point2="45.5,30.5"
+                    Point3="45.5,34.5" />
+                  <mssgle:LineSegment
+                    End="45.5,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check"
+          TopLeft="171,210" />
+        <EdgeLayout
+          Id="Package\Import Intake File\Intake File\Import Intake File.Paths[Derived Column Output]"
+          TopLeft="122.5,150.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="137,59.5"
+              Start="0,0"
+              End="137,52">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.75"
+                    Point2="0,29.75"
+                    Point3="4,29.75" />
+                  <mssgle:LineSegment
+                    End="133,29.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="133,29.75"
+                    Point2="137,29.75"
+                    Point3="137,33.75" />
+                  <mssgle:LineSegment
+                    End="137,52" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import Intake File\Intake File\Import Intake File\Stage_Intake_Check">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Import Intake File\Intake File\Load to View">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck"
+          TopLeft="69,44" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck"
+          TopLeft="116,159" />
+        <EdgeLayout
+          Id="Package\Import Intake File\Intake File\Load to View.Paths[OLE DB Source Output]"
+          TopLeft="156,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38,73"
+              Start="0,0"
+              End="38,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5"
+                    Point2="0,36.5"
+                    Point3="4,36.5" />
+                  <mssgle:LineSegment
+                    End="34,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="34,36.5"
+                    Point2="38,36.5"
+                    Point3="38,40.5" />
+                  <mssgle:LineSegment
+                    End="38,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import Intake File\Intake File\Load to View\Stage_InTakeCheck">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import Intake File\Intake File\Load to View\FF_IntakeCheck">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

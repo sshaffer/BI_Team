@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="OCS"
+  DTS:DTSID="{ED39B57E-874C-4E2F-8F19-C82EA0476AED}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">"Data Source=" + @[$Project::OCSServer] + ";Initial Catalog=OCS;Provider=SQLNCLI11.1;User Id=" + @[$Project::OCSUser] + ";Password=" + @[$Project::OCSPassword] + ";Auto Translate=False;Persist Security Info=True;"</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=GS1-BIS-U01;User Id=BISUAT;Initial Catalog=OCS;Provider=SQLNCLI11.1;Auto Translate=False;Persist Security Info=True;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArMnuxClqs0+rkN8WEZ32vgAAAAACAAAAAAADZgAAwAAAABAAAABGyu2woNLSlCY0GRAxsFYlAAAAAASAAACgAAAAEAAAAPQVbRf22w504A15p8P9tkF4AAAAYoYCwKsb3cNt8IinwtI6xTntvOCmDOD68A2Vlms7PF9End20bE3aNiJekfC22Uu7C0EbB4lnzQP4P9qYneWOy0tBtfDZD+PwRz7sodandR1NrHsn2MiIhSQHWxiHKfFVibCh4RRZCs2xuqokgIqYAQAGTpS5CPlJFAAAADfrJYRtNXHkWy0FI6mDY1Sd3G0B</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

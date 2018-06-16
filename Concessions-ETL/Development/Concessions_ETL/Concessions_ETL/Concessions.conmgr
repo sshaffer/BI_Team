@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Concessions"
+  DTS:DTSID="{9D7F4D29-64F3-4822-B6C0-9B7AF08BD607}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::IPPassword]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::ConcessionsServerName]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::ConcessionsUserName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=CSOSQL01;User ID=DUNE\sql_bisdw_agent;Initial Catalog=Concessions;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{9D7F4D29-64F3-4822-B6C0-9B7AF08BD607}(local).ETLMaster;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+cdjZ1289UOD9YYgZZg4WwAAAAACAAAAAAADZgAAwAAAABAAAACyD7nrhs1sOF8CL67ZtWkpAAAAAASAAACgAAAAEAAAAI6PoNhls5n0rVQPx5xh9EJ4AAAAiQa1+TAeLP++zdInzfI9ZyB6UF0DhMER+8isXnndVfI/5OYNRh/A0HPI/9J9S+sQttUkX86aob14Y9cTKZA6+xAYBvO+o+BPEw28vBCmA5LJZQsN6m/9TvLx1jIPivl1C9HU/eIAax4kcY3WoPDoxbDnXbE3PTNJFAAAAB+HGxGtMC3BJVpO+0u2fEkxOupm</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

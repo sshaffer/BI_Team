@@ -1,0 +1,99 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS ETLs", "Staging_SSIS\SSIS ETLs.dtproj", "{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS Adhoc ETLs", "Adhoc ETLs\SSIS Adhoc ETLs.dtproj", "{A112413C-2357-4A4E-9546-1A757E132DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIS_Yahoo_Weather_Feed", "BIS_Yahoo_Weather_XML\BIS_Yahoo_Weather_Feed.csproj", "{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment Scripts", "Deployment Scripts", "{C0285CB9-4238-47DA-A16A-A1BB4663F21B}"
+	ProjectSection(SolutionItems) = preProject
+		Dune_Data_Warehouse_Seed_IDs.sql = Dune_Data_Warehouse_Seed_IDs.sql
+		Seed Time_Dim.sql = Seed Time_Dim.sql
+		Yahoo_WOEID.sql = Yahoo_WOEID.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stored Procedures", "Stored Procedures", "{3E3B290B-721B-4442-82DA-AE8FCA0A0C1F}"
+	ProjectSection(SolutionItems) = preProject
+		sp_Kill_Connections_To_BIS.sql = sp_Kill_Connections_To_BIS.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Development|Any CPU = Development|Any CPU
+		Development|Mixed Platforms = Development|Mixed Platforms
+		Development|x86 = Development|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|Any CPU.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|Any CPU.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|Mixed Platforms.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|Mixed Platforms.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|x86.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Debug|x86.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|Any CPU.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|Any CPU.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|Mixed Platforms.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|Mixed Platforms.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|x86.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Development|x86.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|Any CPU.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|Any CPU.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|Mixed Platforms.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|Mixed Platforms.Build.0 = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|x86.ActiveCfg = Development
+		{9B5F3D39-4D9A-40B8-9371-0D1EEAFACF94}.Release|x86.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|Any CPU.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|Any CPU.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|Mixed Platforms.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|Mixed Platforms.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|x86.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Debug|x86.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|Any CPU.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|Any CPU.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|Mixed Platforms.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|Mixed Platforms.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|x86.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Development|x86.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|Any CPU.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|Any CPU.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|Mixed Platforms.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|Mixed Platforms.Build.0 = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|x86.ActiveCfg = Development
+		{A112413C-2357-4A4E-9546-1A757E132DCE}.Release|x86.Build.0 = Development
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Development|x86.ActiveCfg = Debug|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BD2E2E8-162B-4F74-A28D-6B0E6ACBBC91}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A112413C-2357-4A4E-9546-1A757E132DCE} = {C0285CB9-4238-47DA-A16A-A1BB4663F21B}
+		{3E3B290B-721B-4442-82DA-AE8FCA0A0C1F} = {C0285CB9-4238-47DA-A16A-A1BB4663F21B}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,59 @@
+﻿@using Concessions.Web.Models;
+
+@model IQueryable<SSISPackageLogDetail>
+           
+@{
+    ViewBag.Title = "Concessions Portal - Details";
+
+    SSISPackageLog log = Model.First().SSISPackageLog;
+}
+
+<h2 class="alt">Details [ <a href="http://csosql01/ReportServer?/SSIS Reports/Log Report&SSISPackageLogId=@log.SSISPackageLogId&rc:Parameters=false" target="_blank">Report</a> ]</h2>
+<div class="span-24 last">
+    @log.PackageName (@log.SSISPackageLogResultType.ResultTypeName) <span class="quiet small">@log.StartTime - @log.EndTime</span>
+<table id="etlTable">
+    <thead>
+        <tr>
+            <th>Concession</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
+            <th>Source File</th>
+            <th>Successes</th>
+            <th>Failures</th>
+            <th>Error Code</th>
+            <th>Result Message</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var detail in Model) {
+        <tr id="@detail.SSISPackageLogDetailId">
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.TaskName</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@JW.TimeOnly(Convert.ToDateTime(detail.StartTime))</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@JW.TimeOnly(Convert.ToDateTime(detail.EndTime))</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@JW.TimeDifference(Convert.ToDateTime(detail.StartTime), Convert.ToDateTime(detail.EndTime))</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.Source</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.RowCountSuccesses</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.RowCountFailures</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.ErrorCode</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.ResultMessage</td>
+            <td class="result-@HTML.CSSTag(@detail.SSISPackageLogResultType.ResultTypeName)">@detail.SSISPackageLogResultType.ResultTypeName</td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#etlTable tr").not(":first").hover(function () {
+            $(this).addClass("cursor");
+        });
+
+        $("#etlTable tr").not(":first").click(function () {
+            logDetailId = $(this).attr("id");
+            window.location = "/Concessions/Errors/" + logDetailId;
+        });
+    });
+</script>

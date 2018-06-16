@@ -1,0 +1,28 @@
+﻿@model Concessions.Web.Models.Configuration
+
+@{
+    ViewBag.Title = "Concessions Portal - Edit Configuration";
+}
+
+<h2 class="alt">Edit @Html.ActionLink("Configuration","ManageConfigurations"): @Model.Name</h2>
+
+@if(TempData.ContainsKey("ErrorMessage")) {
+    <div class="error">@TempData["ErrorMessage"]</div>
+    }
+
+@{Html.BeginForm("EditConfiguration","Configuration");}
+@Html.Hidden("ConfigurationId", @Model.ConfigurationId)
+@Html.Hidden("Concession", @Model.Name)
+@Html.Label("Description","Description:") @Html.TextBox("Description",null, new { @class = "largeTextBox" })
+<input type="submit" name="submit" id="save" value="Save" />
+<input type="submit" name="submit" id="delete" value="Delete" />
+@{Html.EndForm();}
+
+
+<script>
+    $(document).ready(function () {
+        $("#delete").click(function () {
+            confirm("Are you sure you want to delete this configuration item?");
+        });
+    });
+</script>

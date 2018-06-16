@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Concessions" Class="ConcessionsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=CSOSQL01\CSOSQL01;Initial Catalog=Concessions;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ConcessionsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Configuration" Member="Configurations">
+    <Type Name="Configuration">
+      <Column Name="ConfigurationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Association Name="Configuration_ConcessionConfiguration" Member="ConcessionConfigurations" ThisKey="ConfigurationId" OtherKey="ConfigurationId" Type="ConcessionConfiguration" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Concessions" Member="Concessions">
+    <Type Name="Concession">
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Association Name="Concession_ConcessionConfiguration" Member="ConcessionConfigurations" ThisKey="Name" OtherKey="ConcessionName" Type="ConcessionConfiguration" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ConcessionConfiguration" Member="ConcessionConfigurations">
+    <Type Name="ConcessionConfiguration">
+      <Column Name="ConcessionName" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ConfigurationId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Association Name="Configuration_ConcessionConfiguration" Member="Configuration" ThisKey="ConfigurationId" OtherKey="ConfigurationId" Type="Configuration" IsForeignKey="true" />
+      <Association Name="Concession_ConcessionConfiguration" Member="Concession" ThisKey="ConcessionName" OtherKey="Name" Type="Concession" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SSISPackageLog" Member="SSISPackageLogs">
+    <Type Name="SSISPackageLog">
+      <Column Name="SSISPackageLogId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SSISPackageLogResultTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SSISPackageLog_SSISPackageLogDetail" Member="SSISPackageLogDetails" ThisKey="SSISPackageLogId" OtherKey="SSISPackageLogID" Type="SSISPackageLogDetail" />
+      <Association Name="SSISPackageLog_SSISPackageLogReport" Member="SSISPackageLogReports" ThisKey="SSISPackageLogId" OtherKey="SSISPackageLogId" Type="SSISPackageLogReport" />
+      <Association Name="SSISPackageLogResultType_SSISPackageLog" Member="SSISPackageLogResultType" ThisKey="SSISPackageLogResultTypeId" OtherKey="SSISPackageLogResultTypesId" Type="SSISPackageLogResultType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SSISPackageLogDetail" Member="SSISPackageLogDetails">
+    <Type Name="SSISPackageLogDetail">
+      <Column Name="SSISPackageLogDetailId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SSISPackageLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaskName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Source" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RowCountSuccesses" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RowCountFailures" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SSISPackageLogResultTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ErrorCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ResultMessage" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
+      <Association Name="SSISPackageLogDetail_SSISPackageLogDetailErrorRecord" Member="SSISPackageLogDetailErrorRecords" ThisKey="SSISPackageLogDetailId" OtherKey="SSISPackageLogDetailRowId" Type="SSISPackageLogDetailErrorRecord" />
+      <Association Name="SSISPackageLog_SSISPackageLogDetail" Member="SSISPackageLog" ThisKey="SSISPackageLogID" OtherKey="SSISPackageLogId" Type="SSISPackageLog" IsForeignKey="true" />
+      <Association Name="SSISPackageLogResultType_SSISPackageLogDetail" Member="SSISPackageLogResultType" ThisKey="SSISPackageLogResultTypeId" OtherKey="SSISPackageLogResultTypesId" Type="SSISPackageLogResultType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SSISPackageLogDetailErrorRecord" Member="SSISPackageLogDetailErrorRecords">
+    <Type Name="SSISPackageLogDetailErrorRecord">
+      <Column Name="SSISPackageLogDetailErrorRecordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SSISPackageLogDetailRowId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ErrorRecord" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="RowNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SSISPackageLogDetail_SSISPackageLogDetailErrorRecord" Member="SSISPackageLogDetail" ThisKey="SSISPackageLogDetailRowId" OtherKey="SSISPackageLogDetailId" Type="SSISPackageLogDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SSISPackageLogResultTypes" Member="SSISPackageLogResultTypes">
+    <Type Name="SSISPackageLogResultType">
+      <Column Name="SSISPackageLogResultTypesId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ResultTypeName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ResultTypeDescription" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="SSISPackageLogResultType_SSISPackageLog" Member="SSISPackageLogs" ThisKey="SSISPackageLogResultTypesId" OtherKey="SSISPackageLogResultTypeId" Type="SSISPackageLog" />
+      <Association Name="SSISPackageLogResultType_SSISPackageLogDetail" Member="SSISPackageLogDetails" ThisKey="SSISPackageLogResultTypesId" OtherKey="SSISPackageLogResultTypeId" Type="SSISPackageLogDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SSISPackageLogReport" Member="SSISPackageLogReports">
+    <Type Name="SSISPackageLogReport">
+      <Column Name="SSISPackageLogReportId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SSISPackageLogId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Store_Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Count_of_Sales" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Units_Sold" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Units_Returned" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total_Refunded" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Total_Sold" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Total_Discount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Total_Sold_Discount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="SSISPackageLog_SSISPackageLogReport" Member="SSISPackageLog" ThisKey="SSISPackageLogId" OtherKey="SSISPackageLogId" Type="SSISPackageLog" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

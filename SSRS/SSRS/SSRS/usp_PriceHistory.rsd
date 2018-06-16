@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>BISDW-CL01</DataSourceReference>
+      <CommandType>StoredProcedure</CommandType>
+      <CommandText>usp_PriceHistory</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="ToBeProcessed">
+        <DataField>ToBeProcessed</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Processed">
+        <DataField>Processed</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Remaining">
+        <DataField>Remaining</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

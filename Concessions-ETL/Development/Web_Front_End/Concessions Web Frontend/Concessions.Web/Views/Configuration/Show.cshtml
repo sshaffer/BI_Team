@@ -1,0 +1,23 @@
+﻿@using Concessions.Web.Models;
+@model IQueryable<ConcessionConfiguration>
+           
+@{    
+    ViewBag.Title = "Concessions Portal - Show Configurations";
+
+    var concession = Model.First().Concession;
+    string errorMessage = ViewBag.ErrorMessage;
+}
+
+<h2 class="alt">@Html.ActionLink("Configuration", "Index") :: @concession.Name - @concession.Description [ @Html.ActionLink("Add", "Add", new { id = concession.Name }) ]</h2>
+
+@if (TempData.ContainsKey("ErrorMessage")) {
+  <div class="error">@TempData["ErrorMessage"].ToString()</div>
+}
+
+<ul>
+    @foreach (var c in Model)
+    {
+        <li><strong>@Html.ActionLink(@c.Configuration.Name, "Edit", new { concession = c.ConcessionName, id = c.ConfigurationId }, new { title = c.Configuration.Description }):</strong> @c.value</li>
+    }
+</ul>
+

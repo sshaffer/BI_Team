@@ -1,0 +1,26 @@
+﻿@using Concessions.Web.Models
+@model ConcessionConfiguration
+       
+@{
+    ViewBag.Title = "Concessions Portal - Edit Configuration Item";
+}
+
+<h2 class="alt bottom">@Html.ActionLink(@Model.Concession.Name, "Show", new { id = Model.ConcessionName }) - @Model.Configuration.Name - [ @Html.ActionLink("delete", "Delete", new { concession = Model.Concession.Name, id = Model.ConfigurationId }, new { @class = "confirm" }) ]</h2>
+<p><em class="em">@Model.Configuration.Description</em></p>
+@{Html.BeginForm("Edit","Configuration",FormMethod.Post);}
+@Html.Label("Description","Description:")
+@Html.TextBox("Description", Model.Configuration.Description, new { @class = "largeTextBox" })
+@Html.Label("Value","Value:")
+@Html.TextBox("Value", Model.value, new { @class = "largeTextBox" })
+<input type="submit" value="Save" />
+@{Html.EndForm();}
+
+<script>
+    $(document).ready(function () {
+        $
+
+        $(".confirm").click(function () {
+            confirm("Are you sure you want to delete this configuration?");
+        });
+    });
+</script>

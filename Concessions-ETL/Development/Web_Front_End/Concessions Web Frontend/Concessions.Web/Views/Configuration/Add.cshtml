@@ -1,0 +1,41 @@
+﻿@using Concessions.Web.Models
+@model Concession
+           
+@{
+    ViewBag.Title = "Concessions Portal - Add Configuration Item";
+}
+
+
+
+<h2 class="alt">Add Configuration for @Html.ActionLink(@Model.Name, "Show", new { id = Model.Name }) - @Model.Description</h2>
+@{Html.BeginForm("Add", "Configuration");}
+@Html.Hidden("Concession", @Model.Name)
+
+
+
+<h3 class="alt">New Configuration Item (leave blank if using a current configuration):</h3>
+<div>
+@Html.Label("NewConfiguration", "Name:")<br />
+@Html.TextBox("NewConfiguration", null, new { @class = "largeTextBox" })
+</div>
+<div>
+@Html.Label("NewConfigurationDesc", "Description:")<br />
+@Html.TextBox("NewConfigurationDesc", null, new { @class = "largeTextBox" })
+</div>
+
+<h3 class="alt">Configuration:</h3>
+<div>
+    @Html.Label("Configuration", "Configuration:")<br />
+    @Html.DropDownList("Configurations")
+</div>
+
+<div>
+@Html.Label("Value", "Value: ")
+@Html.TextBox("Value", null, new { @class = "largeTextBox" })
+</div>
+<div class="clear">
+<input type ="submit" value="Save" />
+</div>
+
+
+@{Html.EndForm();}

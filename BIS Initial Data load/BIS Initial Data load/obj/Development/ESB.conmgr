@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="ESB"
+  DTS:DTSID="{6a1b50bc-21af-45f2-bd77-cc14a4c12aac}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::OCS_Password]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::OCS_Server_Name]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::OCS_User_Name]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DUNEOCSQL01;User ID=BISUAT;Initial Catalog=ESB;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArMnuxClqs0+rkN8WEZ32vgAAAAACAAAAAAADZgAAwAAAABAAAABqW9FMijPSA6JaJnDHVf2FAAAAAASAAACgAAAAEAAAAO1Qs+bGT3JUiahJg9FBSpR4AAAAa7GIF/uP4b2hWAXX3IPQ4KSoddKb4wd6Cbj5CKQfRPZvQgU1WRwEWhyWMy18uDgchileav6z4MLaAzjCmxoNJW1865yQbfgu9nncDHUSkkZkMEwrXvjO+F4fURcmVSG6WqqquVHB3PldQOSbJ1Em1fGL6fEMVaqCFAAAALR2BPu35zpNozD9tou6Sw9oy1mb</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,18 @@
+﻿@model Concessions.Web.Models.Concession
+
+@{
+    ViewBag.Title = "AddConcession";
+}
+
+<h2 class="alt">Add Concession</h2>
+
+@{ Html.BeginForm("AddConcession","Configuration"); }
+
+@Html.Label("Name","Name: ")
+@Html.TextBox("Name", null, new { @class="largeTextBox"} )
+@Html.Label("Description","Description: ")
+@Html.TextBox("Description", null, new { @class="largeTextBox"} )
+@Html.Label("IsEnabled", "IsEnabled: ")@Html.RadioButton("IsEnabled",1) Yes @Html.RadioButton("IsEnabled",0,true) No
+<br /><br /><input type="submit" value="Save" />
+
+@{ Html.EndForm(); }

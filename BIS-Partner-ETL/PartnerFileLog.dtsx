@@ -1,0 +1,1998 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/25/2015 3:56:41 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="GS1-DEV-01"
+  DTS:CreatorName="DUNE\JWolfisz"
+  DTS:DTSID="{77B9786E-8BBE-4A4C-848D-3D5C85B0A042}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="FileLog"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="273"
+  DTS:VersionGUID="{EDBBC770-1BFF-4EA8-8713-566B5155E574}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SalesFiles]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B3669BF5-45D2-4ACC-8707-9C72A587F0B9}"
+      DTS:ObjectName="SalesFiles">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::files_to_process]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_DATE"
+              DTS:DTSID="{0D9E72B5-9FC6-48A3-B296-BD69C30439BD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_TIME"
+              DTS:DTSID="{7869E154-B421-4607-B120-44BE24E1593E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STORE"
+              DTS:DTSID="{55EE5ED0-AFEE-4C67-9203-156B6FEE68E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM"
+              DTS:DTSID="{95B7F6C0-B298-4DDD-9514-565F4D638678}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_QTY"
+              DTS:DTSID="{C8369994-FD72-42DB-8D46-18E498E3B301}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UNIT_PRICE"
+              DTS:DTSID="{B71F641D-85EA-4A71-84BA-165CB3EBED16}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DISCOUNT_VALUE"
+              DTS:DTSID="{E0C473FE-73E7-44F1-A695-76AF1ECADE53}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FP_MD"
+              DTS:DTSID="{F64D9C0F-6AC4-4F4C-ACD4-9CBCC6DE3F9A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SALE_RETURN"
+              DTS:DTSID="{A8493F83-177E-4F2C-B5E9-6B2BC2D1035C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_COST"
+              DTS:DTSID="{C2102A78-EF1D-4EE1-B931-665936A7BE33}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[StockFiles]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Stock Files"
+      DTS:DTSID="{E0316E80-14FC-4440-9C38-B80F224CEF22}"
+      DTS:ObjectName="StockFiles">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::files_to_process]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DATE"
+              DTS:DTSID="{5EDE56AF-C24A-4147-9039-BD67A687E61A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STORE"
+              DTS:DTSID="{96127ED3-1E46-4B42-8B27-1C8CFFD05463}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM"
+              DTS:DTSID="{6D20A27D-D400-4DD9-A78C-72F8A6451EFA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ONHAND_QTY"
+              DTS:DTSID="{5B0332B4-1D23-4E0E-BBFF-F336BEF820F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="INTRANSIT_QTY"
+              DTS:DTSID="{3EAAF537-AA06-4F49-8380-6E27DF6AB790}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FP_MD"
+              DTS:DTSID="{8AD75639-48A1-4C7F-8A74-ADA94FF28404}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_COST2"
+              DTS:DTSID="{57A1E9C2-25F3-46F0-A0AA-E30263B0BC28}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RETAIL_PRICE"
+              DTS:DTSID="{FD574A95-5634-46A9-8C42-BA82E09B123E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{F827F900-AA69-4C50-8833-C7AD4AB60337}"
+      DTS:ObjectName="PartnerCode">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C417BECB-E972-438F-BC71-DBB26BBCDAE7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Calendar_Date">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{290460FE-CAF5-45A7-AA84-68C824ABEF70}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Duplicate_Item_Dim_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">-1111111111</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3084338-CDD5-4F51-8722-692008B2530E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{245A6EB5-B21F-4289-ADC5-346ACACB0A1E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="filecount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{131BEBE6-15CC-46D5-AEC1-AF598484DC9B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileExists">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6890FBFE-F8BF-48D4-A14F-523A3E24F724}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileReceived">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA264F0A-B310-4A2E-A820-3F2A056E65AA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="files_to_process">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{982C49C7-E0C9-49BD-93F2-FB3321F731D4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PartnerCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{93106AFD-2635-44D9-88B0-F3F82935D1E7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PartnerID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D760F0D6-930E-4D43-ACA6-F63456357F3F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RawFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">SalesLog.RAW</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{809604FD-CAB8-4058-9249-C20B4799767B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="SUBSTRING( @[User::strFile_Name] ,11,2)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Region_Code">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D26F8FD-F256-42FA-BED0-1060849392A1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strFile_Name">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{05D744CA-D022-4125-B656-8797FF1C2207}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strRegionCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{27CBBE43-B281-41AE-BC89-F68F47A00B3D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="UnknownItem_Dim_Id">
+      <DTS:VariableValue
+        DTS:DataType="3">-2147483648</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Partner Check for Files"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A2113393-A3C1-4AE9-8ADF-B1F5F79498A7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Partner Check for Files">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{FCF21E76-2C1D-43BA-9E88-AFDC98FEE99E}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="FilesList">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Count the files"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D1CD675B-F8C5-473C-BAB2-A25009E9AF68}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count the files"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="SELECT COUNT(*) FROM dbo.Tracking_SalesFileRec&#xA;WHERE File_Rec = 0"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::filecount" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Get Date"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A57F028F-A9BD-4773-8532-B91BC1EE3319}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Date"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{D4D5696D-0846-4E54-9532-91E01EAA1E84}"
+              SQLTask:SqlStatementSource="USE Dune_Data_Warehouse&#xA;SELECT calendar_date FROM dbo.BIS_Calendar_Dim&#xA;WHERE Relative_Day = 1"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Calendar_Date" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Get Partner Codes"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{757d64ff-2cdd-45a6-8ab1-e99bd513cbc5}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Partner Codes"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="Select Partner_Id,SUBSTRING(Partner_Code,1,2) from Partner_LookUp where partner_code = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::PartnerID" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="1"
+                SQLTask:DtsVariableName="User::PartnerCode" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::PartnerCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Identify The Region"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{f069dcc5-8d8d-42da-a25c-6b2c4195e86d}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Identify The Region">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="DTS.ForEachFileEnumerator.3"
+            DTS:DTSID="{d21998b4-dbe2-4886-b11a-33bb2cc6829c}"
+            DTS:ObjectName="{235C0B6A-4379-4B48-A406-710132EE918F}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[$Project::SourceFolder]  + @[User::PartnerCode]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\Bisdw-cl01\FTP\Partner\Source\" />
+                <FEFEProperty
+                  FileSpec="SR_*.csv" />
+                <FEFEProperty
+                  FileNameRetrievalType="1" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Partner Check for Files\Identify The Region\Log The Files"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{06606175-8438-4DD0-9411-2D874AD1BE87}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Log The Files"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+                  SQLTask:SqlStatementSource="exec usp_Tracking_SalesFileRec ?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::Calendar_Date"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::Region_Code"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::strFile_Name"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{C65BE612-1CD9-4BE7-A466-A5B8667CBD2B}"
+              DTS:ObjectName="{C65BE612-1CD9-4BE7-A466-A5B8667CBD2B}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::strFile_Name" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Log AP Sales"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{50C399EA-FB4A-401E-BE29-34260CD699DB}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log AP Sales">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="DTS.ForEachFileEnumerator.3"
+            DTS:DTSID="{B03883F0-A400-4865-8B54-8FAC3F0EB04E}"
+            DTS:ObjectName="{B03883F0-A400-4865-8B54-8FAC3F0EB04E}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[$Project::SourceFolder]  + @[$Package::PartnerCode]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\Bisdw-cl01\FTP\Partner\Source\" />
+                <FEFEProperty
+                  FileSpec="SR_*.csv" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="-1" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{47804E74-5E2D-41AB-BCAB-9337B503A11C}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Log the data in the files"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column"
+                      componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                      contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                      name="Derived Column"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Inputs[Derived Column Input]"
+                          description="Input to the Derived Column Transformation"
+                          name="Derived Column Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Inputs[Derived Column Input].Columns[ITEM]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="14"
+                              cachedName="ITEM"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM]" />
+                          </inputColumns>
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output]"
+                          description="Default Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          name="Derived Column Output"
+                          synchronousInputId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[Import_Date]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="10"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[Import_Date]"
+                              name="Import_Date"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">(DT_STR,10,1252)(@[User::Calendar_Date])</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,10,1252)(@[User::Calendar_Date])</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[Region_Code]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[Region_Code]"
+                              name="Region_Code"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">(DT_STR,4,1252)(@[User::Region_Code])</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,4,1252)(@[User::Region_Code])</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[FullFileName]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="255"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[FullFileName]"
+                              name="FullFileName"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">(DT_STR,255,1252)(@[User::files_to_process])</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,255,1252)(@[User::files_to_process])</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[GTIN]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              length="15"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[GTIN]"
+                              name="GTIN"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">"0" + #{Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM]}</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">"0" + ITEM</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Error Output]"
+                          description="Error Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Derived Column Error Output"
+                          synchronousInputId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles"
+                      componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                      contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Flat File Source"
+                      localeId="2057"
+                      name="SalesFiles"
+                      usesDispositions="true"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Specifies whether zero-length columns are treated as null."
+                          name="RetainNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                          name="FileNameColumnName"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Connections[FlatFileConnection]"
+                          connectionManagerID="Package.ConnectionManagers[SalesFiles]"
+                          connectionManagerRefId="Package.ConnectionManagers[SalesFiles]"
+                          name="FlatFileConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output]"
+                          name="Flat File Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_DATE]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_DATE]"
+                              name="SALE_DATE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_TIME]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_TIME]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_TIME]"
+                              name="SALE_TIME"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[STORE]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[STORE]"
+                              name="STORE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[ITEM]"
+                              length="14"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM]"
+                              name="ITEM"
+                              truncationRowDisposition="IgnoreFailure">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_QTY]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_QTY]"
+                              name="SALE_QTY"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[UNIT_PRICE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[UNIT_PRICE]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[UNIT_PRICE]"
+                              name="UNIT_PRICE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[DISCOUNT_VALUE]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[DISCOUNT_VALUE]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[DISCOUNT_VALUE]"
+                              name="DISCOUNT_VALUE"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[FP_MD]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[FP_MD]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[FP_MD]"
+                              name="FP_MD"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_RETURN]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_RETURN]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_RETURN]"
+                              name="SALE_RETURN"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[ITEM_COST]"
+                              length="50"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM_COST]"
+                              name="ITEM_COST"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_TIME]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_TIME" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[UNIT_PRICE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="UNIT_PRICE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[DISCOUNT_VALUE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DISCOUNT_VALUE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[FP_MD]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="FP_MD" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[SALE_RETURN]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_RETURN" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].ExternalColumns[ITEM_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM_COST" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output]"
+                          isErrorOut="true"
+                          name="Flat File Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              codePage="1252"
+                              dataType="text"
+                              description="Flat File Source Error Output Column"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              name="Flat File Source Error Output Column" />
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog"
+                      componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="Stage_SalesFilesLog"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[Stage_SalesFilesLog]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Connections[OleDbConnection]"
+                          connectionManagerID="{f9082835-573f-4b99-905a-183d8460eeb8}:external"
+                          connectionManagerRefId="Project.ConnectionManagers[Management]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[SALE_DATE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="SALE_DATE"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_DATE]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_DATE]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[STORE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="STORE"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[STORE]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[ITEM]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="14"
+                              cachedName="ITEM"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[SALE_QTY]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="SALE_QTY"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_QTY]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_QTY]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[UNIT_PRICE]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="UNIT_PRICE"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[UNIT_PRICE]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[UNIT_PRICE]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[FP_MD]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="FP_MD"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[FP_MD]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[SALE_RETURN]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="SALE_RETURN"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_RETURN]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[SALE_RETURN]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[Import_Date]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="10"
+                              cachedName="Import_Date"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[Import_Date]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[Import_Date]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[FullFileName]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="255"
+                              cachedName="FullFileName"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[FullFileName]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output].Columns[FullFileName]" />
+                            <inputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].Columns[ITEM_COST]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="ITEM_COST"
+                              externalMetadataColumnId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[UNIT_COST]"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output].Columns[ITEM_COST]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_DATE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_DATE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[STORE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="STORE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[ITEM]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="ITEM" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_QTY]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_QTY" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[FP_MD]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="FP_MD" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[SALE_RETURN]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="SALE_RETURN" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[Import_Date]"
+                              codePage="1252"
+                              dataType="str"
+                              length="10"
+                              name="Import_Date" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[FullFileName]"
+                              codePage="1252"
+                              dataType="str"
+                              length="255"
+                              name="FullFileName" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                              codePage="1252"
+                              dataType="str"
+                              length="20"
+                              name="Country" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[Store_Dim_ID]"
+                              dataType="i4"
+                              name="Store_Dim_ID" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[UNIT_PRICE]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="UNIT_PRICE" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[Item_Dim_Id]"
+                              dataType="i8"
+                              name="Item_Dim_Id" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[DW_Item_Code]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="DW_Item_Code" />
+                            <externalMetadataColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input].ExternalColumns[UNIT_COST]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="UNIT_COST" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files.Paths[Derived Column Output]"
+                      endId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog.Inputs[OLE DB Destination Input]"
+                      name="Derived Column Output"
+                      startId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Outputs[Derived Column Output]" />
+                    <path
+                      refId="Package\Partner Check for Files\Log AP Sales\Log the data in the files.Paths[Flat File Source Output]"
+                      endId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column.Inputs[Derived Column Input]"
+                      name="Flat File Source Output"
+                      startId="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles.Outputs[Flat File Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{F6637087-2DDA-46A0-A4AA-CFAD652FCC58}"
+              DTS:ObjectName="{F6637087-2DDA-46A0-A4AA-CFAD652FCC58}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::files_to_process" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Merge Into history_NoSalesForStores"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C658DB34-DEF9-4E75-8D38-702A18E3F866}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge Into history_NoSalesForStores"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="MERGE INTO history_NoSalesForStores target&#xA;USING &#xA;(SELECT * FROM Tracking_NoSalesForStores&#xA;GROUP BY Store_Number&#xA;,Country&#xA;,sales&#xA;,Import_Date&#xA;,FullFileName&#xA;,File_Name&#xA;) source&#xA;ON source.Store_Number = target.Store_Number&#xA;AND SOURCE.Country = TARGET.Country&#xA;AND SOURCE.sales = TARGET.sales&#xA;AND SOURCE.Import_Date = TARGET.Import_Date&#xA;AND SOURCE.FullFileName = TARGET.FullFileName&#xA;AND SOURCE.FILE_NAME = TARGET.File_Name&#xA;WHEN MATCHED THEN UPDATE SET&#xA;Store_Number = source.Store_Number&#xA;,Country = source.Country&#xA;,sales = source.sales&#xA;,Import_Date = source.Import_Date&#xA;,FullFileName = source.FullFileName&#xA;,FILE_NAME = source.File_Name&#xA;WHEN NOT MATCHED THEN&#xA;INSERT (&#xA;Store_Number&#xA;,Country&#xA;,sales&#xA;,Import_date&#xA;,FullFileName&#xA;,[File_Name]&#xA;)&#xA;VALUES&#xA;(source.store_number&#xA;,source.Country&#xA;,source.sales&#xA;,source.Import_date&#xA;,source.FullFileName&#xA;,source.File_Name&#xA;);&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Merge to Tracking_SalesImport"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{127529A9-6CD8-4AFE-8DA5-E65F2BAB26AE}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge to Tracking_SalesImport"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="&#xA;MERGE INTO PartnerManagementSystem.dbo.Tracking_SalesImport target&#xA;USING (&#xA;SELECT SALE_DATE ,&#xA;       STORE ,&#xA;       ITEM ,&#xA;       SALE_QTY ,&#xA;       FP_MD ,&#xA;       SALE_RETURN ,&#xA;       Import_Date ,&#xA;       FullFileName ,&#xA;       Country ,&#xA;       Store_Dim_ID ,&#xA;       UNIT_PRICE ,&#xA;       Item_Dim_Id ,&#xA;       DW_Item_Code ,&#xA;       UNIT_COST FROM dbo.Stage_SalesFilesLog&#xA;GROUP BY SALE_DATE ,&#xA;       STORE ,&#xA;       ITEM ,&#xA;       SALE_QTY ,&#xA;       FP_MD ,&#xA;       SALE_RETURN ,&#xA;       Import_Date ,&#xA;       FullFileName ,&#xA;       Country ,&#xA;       Store_Dim_ID ,&#xA;       UNIT_PRICE ,&#xA;       Item_Dim_Id ,&#xA;       DW_Item_Code ,&#xA;       UNIT_COST&#xA;&#xA;) source&#xA;ON source.FullFileName = target.FullFileName&#xA;AND source.sale_Date = target.SALE_DATE&#xA;AND source.store = target.STORE&#xA;AND source.Item = target.ITEM&#xA;AND source.Sale_Qty = target.SALE_QTY&#xA;AND source.FP_MD = target.FP_MD&#xA;AND source.Sale_Return = target.SALE_RETURN&#xA;AND source.Import_Date = target.Import_Date&#xA;AND source.Country = target.Country&#xA;AND source.Store_Dim_Id = target.Store_Dim_ID&#xA;AND source.unit_price = target.UNIT_PRICE&#xA;AND source.UNIT_Cost = target.UNIT_COST&#xA;WHEN MATCHED then&#xA;UPDATE SET&#xA;target.SALE_DATE = source.SALE_DATE&#xA;,target.STORE = source.STORE&#xA;,target.ITEM = source.ITEM&#xA;,target.SALE_QTY = source.SALE_QTY&#xA;,target.FP_MD = source.FP_MD&#xA;,target.SALE_RETURN = source.SALE_RETURN&#xA;,target.Import_Date = source.Import_Date&#xA;,target.FullFileName = source.FullFileName&#xA;,target.Country = source.Country&#xA;,target.Store_Dim_ID = source.Store_Dim_Id&#xA;,target.UNIT_PRICE = source.UNIT_PRICE&#xA;,target.UNIT_COST = source.UNIT_COST&#xA;WHEN NOT MATCHED&#xA;THEN INSERT&#xA;          (SALE_DATE&#xA;           ,STORE&#xA;           ,ITEM&#xA;           ,SALE_QTY&#xA;&#x9;&#x9;&#x9;,FP_MD&#xA;           ,SALE_RETURN&#xA;           ,Import_Date&#xA;           ,FullFileName&#xA;           ,Country&#xA;           ,Store_Dim_ID&#xA;           ,UNIT_PRICE&#xA;,UNIT_COST&#xA;             )&#xA;    VALUES (source.SALE_DATE&#xA;           ,source.STORE&#xA;           ,source.ITEM&#xA;           ,source.SALE_QTY&#xA;&#x9;&#x9;&#x9;,source.FP_MD&#xA;           ,source.SALE_RETURN&#xA;           ,source.Import_Date&#xA;           ,source.FullFileName&#xA;           ,source.Country&#xA;           ,source.Store_Dim_ID&#xA;           ,source.UNIT_PRICE&#xA;,source.UNIT_COST&#xA;&#x9;       );&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Send_FilesReceived usp_FilesReceived"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send_FilesReceived usp_FilesReceived "
+          DTS:Disabled="True"
+          DTS:DTSID="{DBBD0FDD-5090-40C8-95B2-93A9B72C5C19}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send_FilesReceived usp_FilesReceived"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="exec usp_FilesReceived " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\truncate table Stage_SalesFilesLog"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AAB14EB7-DB46-44FA-A091-79BCA5C71FC6}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate table Stage_SalesFilesLog"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="truncate table dbo.Stage_SalesFilesLog" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Partner Check for Files\Update Files_Rec Flag on Tracking_SalesFileRec"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Update Files_Rec Flag on Tracking_SalesFileRec "
+          DTS:DTSID="{3A6C4238-BAFB-4D1A-92E7-5B1BDF1D8968}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Files_Rec Flag on Tracking_SalesFileRec"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="UPDATE Tracking_SalesFileRec SET File_Rec = 1 " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{E90F9948-840E-4377-A805-8A29B45483AF}"
+          DTS:From="Package\Partner Check for Files\Get Date"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Partner Check for Files\Get Partner Codes" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{BE6278B8-3633-4C61-B70A-6B38B6612885}"
+          DTS:From="Package\Partner Check for Files\Identify The Region"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Partner Check for Files\Count the files" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 12]"
+          DTS:CreationName=""
+          DTS:DTSID="{71E60438-FDCE-4E42-B145-742EE6073621}"
+          DTS:From="Package\Partner Check for Files\Send_FilesReceived usp_FilesReceived"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 12"
+          DTS:To="Package\Partner Check for Files\Update Files_Rec Flag on Tracking_SalesFileRec" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{D2EDE692-44D0-4468-A856-6ACCABF317D1}"
+          DTS:From="Package\Partner Check for Files\Merge Into history_NoSalesForStores"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Partner Check for Files\Send_FilesReceived usp_FilesReceived" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{3F2BA4BF-3BEF-464E-BBE2-92FF1106AE10}"
+          DTS:Expression="@Partner_Code == &quot;AP&quot;"
+          DTS:From="Package\Partner Check for Files\Get Partner Codes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Partner Check for Files\Identify The Region" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{4974969D-537D-4017-A156-263CF008D91B}"
+          DTS:From="Package\Partner Check for Files\Log AP Sales"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Partner Check for Files\Merge to Tracking_SalesImport" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{78E2C935-BD09-4885-8AE7-4687FB410610}"
+          DTS:From="Package\Partner Check for Files\truncate table Stage_SalesFilesLog"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Partner Check for Files\Log AP Sales" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{35FBC8D4-AE33-43DE-9061-19A8957FB5F7}"
+          DTS:From="Package\Partner Check for Files\Count the files"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Partner Check for Files\truncate table Stage_SalesFilesLog" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Partner Check for Files.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{2C8EB666-491A-44D3-907E-ED9025D6C0D9}"
+          DTS:From="Package\Partner Check for Files\Merge to Tracking_SalesImport"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Partner Check for Files\Merge Into history_NoSalesForStores" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Record Files Received"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{F603522C-BC83-415F-B4CF-4D15513C84BD}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Record Files Received">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{B4B0B3C0-DB6F-414A-A245-2B6DF60D3497}"
+        DTS:ObjectName="{B4B0B3C0-DB6F-414A-A245-2B6DF60D3497}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Project::SourceFolder]  + @[$Package::PartnerCode]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\Bisdw-cl01\FTP\Partner\Source\" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Record Files Received\usp_FileReceivedInsert"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Record the file names received"
+          DTS:DTSID="{D6750EAC-C3C5-4C89-A532-28F15E86F6B8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="usp_FileReceivedInsert"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{f9082835-573f-4b99-905a-183d8460eeb8}"
+              SQLTask:SqlStatementSource="EXEC usp_FileReceivedInsert ?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@FileReceived"
+                SQLTask:DtsVariableName="User::FileReceived"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="400" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PartnerCode"
+                SQLTask:DtsVariableName="$Package::PartnerCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="10" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6069EEC7-5346-40C4-8B89-27F75D9BE249}"
+          DTS:ObjectName="{6069EEC7-5346-40C4-8B89-27F75D9BE249}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileReceived" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{220C1B8A-3A9E-424D-B798-F74BFBFA73DF}"
+      DTS:From="Package\Record Files Received"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Partner Check for Files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="241,42"
+          Id="Package\Partner Check for Files\Count the files"
+          TopLeft="38.5000000000001,415.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Partner Check for Files\Get Date"
+          TopLeft="97.5,5.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Partner Check for Files\Get Partner Codes"
+          TopLeft="75.5,107.5" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Partner Check for Files\Identify The Region\Log The Files"
+          TopLeft="38.5,23.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="215,119"
+          Size="215,162"
+          Id="Package\Partner Check for Files\Identify The Region"
+          TopLeft="51.0000000000001,210.5" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files"
+          TopLeft="6.5,27.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204,125"
+          Size="204,168"
+          Id="Package\Partner Check for Files\Log AP Sales"
+          TopLeft="57.0000000000001,619.5" />
+        <NodeLayout
+          Size="256,42"
+          Id="Package\Partner Check for Files\Merge Into history_NoSalesForStores"
+          TopLeft="31.0000000000001,927.5" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Partner Check for Files\Merge to Tracking_SalesImport"
+          TopLeft="44.5000000000001,825.5" />
+        <NodeLayout
+          Size="301,46"
+          Id="Package\Partner Check for Files\Send_FilesReceived usp_FilesReceived"
+          TopLeft="7.50000000000014,1024.5" />
+        <NodeLayout
+          Size="252,42"
+          Id="Package\Partner Check for Files\truncate table Stage_SalesFilesLog"
+          TopLeft="33.0000000000001,517.5" />
+        <NodeLayout
+          Size="307,42"
+          Id="Package\Partner Check for Files\Update Files_Rec Flag on Tracking_SalesFileRec"
+          TopLeft="4.50000000000017,1130.5" />
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint]"
+          TopLeft="159,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 1]"
+          TopLeft="158.75,372.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 12]"
+          TopLeft="158,1070.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 2]"
+          TopLeft="158.5,969.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 3]"
+          TopLeft="158.75,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 4]"
+          TopLeft="159,787.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 5]"
+          TopLeft="159,559.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 7]"
+          TopLeft="159,457.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files.PrecedenceConstraints[Constraint 8]"
+          TopLeft="159,867.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="318,1335"
+          Size="318,1378"
+          Id="Package\Partner Check for Files"
+          TopLeft="5.5000000000002,306.5" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Record Files Received\usp_FileReceivedInsert"
+          TopLeft="55.5,21.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="307,120"
+          Size="307,163"
+          Id="Package\Record Files Received"
+          TopLeft="18.5000000000001,99.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="168.25,262.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Partner Check for Files\Log AP Sales\Log the data in the files">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Stage_SalesFilesLog"
+          TopLeft="461,232" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files\Derived Column"
+          TopLeft="475.5,132.5" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files\SalesFiles"
+          TopLeft="488,30.5" />
+        <EdgeLayout
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files.Paths[Derived Column Output]"
+          TopLeft="551.25,174.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.5"
+              Start="0,0"
+              End="0,50">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Partner Check for Files\Log AP Sales\Log the data in the files.Paths[Flat File Source Output]"
+          TopLeft="552.25,72.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

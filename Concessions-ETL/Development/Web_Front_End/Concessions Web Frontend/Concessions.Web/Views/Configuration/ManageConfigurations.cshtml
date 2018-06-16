@@ -1,0 +1,20 @@
+﻿@using Concessions.Web.Models
+@model IQueryable<Configuration>
+
+@{
+    ViewBag.Title = "Concessions Portal - Manage Configurations";
+}
+
+<h2 class="alt">Manage Configurations [ @Html.ActionLink("Add", "AddConfiguration") ]</h2>
+
+@if (TempData.ContainsKey("SuccessMessage"))
+{
+    <div class="success">@TempData["SuccessMessage"]</div>
+}
+
+<ul>
+@foreach (var item in Model)
+{
+    <li>@Html.ActionLink(item.Name, "EditConfiguration", new { id = item.ConfigurationId }) - @item.Description</li>
+}
+</ul>
